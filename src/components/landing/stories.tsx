@@ -40,7 +40,7 @@ export function StoriesPilares() {
       href: "/envelopamento",
       cta: "Simular envelopamento",
       fundo: "from-zinc-500/20 via-zinc-500/[0.04] to-transparent",
-      cor: "text-prata-claro",
+      cor: "text-tx",
     },
     {
       id: "renda",
@@ -51,8 +51,8 @@ export function StoriesPilares() {
       dado: `a partir de ${brl(Math.min(...arq))}/m²`,
       href: "/arquitetonico",
       cta: "Simular superfícies",
-      fundo: "from-white/[0.10] via-white/[0.02] to-transparent",
-      cor: "text-prata",
+      fundo: "from-linha/[0.06] via-linha/[0.02] to-transparent",
+      cor: "text-tx2",
     },
   ];
 
@@ -92,10 +92,10 @@ export function StoriesPilares() {
     <div className="flex flex-col gap-4">
       <div className="flex gap-1.5 md:hidden" aria-hidden>
         {pilares.map((p, k) => (
-          <span key={p.id} className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/10">
+          <span key={p.id} className="h-[3px] flex-1 overflow-hidden rounded-full bg-linha/10">
             <span
               key={`${atual}-${pausado}`}
-              className={cn("block h-full origin-left rounded-full bg-white", k < atual ? "scale-x-100" : k > atual ? "scale-x-0" : "")}
+              className={cn("block h-full origin-left rounded-full bg-tx", k < atual ? "scale-x-100" : k > atual ? "scale-x-0" : "")}
               style={k === atual ? { animation: pausado ? "none" : "encherStory 5s linear forwards", transform: pausado ? "scaleX(1)" : undefined } : undefined}
             />
           </span>
@@ -116,7 +116,7 @@ export function StoriesPilares() {
           return (
             <article
               key={p.id}
-              className="relative flex min-h-[420px] rounded-[3px] border border-white/10 bg-[#0a0a0a] w-[86%] shrink-0 snap-center flex-col justify-between overflow-hidden p-6 md:w-auto"
+              className="relative flex min-h-[420px] rounded-[3px] border border-linha/10 bg-sup w-[86%] shrink-0 snap-center flex-col justify-between overflow-hidden p-6 md:w-auto"
             >
               <div className={cn("pointer-events-none absolute inset-0 bg-gradient-to-b", p.fundo)} aria-hidden />
               <div className="relative flex items-center justify-between">
@@ -124,8 +124,8 @@ export function StoriesPilares() {
                 <Icone className={cn("h-5 w-5", p.cor)} strokeWidth={1.3} aria-hidden />
               </div>
               <div className="relative flex flex-col gap-4">
-                <h3 className="text-balance font-serif text-[2.1rem] font-light leading-[1.02] text-white">{p.titulo}</h3>
-                <p className="text-[15px] leading-relaxed text-zinc-300">{p.texto}</p>
+                <h3 className="text-balance font-serif text-[2.1rem] font-light leading-[1.02] text-tx">{p.titulo}</h3>
+                <p className="text-[15px] leading-relaxed text-tx2">{p.texto}</p>
                 <p className={cn("num text-[12px] uppercase tracking-[0.18em]", p.cor)}>{p.dado}</p>
                 <Link href={p.href} className="group mt-2 inline-flex w-fit items-center gap-1.5 text-[10.5px] font-medium uppercase tracking-[0.24em] text-ouro">
                   {p.cta}

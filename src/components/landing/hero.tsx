@@ -5,9 +5,25 @@ import { ArrowRight, BadgeCheck, Clock3, Home, MapPin } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePlataforma } from "@/lib/store";
 
+/** Faixa com as ondas do calçadão de Copacabana, usada como divisória carioca. */
+export function Calcadao({ className = "" }: { className?: string }) {
+  return (
+    <div
+      aria-hidden
+      className={`h-7 w-full bg-[#050505] ${className}`}
+      style={{
+        backgroundImage:
+          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='28' viewBox='0 0 80 28'%3E%3Cpath d='M0 14 C10 0 30 0 40 14 S70 28 80 14 V28 H0Z' fill='%23fbf7ef'/%3E%3C/svg%3E\")",
+        backgroundSize: "80px 28px",
+        backgroundRepeat: "repeat-x",
+      }}
+    />
+  );
+}
+
 /**
- * Abertura editorial: foto de showroom em tela cheia (gerada por IA), escurecida à esquerda
- * para a tipografia serifada respirar. Sem brilhos animados; o luxo vem do espaço e da luz.
+ * Abertura solar e carioca: título serifado sobre fundo areia e, logo abaixo,
+ * o panorama ilustrado do Rio (gerado por IA) com o calçadão de Copacabana.
  */
 export function Hero() {
   const { config } = usePlataforma();
@@ -19,56 +35,61 @@ export function Hero() {
     { icone: BadgeCheck, texto: `Garantia de ${site.garantiaAnos} anos` },
   ];
   return (
-    <section className="relative isolate -mt-px overflow-hidden md:min-h-[92svh]">
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img
-        src="/img/showroom.webp"
-        alt="Sedã preto em showroom de concessionária com piso espelhado e vista noturna da cidade"
-        className="absolute inset-x-0 top-0 -z-20 h-[58svh] w-full object-cover object-[64%_50%] md:inset-0 md:h-full md:object-[70%_50%] [mask-image:linear-gradient(to_bottom,#000_55%,transparent)] md:[mask-image:none]"
-        fetchPriority="high"
-      />
-      <div className="absolute inset-0 -z-10 bg-gradient-to-t from-[#050505] from-45% via-black/40 to-black/0 md:bg-gradient-to-r md:from-black md:from-0% md:via-black/60 md:to-transparent" aria-hidden />
-      <div className="absolute inset-x-0 bottom-0 -z-10 h-1/2 bg-gradient-to-t from-[#050505] to-transparent" aria-hidden />
-
-      <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 pb-16 pt-[40svh] sm:px-6 md:min-h-[92svh] md:justify-center md:pb-24 md:pt-28">
-        <div className="flex max-w-2xl flex-col gap-8">
+    <section className="relative overflow-hidden">
+      <div className="pointer-events-none absolute -right-32 -top-40 h-[420px] w-[420px] rounded-full bg-[#ffd98a]/40 blur-3xl" aria-hidden />
+      <div className="relative mx-auto grid max-w-7xl gap-10 px-4 pb-12 pt-12 sm:px-6 md:pt-20 lg:grid-cols-[1.25fr_0.75fr] lg:items-end">
+        <div className="flex flex-col gap-7">
           <div className="flex items-center gap-4">
             <span className="hidden h-px w-10 bg-ouro sm:block" aria-hidden />
-            <p className="text-[10px] font-medium uppercase tracking-[0.24em] text-ouro-soft sm:text-[10.5px] sm:tracking-[0.38em]">Insulfilm · Envelopamento · Películas</p>
+            <p className="text-[10px] font-semibold uppercase tracking-[0.24em] text-ouro sm:text-[10.5px] sm:tracking-[0.34em]">Insulfilm · Envelopamento · Películas · Rio de Janeiro</p>
           </div>
-
-          <h1 className="font-serif text-[3.1rem] font-light leading-[0.98] tracking-[-0.015em] text-white text-balance sm:text-[4.8rem] lg:text-[5.6rem]">
-            Mais do que aparência, <em className="italic text-ouro-soft">é proteção.</em>
+          <h1 className="font-serif text-[3rem] font-light leading-[0.98] tracking-[-0.015em] text-tx text-balance sm:text-[4.6rem] lg:text-[5.4rem]">
+            Mais do que aparência, <em className="italic text-ouro">é proteção.</em>
           </h1>
-
-          <p className="max-w-lg text-pretty text-[15px] leading-[1.8] text-zinc-300 sm:text-base">
-            O acabamento que você vê nas concessionárias, aplicado na sua garagem, na sua empresa ou em um dos nossos pontos de instalação. Com hora marcada e equipe própria.
+        </div>
+        <div className="flex flex-col gap-6">
+          <p className="max-w-md text-pretty text-[15px] leading-[1.8] text-tx2 sm:text-base">
+            Película e envelopamento com acabamento de concessionária, sob o sol do Rio. Vamos até você em {site.areaDomicilio}, ou você nos encontra em um ponto de instalação.
           </p>
-
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button asChild tamanho="lg">
               <Link href="#orcamento">
                 Solicitar orçamento <ArrowRight className="h-4 w-4" aria-hidden />
               </Link>
             </Button>
-            <Button asChild tamanho="lg" variante="vidro">
+            <Button asChild tamanho="lg" variante="contorno">
               <Link href="/pelicula">Simular preço</Link>
             </Button>
           </div>
         </div>
+      </div>
 
-        <ul className="grid max-w-3xl grid-cols-2 border-t border-white/15 pt-6 sm:grid-cols-4">
+      <div className="relative">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="/img/rio-panorama.webp"
+          alt="Ilustração do Rio de Janeiro em dia de sol: sedã preto no calçadão, praia, baía de Guanabara e Pão de Açúcar"
+          className="aspect-[4/3] w-full object-cover object-[18%_60%] sm:aspect-[2.36/1] sm:object-center"
+          fetchPriority="high"
+        />
+        <ul className="absolute inset-x-4 bottom-4 hidden grid-cols-4 rounded-[3px] bg-white/90 px-6 py-4 shadow-[0_20px_50px_-30px_rgba(14,22,36,.6)] backdrop-blur md:inset-x-auto md:left-1/2 md:grid md:w-[min(900px,calc(100%-3rem))] md:-translate-x-1/2">
           {selos.map((s, i) => (
-            <li
-              key={s.texto}
-              className={`flex items-center gap-2.5 py-2 text-[12px] tracking-wide text-zinc-300 sm:py-0 ${i > 0 ? "sm:border-l sm:border-white/10 sm:pl-5" : ""}`}
-            >
-              <s.icone className="h-4 w-4 shrink-0 text-ouro" strokeWidth={1.4} aria-hidden />
+            <li key={s.texto} className={`flex items-center gap-2.5 text-[12.5px] font-medium text-tx ${i > 0 ? "border-l border-linha/10 pl-5" : ""}`}>
+              <s.icone className="h-4 w-4 shrink-0 text-ouro" strokeWidth={1.6} aria-hidden />
               {s.texto}
             </li>
           ))}
         </ul>
       </div>
+      <Calcadao />
+      <ul className="grid grid-cols-2 gap-x-4 gap-y-3 px-4 py-6 md:hidden">
+        {selos.map((s) => (
+          <li key={s.texto} className="flex items-center gap-2.5 text-[13px] font-medium text-tx">
+            <s.icone className="h-4 w-4 shrink-0 text-ouro" strokeWidth={1.6} aria-hidden />
+            {s.texto}
+          </li>
+        ))}
+      </ul>
     </section>
   );
 }

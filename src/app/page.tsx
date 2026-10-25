@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import { Hero } from "@/components/landing/hero";
+import { Calcadao, Hero } from "@/components/landing/hero";
 import { StoriesPilares } from "@/components/landing/stories";
 import { TimelineEtapas } from "@/components/landing/timeline";
 import { AtendimentoLocal, ComparativoPeliculas, FaixaBeneficios, PadraoConcessionaria, Perguntas, ServicosDiagonais } from "@/components/landing/marca";
@@ -9,7 +9,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <>
+    <div className="tema-claro">
       <Hero />
       <FaixaBeneficios />
 
@@ -27,6 +27,18 @@ export default function Home() {
             titulo={<>Na sua casa <em>ou no nosso ponto.</em></>}
             descricao="Você escolhe: a equipe vai até você com todo o equipamento, ou você leva o carro ou a peça até um ponto de instalação. Nos dois casos, com hora marcada."
           />
+          <figure className="relative overflow-hidden rounded-[3px]">
+            {/* eslint-disable-next-line @next/next/no-img-element */}
+            <img
+              src="/img/rio-centro.webp"
+              alt="Ilustração do Centro do Rio com os Arcos da Lapa, o bondinho amarelo, a Catedral e o Pão de Açúcar ao fundo"
+              loading="lazy"
+              className="aspect-[16/9] w-full object-cover sm:aspect-[2.2/1]"
+            />
+            <figcaption className="absolute bottom-4 left-4 rounded-[3px] bg-white/90 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-tx backdrop-blur">
+              Rio de Janeiro e região
+            </figcaption>
+          </figure>
           <AtendimentoLocal />
         </div>
       </section>
@@ -61,6 +73,7 @@ export default function Home() {
         <Titulo eyebrow="Dúvidas frequentes" titulo="Antes de agendar." />
         <Perguntas />
       </section>
-    </>
+      <Calcadao />
+    </div>
   );
 }

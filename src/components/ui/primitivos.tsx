@@ -87,8 +87,8 @@ export function Titulo({ eyebrow, titulo, descricao, className }: { eyebrow?: st
   return (
     <div className={cn("flex max-w-2xl flex-col gap-3", className)}>
       {eyebrow && <span className="rotulo flex items-center gap-3 text-ouro"><span className="h-px w-8 bg-ouro/70" aria-hidden />{eyebrow}</span>}
-      <h2 className="text-balance font-serif text-[2.4rem] font-light leading-[1.02] tracking-[-0.01em] text-white sm:text-[3.4rem] [&_em]:italic [&_em]:text-ouro">{titulo}</h2>
-      {descricao && <p className="text-pretty text-[15px] leading-relaxed text-zinc-400 sm:text-base">{descricao}</p>}
+      <h2 className="text-balance font-serif text-[2.4rem] font-light leading-[1.02] tracking-[-0.01em] text-tx sm:text-[3.4rem] [&_em]:italic [&_em]:text-ouro">{titulo}</h2>
+      {descricao && <p className="text-pretty text-[15px] leading-relaxed text-tx3 sm:text-base">{descricao}</p>}
     </div>
   );
 }
@@ -96,7 +96,7 @@ export function Titulo({ eyebrow, titulo, descricao, className }: { eyebrow?: st
 export function BarraProgresso({ valor, tom = "neon" }: { valor: number; tom?: "neon" | "esmeralda" | "alerta" }) {
   const cor = { neon: "bg-neon shadow-neon", esmeralda: "bg-esmeralda shadow-esmeralda", alerta: "bg-alerta" }[tom];
   return (
-    <div className="h-1.5 w-full overflow-hidden rounded-full bg-white/[0.06]" role="progressbar" aria-valuenow={valor} aria-valuemin={0} aria-valuemax={100}>
+    <div className="h-1.5 w-full overflow-hidden rounded-full bg-linha/[0.06]" role="progressbar" aria-valuenow={valor} aria-valuemin={0} aria-valuemax={100}>
       <div className={cn("h-full origin-left rounded-full transition-transform duration-500 ease-saida", cor)} style={{ transform: `scaleX(${valor / 100})` }} />
     </div>
   );

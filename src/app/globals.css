@@ -7,7 +7,38 @@
   --fundo: #050505;
   /* metal escovado: faixas claras e escuras alternadas, como o logotipo */
   --cromo: linear-gradient(180deg, #ffffff 0%, #e4e5e8 28%, #9a9da3 48%, #5f6268 52%, #d9dadd 70%, #f6f6f7 86%, #a7aab0 100%);
-  --ouro: linear-gradient(180deg, #f6e3b4 0%, #d4af6a 45%, #a8803f 70%, #e8cd8e 100%);
+  --ouro-grad: linear-gradient(180deg, #f6e3b4 0%, #d4af6a 45%, #a8803f 70%, #e8cd8e 100%);
+  /* tokens de tema em "r g b" para aceitar opacidade do Tailwind */
+  --ouro: 212 175 106;
+  --tx: 255 255 255;
+  --tx2: 212 212 216;
+  --tx3: 161 161 170;
+  --tx4: 113 113 122;
+  --linha: 255 255 255;
+  --sup: 10 10 10;
+}
+
+/* Tema claro e solar da vitrine: areia de Copacabana, tinta azul-noite e dourado mais fechado para contraste. */
+.tema-claro {
+  --ouro: 150 110 38;
+  --tx: 14 22 36;
+  --tx2: 52 62 78;
+  --tx3: 88 98 114;
+  --tx4: 120 128 140;
+  --linha: 14 22 36;
+  --sup: 255 255 255;
+  background: #fbf7ef;
+  color: rgb(var(--tx2));
+}
+/* ilhas escuras (fotos, faixas pretas) dentro do tema claro */
+.tema-claro .escuro {
+  --ouro: 212 175 106;
+  --tx: 255 255 255;
+  --tx2: 212 212 216;
+  --tx3: 161 161 170;
+  --tx4: 113 113 122;
+  --linha: 255 255 255;
+  --sup: 10 10 10;
 }
 
 html,
@@ -34,10 +65,10 @@ body {
     @apply rounded-3xl border border-white/[0.1] bg-gradient-to-b from-zinc-900 to-black shadow-vidro;
   }
   .rotulo {
-    @apply font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-prata-escuro;
+    @apply font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-tx4;
   }
   .campo {
-    @apply w-full rounded-xl border border-white/10 bg-black/60 px-4 py-3 text-[15px] text-zinc-100 outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-zinc-600 focus:border-ouro/70 focus:shadow-[0_0_0_4px_rgba(212,175,106,.12)];
+    @apply w-full rounded-xl border border-linha/10 bg-sup/60 px-4 py-3 text-[15px] text-tx outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-zinc-600 focus:border-ouro/70 focus:shadow-[0_0_0_4px_rgb(var(--ouro)/.14)];
   }
   /* tipografia larga e itálica do logotipo */
   .display {
@@ -53,7 +84,7 @@ body {
   }
   .texto-neon,
   .dourado {
-    background: var(--ouro);
+    background: var(--ouro-grad);
     -webkit-background-clip: text;
     background-clip: text;
     color: transparent;

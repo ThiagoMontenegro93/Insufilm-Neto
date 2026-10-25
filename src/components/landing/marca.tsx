@@ -39,13 +39,13 @@ const BENEFICIOS = [
 
 export function FaixaBeneficios() {
   return (
-    <section className="border-b border-white/[0.06]">
+    <section className="border-b border-linha/[0.06]">
       <ul className="mx-auto grid max-w-7xl grid-cols-2 gap-y-10 px-4 py-14 sm:px-6 md:grid-cols-3 lg:grid-cols-6 lg:gap-x-8">
         {BENEFICIOS.map((b) => (
           <li key={b.titulo} className="flex flex-col gap-3 pr-4">
             <b.icone className="h-5 w-5 text-ouro" strokeWidth={1.2} aria-hidden />
-            <h3 className="font-serif text-[1.3rem] font-normal leading-tight text-white">{b.titulo}</h3>
-            <p className="text-[13px] leading-relaxed text-zinc-500">{b.texto}</p>
+            <h3 className="font-serif text-[1.3rem] font-normal leading-tight text-tx">{b.titulo}</h3>
+            <p className="text-[13px] leading-relaxed text-tx4">{b.texto}</p>
           </li>
         ))}
       </ul>
@@ -61,8 +61,8 @@ const SERVICOS = [
     titulo: "Insulfilm automotivo",
     texto: "Mais segurança, conforto e privacidade, dentro das regras do CONTRAN.",
     href: "#orcamento",
-    foto: "/img/insulfilm.webp",
-    alt: "Aplicador instalando película no vidro lateral de um carro preto em concessionária",
+    foto: "/img/rio-insulfilm.webp",
+    alt: "Ilustração de técnico aplicando insulfilm em sedã preto no Aterro do Flamengo, com o Pão de Açúcar ao fundo",
     posicao: "object-center",
     grade: "lg:col-span-7 lg:row-span-2",
   },
@@ -152,7 +152,7 @@ export function PadraoConcessionaria() {
     { valor: "5 anos", rotulo: "de garantia" },
   ];
   return (
-    <section className="relative isolate overflow-hidden">
+    <section className="escuro relative isolate overflow-hidden bg-black">
       {/* eslint-disable-next-line @next/next/no-img-element */}
       <img
         src="/img/detalhe-aplicacao.webp"
@@ -238,32 +238,32 @@ export function AtendimentoLocal() {
             onClick={() => setLocal(o.id)}
             aria-pressed={local === o.id}
             className={cn(
-              "flex flex-col gap-4 rounded-[3px] border bg-black/40 p-6 text-left transition-[border-color,background-color] duration-200 sm:p-8",
-              local === o.id ? "border-ouro/60 bg-ouro/[0.04]" : "border-white/10 hover:border-white/25",
+              "flex flex-col gap-4 rounded-[3px] border bg-sup/60 p-6 text-left transition-[border-color,background-color] duration-200 sm:p-8",
+              local === o.id ? "border-ouro/60 bg-ouro/[0.04]" : "border-linha/10 hover:border-linha/25",
             )}
           >
             <div className="flex items-center justify-between">
               <span className="grid h-11 w-11 place-items-center rounded-full border border-ouro/40">
                 <o.icone className="h-5 w-5 text-ouro" strokeWidth={1.3} aria-hidden />
               </span>
-              <span className={cn("h-4 w-4 rounded-full border-2", local === o.id ? "border-ouro bg-ouro" : "border-zinc-600")} aria-hidden />
+              <span className={cn("h-4 w-4 rounded-full border-2", local === o.id ? "border-ouro bg-ouro" : "border-linha/30")} aria-hidden />
             </div>
-            <h3 className="font-serif text-[2rem] font-light leading-none text-white">{o.titulo}</h3>
-            <p className="text-[15px] leading-relaxed text-zinc-300">{o.texto}</p>
+            <h3 className="font-serif text-[2rem] font-light leading-none text-tx">{o.titulo}</h3>
+            <p className="text-[15px] leading-relaxed text-tx2">{o.texto}</p>
             <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-ouro/80">{o.detalhe}</p>
           </button>
         ))}
       </div>
 
-      <ol className="grid gap-px overflow-hidden rounded-[3px] border border-white/[0.07] bg-white/[0.07] sm:grid-cols-2 lg:grid-cols-5">
+      <ol className="grid gap-px overflow-hidden rounded-[3px] border border-linha/[0.07] bg-linha/[0.07] sm:grid-cols-2 lg:grid-cols-5">
         {PASSOS.map((p, i) => (
-          <li key={p.titulo} className="flex flex-col gap-2 bg-[#070707] p-6">
+          <li key={p.titulo} className="flex flex-col gap-2 bg-sup p-6">
             <div className="flex items-center gap-3">
               <span className="num font-serif text-lg italic text-ouro">{String(i + 1).padStart(2, "0")}</span>
               <p.icone className="h-5 w-5 text-prata" strokeWidth={1.5} aria-hidden />
             </div>
-            <h4 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-white">{p.titulo}</h4>
-            <p className="text-[13px] leading-snug text-zinc-400">{p.texto}</p>
+            <h4 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-tx">{p.titulo}</h4>
+            <p className="text-[13px] leading-snug text-tx3">{p.texto}</p>
           </li>
         ))}
       </ol>
@@ -271,12 +271,12 @@ export function AtendimentoLocal() {
       <form
         id="orcamento"
         onSubmit={(e) => e.preventDefault()}
-        className="grid scroll-mt-28 grid-cols-1 gap-4 rounded-[3px] border border-white/10 bg-[#0a0a0a] p-6 sm:p-8 md:grid-cols-[1fr_1fr_auto] md:items-end"
+        className="grid scroll-mt-28 grid-cols-1 gap-4 rounded-[3px] border border-linha/10 bg-sup p-6 sm:p-8 md:grid-cols-[1fr_1fr_auto] md:items-end"
       >
         <div className="flex flex-col gap-1 md:col-span-3">
           <span className="rotulo text-ouro/90">Solicite seu orçamento</span>
-          <p className="text-sm text-zinc-400">
-            Atendimento <strong className="text-white">{local === "domicilio" ? "em domicílio" : "em ponto de instalação"}</strong>. A mensagem já vai pronta para o WhatsApp.
+          <p className="text-sm text-tx3">
+            Atendimento <strong className="text-tx">{local === "domicilio" ? "em domicílio" : "em ponto de instalação"}</strong>. A mensagem já vai pronta para o WhatsApp.
           </p>
         </div>
         <Campo rotulo="Seu nome" htmlFor="orc-nome">
@@ -321,7 +321,7 @@ function Nivel({ valor, rotulo }: { valor: number; rotulo: string }) {
   return (
     <span className="flex gap-1" role="img" aria-label={`${rotulo}: ${valor} de 5`}>
       {[1, 2, 3, 4, 5].map((n) => (
-        <span key={n} className={cn("h-1.5 w-4 -skew-x-[25deg] rounded-[1px]", n <= valor ? "bg-ouro" : "bg-white/10")} />
+        <span key={n} className={cn("h-1.5 w-4 -skew-x-[25deg] rounded-[1px]", n <= valor ? "bg-ouro" : "bg-linha/10")} />
       ))}
     </span>
   );
@@ -336,10 +336,10 @@ export function ComparativoPeliculas() {
   ];
   return (
     <div className="flex flex-col gap-3">
-      <div className="overflow-x-auto rounded-[3px] border border-white/[0.07]">
+      <div className="overflow-x-auto rounded-[3px] border border-linha/[0.07]">
         <table className="w-full min-w-[640px] text-left text-sm">
           <thead>
-            <tr className="border-b border-white/[0.07] bg-white/[0.02]">
+            <tr className="border-b border-linha/[0.07] bg-linha/[0.02]">
               <th className="rotulo px-5 py-4 font-semibold">Película</th>
               <th className="rotulo px-5 py-4 font-semibold">Uso</th>
               {colunas.map((c) => (
@@ -351,9 +351,9 @@ export function ComparativoPeliculas() {
           </thead>
           <tbody>
             {LINHAS.map((l) => (
-              <tr key={l.nome} className="border-b border-white/[0.05] last:border-0">
-                <td className="px-5 py-4 font-semibold text-white">{l.nome}</td>
-                <td className="px-5 py-4 text-zinc-400">{l.uso}</td>
+              <tr key={l.nome} className="border-b border-linha/[0.05] last:border-0">
+                <td className="px-5 py-4 font-semibold text-tx">{l.nome}</td>
+                <td className="px-5 py-4 text-tx3">{l.uso}</td>
                 {colunas.map((c) => (
                   <td key={c.k} className="px-5 py-4">
                     <Nivel valor={l[c.k]} rotulo={c.t} />
@@ -364,7 +364,7 @@ export function ComparativoPeliculas() {
           </tbody>
         </table>
       </div>
-      <p className="text-xs text-zinc-500">Comparativo indicativo. O desempenho exato e a garantia dependem do fabricante e da linha escolhida, e vão descritos no orçamento.</p>
+      <p className="text-xs text-tx4">Comparativo indicativo. O desempenho exato e a garantia dependem do fabricante e da linha escolhida, e vão descritos no orçamento.</p>
     </div>
   );
 }
@@ -382,16 +382,16 @@ export function Perguntas() {
     { p: "Como funciona a indicação?", r: `Você indica pelo painel do parceiro, o cliente recebe um código e, quando o serviço fecha, você ganha ${config.taxas.indicadorPct}% do valor por PIX.` },
   ];
   return (
-    <div className="flex flex-col divide-y divide-white/[0.07] rounded-[3px] border border-white/[0.07]">
+    <div className="flex flex-col divide-y divide-linha/[0.07] rounded-[3px] border border-linha/[0.07]">
       {itens.map((i) => (
         <details key={i.p} className="group px-5 py-1 sm:px-6">
-          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-semibold text-white [&::-webkit-details-marker]:hidden">
+          <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-semibold text-tx [&::-webkit-details-marker]:hidden">
             {i.p}
             <span className="grid h-7 w-7 shrink-0 place-items-center rounded-full border border-ouro/40 text-ouro transition-transform duration-200 ease-saida group-open:rotate-45" aria-hidden>
               +
             </span>
           </summary>
-          <p className="max-w-3xl pb-5 text-[15px] leading-relaxed text-zinc-400">{i.r}</p>
+          <p className="max-w-3xl pb-5 text-[15px] leading-relaxed text-tx3">{i.r}</p>
         </details>
       ))}
     </div>

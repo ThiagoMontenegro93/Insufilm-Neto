@@ -30,10 +30,10 @@ export function TimelineEtapas() {
             </span>
             <div className="flex min-w-0 flex-col gap-1.5 pt-1">
               <div className="flex flex-wrap items-center gap-2">
-                <h3 className="text-lg font-semibold text-white">{e.rotulo}</h3>
-                <span className="num rounded-full bg-white/[0.06] px-2 py-0.5 font-mono text-[11px] text-zinc-400">{e.progresso}%</span>
+                <h3 className="text-lg font-semibold text-tx">{e.rotulo}</h3>
+                <span className="num rounded-full bg-linha/[0.06] px-2 py-0.5 font-mono text-[11px] text-tx3">{e.progresso}%</span>
               </div>
-              <p className="max-w-md text-[15px] leading-relaxed text-zinc-400">{TEXTOS[i]}</p>
+              <p className="max-w-md text-[15px] leading-relaxed text-tx3">{TEXTOS[i]}</p>
             </div>
           </li>
         );

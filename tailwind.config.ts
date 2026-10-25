@@ -4,7 +4,9 @@ import type { Config } from "tailwindcss";
  * Identidade JR Filmes: preto profundo, metal escovado prata e acento dourado.
  * `neon` continua como nome do acento por compatibilidade com os componentes; hoje é o dourado.
  */
-const ouro = { DEFAULT: "#D4AF6A", soft: "#F0DBA8", deep: "#9C7A3C" };
+const ouro = { DEFAULT: "rgb(var(--ouro) / <alpha-value>)", soft: "#F0DBA8", deep: "#9C7A3C" };
+/** Tons que mudam com o tema: escuro por padrão, claro dentro de `.tema-claro`. */
+const tom = (v: string) => `rgb(var(--${v}) / <alpha-value>)`;
 
 const config: Config = {
   content: ["./src/**/*.{ts,tsx,mdx}"],
@@ -15,6 +17,13 @@ const config: Config = {
         neon: ouro,
         prata: { DEFAULT: "#C9CBCF", claro: "#F2F3F5", escuro: "#7B7F86" },
         esmeralda: { DEFAULT: "#34C38F", soft: "#86E3BD" },
+        tx: tom("tx"),
+        tx2: tom("tx2"),
+        tx3: tom("tx3"),
+        tx4: tom("tx4"),
+        linha: tom("linha"),
+        sup: tom("sup"),
+        mar: "#0E6BA8",
         alerta: "#E8B04A",
         perigo: "#E5484D",
       },
