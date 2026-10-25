@@ -1,0 +1,141 @@
+"use client";
+
+/**
+ * Stories dos 3 pilares. No celular: carrossel com toque/arraste e avanço automático (pausa ao tocar).
+ * No desktop: três colunas lado a lado.
+ */
+import Link from "next/link";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { ArrowUpRight, Brush, Coins, ShieldCheck } from "lucide-react";
+import { usePlataforma } from "@/lib/store";
+import { brl } from "@/lib/pricing";
+import { cn } from "@/lib/utils";
+
+export function StoriesPilares() {
+  const { config } = usePlataforma();
+  const precos = config.servicos.peliculaSeguranca.map((p) => p.preco);
+  const marcas = config.servicos.envelopamento.marcas.map((m) => m.preco);
+
+  const pilares = [
+    {
+      id: "protecao",
+      icone: ShieldCheck,
+      eyebrow: "Pilar 01 · Proteção",
+      titulo: "Vidro que segura o impacto.",
+      texto: "Jateada para privacidade, antivandalismo para fachadas e alta rigidez para quem não pode ter estilhaço.",
+      dado: `de ${brl(Math.min(...precos))} a ${brl(Math.max(...precos))}/m²`,
+      href: "/pelicula",
+      cta: "Calcular película",
+      fundo: "from-neon/25 via-neon/5 to-transparent",
+      cor: "text-neon",
+    },
+    {
+      id: "design",
+      icone: Brush,
+      eyebrow: "Pilar 02 · Design",
+      titulo: "Carro, parede e geladeira com cara nova.",
+      texto: "3M, Avery Dennison e Oracal em brilho, fosco ou cromado. Mármore e madeira para ambientes.",
+      dado: `a partir de ${brl(Math.min(...marcas))}/m²`,
+      href: "/envelopamento",
+      cta: "Simular envelopamento",
+      fundo: "from-fuchsia-500/20 via-neon/5 to-transparent",
+      cor: "text-fuchsia-300",
+    },
+    {
+      id: "renda",
+      icone: Coins,
+      eyebrow: "Pilar 03 · Renda",
+      titulo: "Indicou, fechou, caiu no PIX.",
+      texto: "Cada indicação ganha um código rastreável pelo telefone do cliente. Você acompanha tudo até a comissão.",
+      dado: `${config.taxas.indicadorPct}% por serviço fechado`,
+      href: "/parceiro/dashboard",
+      cta: "Ver painel do parceiro",
+      fundo: "from-esmeralda/25 via-esmeralda/5 to-transparent",
+      cor: "text-esmeralda-soft",
+    },
+  ];
+
+  const trilho = useRef<HTMLDivElement>(null);
+  const [atual, setAtual] = useState(0);
+  const [pausado, setPausado] = useState(false);
+
+  const irPara = useCallback((i: number) => {
+    const el = trilho.current;
+    if (!el) return;
+    const card = el.children[i] as HTMLElement | undefined;
+    if (card) el.scrollTo({ left: card.offsetLeft - el.offsetLeft, behavior: "smooth" });
+  }, []);
+
+  // sincroniza o índice com o arraste do usuário
+  useEffect(() => {
+    const el = trilho.current;
+    if (!el) return;
+    const onScroll = () => {
+      const i = Math.round(el.scrollLeft / Math.max(1, el.clientWidth * 0.86));
+      setAtual(Math.min(pilares.length - 1, Math.max(0, i)));
+    };
+    el.addEventListener("scroll", onScroll, { passive: true });
+    return () => el.removeEventListener("scroll", onScroll);
+  }, [pilares.length]);
+
+  useEffect(() => {
+    if (pausado) return;
+    const mobile = window.matchMedia("(max-width: 767px)").matches;
+    const reduzir = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    if (!mobile || reduzir) return;
+    const t = setTimeout(() => irPara((atual + 1) % pilares.length), 5000);
+    return () => clearTimeout(t);
+  }, [atual, pausado, irPara, pilares.length]);
+
+  return (
+    <div className="flex flex-col gap-4">
+      <div className="flex gap-1.5 md:hidden" aria-hidden>
+        {pilares.map((p, k) => (
+          <span key={p.id} className="h-[3px] flex-1 overflow-hidden rounded-full bg-white/10">
+            <span
+              key={`${atual}-${pausado}`}
+              className={cn("block h-full origin-left rounded-full bg-white", k < atual ? "scale-x-100" : k > atual ? "scale-x-0" : "")}
+              style={k === atual ? { animation: pausado ? "none" : "encherStory 5s linear forwards", transform: pausado ? "scaleX(1)" : undefined } : undefined}
+            />
+          </span>
+        ))}
+      </div>
+      <div
+        ref={trilho}
+        onPointerDown={() => setPausado(true)}
+        onPointerUp={() => setPausado(false)}
+        onPointerCancel={() => setPausado(false)}
+        className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 sem-barra md:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0"
+        role="region"
+        aria-roledescription="carrossel"
+        aria-label="Os três pilares"
+      >
+        {pilares.map((p) => {
+          const Icone = p.icone;
+          return (
+            <article
+              key={p.id}
+              className="vidro relative flex min-h-[420px] w-[86%] shrink-0 snap-center flex-col justify-between overflow-hidden p-6 md:w-auto"
+            >
+              <div className={cn("pointer-events-none absolute inset-0 bg-gradient-to-b", p.fundo)} aria-hidden />
+              <div className="relative flex items-center justify-between">
+                <span className="rotulo">{p.eyebrow}</span>
+                <Icone className={cn("h-6 w-6", p.cor)} aria-hidden />
+              </div>
+              <div className="relative flex flex-col gap-4">
+                <h3 className="text-balance text-[1.9rem] font-bold leading-[1] tracking-tight text-white">{p.titulo}</h3>
+                <p className="text-[15px] leading-relaxed text-zinc-300">{p.texto}</p>
+                <p className={cn("num font-mono text-sm", p.cor)}>{p.dado}</p>
+                <Link href={p.href} className="group mt-2 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-white">
+                  {p.cta}
+                  <ArrowUpRight className="h-4 w-4 transition-transform duration-150 ease-saida group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+                </Link>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+      <style>{`@keyframes encherStory{from{transform:scaleX(0)}to{transform:scaleX(1)}}`}</style>
+    </div>
+  );
+}

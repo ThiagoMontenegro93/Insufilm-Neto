@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  color-scheme: dark;
+  --fundo: #09090b; /* zinc-950 */
+}
+
+html,
+body {
+  background: var(--fundo);
+  color: #e4e4e7;
+}
+
+body {
+  font-feature-settings: "ss01", "ss02";
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(0, 217, 255, 0.3);
+  color: #fff;
+}
+
+@layer components {
+  /* Superfície de vidro: o "material" base do produto */
+  .vidro {
+    @apply rounded-3xl border border-white/[0.08] bg-white/[0.035] shadow-vidro backdrop-blur-xl;
+  }
+  .vidro-forte {
+    @apply rounded-3xl border border-white/[0.1] bg-zinc-900/70 shadow-vidro backdrop-blur-2xl;
+  }
+  .rotulo {
+    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-400;
+  }
+  .campo {
+    @apply w-full rounded-2xl border border-white/10 bg-zinc-950/60 px-4 py-3 text-[15px] text-zinc-100 outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-zinc-600 focus:border-neon/60 focus:shadow-[0_0_0_4px_rgba(0,217,255,.12)];
+  }
+  .grade-fundo {
+    background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
+    background-size: 48px 48px;
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 30%, transparent 75%);
+  }
+  .texto-neon {
+    @apply text-neon;
+    text-shadow: 0 0 24px rgba(0, 217, 255, 0.55);
+  }
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .sem-barra::-webkit-scrollbar {
+    display: none;
+  }
+  .sem-barra {
+    scrollbar-width: none;
+  }
+  .pb-seguro {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 6.5rem);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid #00d9ff;
+  outline-offset: 3px;
+  border-radius: 12px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}

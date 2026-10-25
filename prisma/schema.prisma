@@ -1,0 +1,242 @@
+// FilmProtect HUB // NEXUS — modelo de dados
+// Valores monetários em centavos (Int) para evitar erro de arredondamento.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Papel {
+  SUPER_ADMIN
+  LOCATARIO // dono de filial
+  PARCEIRO  // indicador
+  CLIENTE
+}
+
+enum StatusKyc {
+  NAO_ENVIADO
+  EM_ANALISE
+  APROVADO
+  RECUSADO
+}
+
+enum StatusIndicacao {
+  PENDENTE
+  EM_CONTATO
+  ORCAMENTO_GERADO
+  FECHADO
+  PAGO_COMISSAO
+}
+
+enum StatusOrcamento {
+  ORCAMENTO
+  APROVADO
+  EM_EXECUCAO
+  CONCLUIDO
+  CANCELADO
+}
+
+enum StatusSaque {
+  PENDENTE
+  APROVADO
+  PAGO
+  RECUSADO
+}
+
+enum StatusLead {
+  NOVO
+  VALIDADO
+  CONTATADO
+  OPT_OUT
+  DESCARTADO
+}
+
+model Usuario {
+  id            String    @id @default(cuid())
+  nome          String
+  email         String    @unique
+  senhaHash     String
+  papel         Papel     @default(PARCEIRO)
+  telefone      String?   // normalizado, só dígitos
+  dataNasc      DateTime?
+  criadoEm      DateTime  @default(now())
+  atualizadoEm  DateTime  @updatedAt
+  excluidoEm    DateTime? // soft delete (LGPD: anonimizar após prazo legal)
+
+  parceiro      Parceiro?
+  filiais       Filial[]
+  logs          LogAuditoria[]
+}
+
+model Filial {
+  id                String   @id @default(cuid())
+  nome              String
+  cnpj              String?  @unique
+  cidade            String
+  uf                String   @db.Char(2)
+  donoId            String
+  dono              Usuario  @relation(fields: [donoId], references: [id])
+  stripeCustomerId  String?
+  stripeSubId       String?
+  mensalidadeAtiva  Boolean  @default(false)
+  criadoEm          DateTime @default(now())
+
+  orcamentos        Orcamento[]
+}
+
+model Parceiro {
+  id            String     @id @default(cuid())
+  usuarioId     String     @unique
+  usuario       Usuario    @relation(fields: [usuarioId], references: [id])
+  codigo        String     @unique // ex.: JORG
+  chavePix      String
+  tipoChavePix  String
+  kycStatus     StatusKyc  @default(NAO_ENVIADO)
+  // caminhos no bucket PRIVADO do R2; nunca URL pública
+  kycSelfieKey  String?
+  kycDocKey     String?
+  cpfHash       String?    // CPF guardado como hash + últimos dígitos para exibição
+  cpfFinal      String?    @db.Char(2)
+  criadoEm      DateTime   @default(now())
+
+  indicacoes    Indicacao[]
+  saques        Saque[]
+  lancamentos   LancamentoSaldo[]
+}
+
+model Indicacao {
+  id                 String          @id @default(cuid())
+  codigo             String          @unique // IND-AAAAMMDD-CODIGO-NNN
+  parceiroId         String
+  parceiro           Parceiro        @relation(fields: [parceiroId], references: [id])
+  telefoneNormalizado String         @unique // chave de rastreio: a primeira indicação ganha
+  nomeCliente        String?
+  emailCliente       String?
+  categoria          String
+  status             StatusIndicacao @default(PENDENTE)
+  criadoEm           DateTime        @default(now())
+  atualizadoEm       DateTime        @updatedAt
+
+  orcamento          Orcamento?
+  eventos            EventoIndicacao[]
+
+  @@index([parceiroId, status])
+}
+
+model EventoIndicacao {
+  id           String          @id @default(cuid())
+  indicacaoId  String
+  indicacao    Indicacao       @relation(fields: [indicacaoId], references: [id])
+  status       StatusIndicacao
+  nota         String?
+  criadoEm     DateTime        @default(now())
+}
+
+model Orcamento {
+  id                 String          @id @default(cuid())
+  numero             String          @unique
+  filialId           String
+  filial             Filial          @relation(fields: [filialId], references: [id])
+  indicacaoId        String?         @unique
+  indicacao          Indicacao?      @relation(fields: [indicacaoId], references: [id])
+  servico            String
+  itens              Json            // linhas com área, preço e subtotal no momento do orçamento
+  brutoCentavos      Int
+  descontoCentavos   Int             @default(0)
+  plataformaCentavos Int
+  indicadorCentavos  Int
+  locatarioCentavos  Int
+  taxasSnapshot      Json            // taxas vigentes no momento (auditoria do split)
+  status             StatusOrcamento @default(ORCAMENTO)
+  criadoEm           DateTime        @default(now())
+  atualizadoEm       DateTime        @updatedAt
+}
+
+model LancamentoSaldo {
+  id           String   @id @default(cuid())
+  parceiroId   String
+  parceiro     Parceiro @relation(fields: [parceiroId], references: [id])
+  orcamentoId  String?
+  valorCentavos Int     // positivo = comissão, negativo = saque
+  descricao    String
+  criadoEm     DateTime @default(now())
+
+  @@index([parceiroId])
+}
+
+model Saque {
+  id              String      @id @default(cuid())
+  parceiroId      String
+  parceiro        Parceiro    @relation(fields: [parceiroId], references: [id])
+  valorCentavos   Int
+  chavePix        String
+  status          StatusSaque @default(PENDENTE)
+  confirmadoEm    DateTime    // segunda confirmação do parceiro
+  aprovadoPor     String?     // "AUTO" ou id do admin
+  comprovanteKey  String?
+  idempotencyKey  String      @unique // evita PIX duplicado em clique duplo
+  criadoEm        DateTime    @default(now())
+  pagoEm          DateTime?
+
+  @@index([status, criadoEm])
+}
+
+model ConfigPlataforma {
+  id           Int      @id @default(1)
+  dados        Json
+  versao       Int      @default(1)
+  atualizadoEm DateTime @updatedAt
+}
+
+model LogAuditoria {
+  id         String   @id @default(cuid())
+  acao       String   // ex.: CONFIG_PLATAFORMA_ALTERADA
+  descricao  String
+  usuarioId  String
+  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
+  antes      Json
+  depois     Json
+  ip         String?
+  criadoEm   DateTime @default(now())
+
+  @@index([acao, criadoEm])
+}
+
+model Lead {
+  id              String     @id @default(cuid())
+  empresa         String
+  endereco        String
+  categoria       String
+  cnpj            String?    @unique
+  googlePlaceId   String?    @unique
+  site            String?
+  email           String?
+  whatsapp        String?
+  instagram       String?
+  avaliacao       Float?
+  totalAvaliacoes Int?
+  validadoGoogle  Boolean    @default(false)
+  validadoSite    Boolean    @default(false)
+  score           Int        @default(0)
+  status          StatusLead @default(NOVO)
+  optOutEm        DateTime?  // pedido de não contato; bloqueia qualquer disparo
+  criadoEm        DateTime   @default(now())
+  atualizadoEm    DateTime   @updatedAt
+
+  disparos        Disparo[]
+}
+
+model Disparo {
+  id          String   @id @default(cuid())
+  leadId      String
+  lead        Lead     @relation(fields: [leadId], references: [id])
+  canal       String   // WHATSAPP_CLOUD | EMAIL
+  modelo      String   // nome do template aprovado
+  status      String   // ENVIADO | ENTREGUE | FALHOU
+  erro        String?
+  criadoEm    DateTime @default(now())
+}
