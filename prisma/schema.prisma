@@ -240,3 +240,94 @@ model Disparo {
   erro        String?
   criadoEm    DateTime @default(now())
 }
+
+// ---------------- Estoque por bobina ----------------
+// Saldo controlado em metros lineares por bobina; m² = largura × comprimento.
+
+enum StatusBobina {
+  LACRADA
+  ABERTA
+  FINALIZADA
+}
+
+enum TipoMovimento {
+  ENTRADA
+  CONSUMO
+  RETALHO
+  AJUSTE
+}
+
+model Fornecedor {
+  id               String     @id @default(cuid())
+  nome             String
+  cnpj             String?    @unique
+  marcas           String[]
+  telefone         String?
+  whatsapp         String?
+  email            String?
+  site             String?
+  prazoEntregaDias Int        @default(3)
+  observacoes      String?
+  criadoEm         DateTime   @default(now())
+
+  materiais        Material[]
+  bobinas          Bobina[]
+}
+
+model Material {
+  id               String     @id @default(cuid())
+  nome             String
+  categoria        String     // antivandalismo | insulfilm | jateado | envelopamento | decorativo | ppf
+  fornecedorId     String
+  fornecedor       Fornecedor @relation(fields: [fornecedorId], references: [id])
+  larguraM         Decimal    @db.Decimal(5, 3)
+  estoqueMinimoM2  Decimal    @db.Decimal(8, 2)
+  retalhoMinimoM   Decimal    @db.Decimal(5, 2) @default(0.5)
+  ativo            Boolean    @default(true)
+
+  bobinas          Bobina[]
+  movimentos       MovimentoEstoque[]
+}
+
+model Bobina {
+  id                    String       @id @default(cuid())
+  codigo                String       @unique // BOB-AAAAMMDD-NNN
+  materialId            String
+  material              Material     @relation(fields: [materialId], references: [id])
+  fornecedorId          String
+  fornecedor            Fornecedor   @relation(fields: [fornecedorId], references: [id])
+  larguraM              Decimal      @db.Decimal(5, 3)
+  comprimentoInicialM   Decimal      @db.Decimal(7, 2)
+  comprimentoRestanteM  Decimal      @db.Decimal(7, 2)
+  custoTotalCentavos    Int
+  notaFiscal            String?
+  dataEntrada           DateTime     @default(now())
+  status                StatusBobina @default(LACRADA)
+  origemBobinaId        String?      // retalho aponta para a bobina-mãe
+  origem                Bobina?      @relation("Retalhos", fields: [origemBobinaId], references: [id])
+  retalhos              Bobina[]     @relation("Retalhos")
+
+  movimentos            MovimentoEstoque[]
+
+  @@index([materialId, status])
+}
+
+model MovimentoEstoque {
+  id             String        @id @default(cuid())
+  bobinaId       String
+  bobina         Bobina        @relation(fields: [bobinaId], references: [id])
+  materialId     String
+  material       Material      @relation(fields: [materialId], references: [id])
+  tipo           TipoMovimento
+  comprimentoM   Decimal       @db.Decimal(7, 2)
+  m2Cortado      Decimal       @db.Decimal(8, 3)
+  m2Aplicado     Decimal       @db.Decimal(8, 3)
+  m2Perda        Decimal       @db.Decimal(8, 3)
+  custoCentavos  Int
+  referencia     String?       // OS / orçamento
+  observacao     String?
+  usuarioId      String?
+  criadoEm       DateTime      @default(now())
+
+  @@index([materialId, criadoEm])
+}

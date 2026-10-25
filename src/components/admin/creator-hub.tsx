@@ -15,6 +15,7 @@ import type { PlatformConfig } from "@/lib/config";
 import { brl, calcularSplit, precoEnvelopamento, precoLinhas } from "@/lib/pricing";
 import { cn } from "@/lib/utils";
 import { PainelProspeccao } from "./prospeccao";
+import { PainelEstoque } from "./estoque";
 import { ListaAuditoria } from "./auditoria";
 
 const ABAS = [
@@ -24,6 +25,7 @@ const ABAS = [
   { id: "apis", rotulo: "APIs", icone: "🔌" },
   { id: "nichos", rotulo: "Nichos", icone: "🎯" },
   { id: "prospeccao", rotulo: "Prospecção", icone: "📡" },
+  { id: "estoque", rotulo: "Estoque", icone: "🧻" },
   { id: "site", rotulo: "Site", icone: "🏠" },
   { id: "modulos", rotulo: "Módulos", icone: "🚀" },
   { id: "auditoria", rotulo: "Auditoria", icone: "📋" },
@@ -465,6 +467,14 @@ export function CreatorHub() {
             Abrir em página inteira <ExternalLink className="h-3.5 w-3.5" />
           </Link>
           <PainelProspeccao />
+        </div>
+      </Tabs.Content>
+      <Tabs.Content value="estoque">
+        <div className="flex flex-col gap-4">
+          <Link href="/admin/estoque" className="inline-flex w-fit items-center gap-1.5 text-sm text-neon hover:underline">
+            Abrir em página inteira <ExternalLink className="h-3.5 w-3.5" />
+          </Link>
+          <PainelEstoque />
         </div>
       </Tabs.Content>
       <Tabs.Content value="site"><AbaSite /></Tabs.Content>
