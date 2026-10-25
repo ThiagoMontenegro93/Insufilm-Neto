@@ -116,18 +116,18 @@ export function StoriesPilares() {
           return (
             <article
               key={p.id}
-              className="vidro relative flex min-h-[420px] w-[86%] shrink-0 snap-center flex-col justify-between overflow-hidden p-6 md:w-auto"
+              className="relative flex min-h-[420px] rounded-[3px] border border-white/10 bg-[#0a0a0a] w-[86%] shrink-0 snap-center flex-col justify-between overflow-hidden p-6 md:w-auto"
             >
               <div className={cn("pointer-events-none absolute inset-0 bg-gradient-to-b", p.fundo)} aria-hidden />
               <div className="relative flex items-center justify-between">
-                <span className={cn("text-[12px] font-bold uppercase tracking-[0.4em]", p.cor)}>{p.eyebrow}</span>
-                <Icone className={cn("h-6 w-6", p.cor)} aria-hidden />
+                <span className={cn("text-[10.5px] font-medium uppercase tracking-[0.38em]", p.cor)}>{p.eyebrow}</span>
+                <Icone className={cn("h-5 w-5", p.cor)} strokeWidth={1.3} aria-hidden />
               </div>
               <div className="relative flex flex-col gap-4">
-                <h3 className="display cromado text-balance text-[1.6rem] leading-[1] tracking-[-0.02em]">{p.titulo}</h3>
+                <h3 className="text-balance font-serif text-[2.1rem] font-light leading-[1.02] text-white">{p.titulo}</h3>
                 <p className="text-[15px] leading-relaxed text-zinc-300">{p.texto}</p>
-                <p className={cn("num font-mono text-sm", p.cor)}>{p.dado}</p>
-                <Link href={p.href} className="group mt-2 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-white">
+                <p className={cn("num text-[12px] uppercase tracking-[0.18em]", p.cor)}>{p.dado}</p>
+                <Link href={p.href} className="group mt-2 inline-flex w-fit items-center gap-1.5 text-[10.5px] font-medium uppercase tracking-[0.24em] text-ouro">
                   {p.cta}
                   <ArrowUpRight className="h-4 w-4 transition-transform duration-150 ease-saida group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
                 </Link>

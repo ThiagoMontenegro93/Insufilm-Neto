@@ -3,8 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Hero } from "@/components/landing/hero";
 import { StoriesPilares } from "@/components/landing/stories";
 import { TimelineEtapas } from "@/components/landing/timeline";
-import { GaleriaReels } from "@/components/landing/reels";
-import { AtendimentoLocal, ComparativoPeliculas, FaixaBeneficios, Perguntas, ServicosDiagonais } from "@/components/landing/marca";
+import { AtendimentoLocal, ComparativoPeliculas, FaixaBeneficios, PadraoConcessionaria, Perguntas, ServicosDiagonais } from "@/components/landing/marca";
 import { Titulo } from "@/components/ui/primitivos";
 import { Button } from "@/components/ui/button";
 
@@ -14,33 +13,30 @@ export default function Home() {
       <Hero />
       <FaixaBeneficios />
 
-      <section className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-14 sm:px-6 md:py-20">
-        <Titulo eyebrow="Nossos serviços" titulo="Do carro à sala de estar." descricao="Insulfilm, envelopamento e películas para veículos, residências, comércios e escritórios." />
+      <section className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-16 sm:px-6 md:py-28">
+        <Titulo eyebrow="Nossos serviços" titulo={<>Do carro à <em>sala de estar.</em></>} descricao="Insulfilm, envelopamento e películas para veículos, residências, comércios e escritórios." />
         <ServicosDiagonais />
       </section>
 
-      <section className="relative border-y border-white/[0.06] bg-gradient-to-b from-zinc-950 to-black">
-        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-14 sm:px-6 md:py-20">
+      <PadraoConcessionaria />
+
+      <section className="relative">
+        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-16 sm:px-6 md:py-28">
           <Titulo
             eyebrow="Onde atendemos"
-            titulo="Na sua casa ou no nosso ponto."
+            titulo={<>Na sua casa <em>ou no nosso ponto.</em></>}
             descricao="Você escolhe: a equipe vai até você com todo o equipamento, ou você leva o carro ou a peça até um ponto de instalação. Nos dois casos, com hora marcada."
           />
           <AtendimentoLocal />
         </div>
       </section>
 
-      <section className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-14 sm:px-6 md:py-20">
-        <Titulo eyebrow="Proteção • Estilo • Sofisticação" titulo="Escolha pelo que importa." descricao="Arraste para o lado no celular. Cada caminho leva direto para a calculadora certa." />
+      <section className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-16 sm:px-6 md:py-28">
+        <Titulo eyebrow="Proteção • Estilo • Sofisticação" titulo={<>Escolha pelo <em>que importa.</em></>} descricao="Arraste para o lado no celular. Cada caminho leva direto para a calculadora certa." />
         <StoriesPilares />
       </section>
 
-      <section className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-14 sm:px-6 md:py-20">
-        <Titulo eyebrow="Antes e depois em 5 segundos" titulo="Veja o serviço acontecer." descricao="Cada sequência mostra as etapas reais do serviço com os preços em vigor." />
-        <GaleriaReels />
-      </section>
-
-      <section className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-14 sm:px-6 md:py-20">
+      <section className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-16 sm:px-6 md:py-28">
         <Titulo eyebrow="Linhas de película" titulo="Qual película é para você?" descricao="Um guia rápido para comparar. No orçamento indicamos a linha certa para cada vidro." />
         <ComparativoPeliculas />
       </section>

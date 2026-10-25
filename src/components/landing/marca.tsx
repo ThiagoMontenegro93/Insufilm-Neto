@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Seções da identidade JR Filmes: benefícios, serviços em painéis diagonais,
+ * Seções da identidade JR Filmes: benefícios, serviços em grade editorial com fotos,
  * atendimento em domicílio ou em ponto de instalação, comparativo de películas e dúvidas.
  */
 import Link from "next/link";
@@ -29,157 +29,161 @@ import { cn } from "@/lib/utils";
 /* ---------------- faixa de benefícios ---------------- */
 
 const BENEFICIOS = [
-  { icone: ShieldCheck, titulo: "Segurança reforçada", texto: "Películas resistentes a impactos e tentativas de arrombamento." },
-  { icone: Sun, titulo: "Proteção solar e UV", texto: "Bloqueia até 99% dos raios UV e reduz o calor interno." },
-  { icone: Thermometer, titulo: "Conforto térmico", texto: "Ambiente mais fresco e menos uso do ar-condicionado." },
-  { icone: EyeOff, titulo: "Privacidade", texto: "Mais discrição e tranquilidade para você e sua família." },
+  { icone: ShieldCheck, titulo: "Segurança reforçada", texto: "Resistência a impactos e tentativas de arrombamento." },
+  { icone: Sun, titulo: "Proteção solar e UV", texto: "Bloqueia até 99% dos raios UV e reduz o calor." },
+  { icone: Thermometer, titulo: "Conforto térmico", texto: "Ambiente mais fresco e menos ar-condicionado." },
+  { icone: EyeOff, titulo: "Privacidade", texto: "Discrição para você e sua família." },
   { icone: Gem, titulo: "Estética premium", texto: "Valoriza o veículo, o imóvel ou o ambiente." },
   { icone: BadgeCheck, titulo: "Qualidade garantida", texto: "Materiais de alta performance e instalação profissional." },
 ];
 
 export function FaixaBeneficios() {
   return (
-    <section className="relative border-y border-white/[0.06] bg-gradient-to-b from-black to-zinc-950">
-      <div className="linha-ouro absolute inset-x-0 top-0" aria-hidden />
-      <ul className="mx-auto grid max-w-7xl grid-cols-2 px-4 sm:px-6 md:grid-cols-3 lg:grid-cols-6">
-        {BENEFICIOS.map((b, i) => (
-          <li
-            key={b.titulo}
-            className={cn(
-              "flex flex-col items-center gap-3 px-3 py-8 text-center",
-              "border-white/[0.07] lg:border-l lg:first:border-l-0",
-              i % 2 === 1 && "border-l lg:border-l",
-              i >= 2 && "border-t lg:border-t-0",
-            )}
-          >
-            <b.icone className="h-8 w-8 text-ouro" strokeWidth={1.3} aria-hidden />
-            <h3 className="text-[12.5px] font-bold uppercase leading-tight tracking-[0.12em] text-white">{b.titulo}</h3>
-            <p className="max-w-[200px] text-[13px] leading-snug text-zinc-400">{b.texto}</p>
+    <section className="border-b border-white/[0.06]">
+      <ul className="mx-auto grid max-w-7xl grid-cols-2 gap-y-10 px-4 py-14 sm:px-6 md:grid-cols-3 lg:grid-cols-6 lg:gap-x-8">
+        {BENEFICIOS.map((b) => (
+          <li key={b.titulo} className="flex flex-col gap-3 pr-4">
+            <b.icone className="h-5 w-5 text-ouro" strokeWidth={1.2} aria-hidden />
+            <h3 className="font-serif text-[1.3rem] font-normal leading-tight text-white">{b.titulo}</h3>
+            <p className="text-[13px] leading-relaxed text-zinc-500">{b.texto}</p>
           </li>
         ))}
       </ul>
-      <div className="linha-ouro absolute inset-x-0 bottom-0" aria-hidden />
     </section>
   );
 }
 
-/* ---------------- serviços em painéis diagonais ---------------- */
+/* ---------------- serviços em grade editorial com fotos ---------------- */
 
-function ArteServico({ tipo }: { tipo: string }) {
-  switch (tipo) {
-    case "insulfilm":
-      return (
-        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice" className="h-full w-full" aria-hidden>
-          <defs>
-            <linearGradient id="a-ins" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stopColor="#2b2b2e" />
-              <stop offset="1" stopColor="#050505" />
-            </linearGradient>
-          </defs>
-          <rect width="200" height="300" fill="url(#a-ins)" />
-          <path d="M-20 170 Q40 70 150 60 L230 60 L230 200 Z" fill="#0a0a0b" stroke="#6b6e74" strokeWidth="1.5" />
-          <path d="M10 160 Q60 90 140 80" stroke="#fff" strokeOpacity="0.35" strokeWidth="6" fill="none" strokeLinecap="round" />
-          <path d="M-20 220 Q80 190 230 210" stroke="#D4AF6A" strokeOpacity="0.55" strokeWidth="1.2" fill="none" />
-        </svg>
-      );
-    case "envelopamento":
-      return (
-        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice" className="h-full w-full" aria-hidden>
-          <defs>
-            <linearGradient id="a-env" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="#1c1c1f" />
-              <stop offset="1" stopColor="#050505" />
-            </linearGradient>
-            <linearGradient id="a-env-carro" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0" stopColor="#4a4c52" />
-              <stop offset="0.5" stopColor="#141416" />
-              <stop offset="1" stopColor="#2c2d31" />
-            </linearGradient>
-          </defs>
-          <rect width="200" height="300" fill="url(#a-env)" />
-          <path d="M-30 200 Q-20 160 20 152 L80 140 Q110 108 150 104 L210 104 Q240 108 260 138 L290 146 L290 210 L-30 210 Z" fill="url(#a-env-carro)" stroke="#8a8d93" strokeOpacity="0.5" />
-          <circle cx="40" cy="210" r="26" fill="#050505" stroke="#3a3a3d" strokeWidth="4" />
-          <circle cx="40" cy="210" r="10" fill="#D4AF6A" fillOpacity="0.5" />
-        </svg>
-      );
-    case "superficies":
-      return (
-        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice" className="h-full w-full" aria-hidden>
-          <defs>
-            <linearGradient id="a-mar" x1="0" y1="0" x2="1" y2="1">
-              <stop offset="0" stopColor="#d9dadc" />
-              <stop offset="1" stopColor="#8d8f93" />
-            </linearGradient>
-          </defs>
-          <rect width="200" height="300" fill="url(#a-mar)" />
-          <g fill="none" stroke="#5c5d60" strokeOpacity="0.5">
-            <path d="M0 40 Q60 70 90 50 T200 90" />
-            <path d="M0 140 Q50 120 100 150 T200 130" strokeOpacity="0.35" />
-          </g>
-          <rect x="0" y="190" width="200" height="110" fill="#111" />
-          <rect x="20" y="170" width="160" height="22" fill="#1a1a1a" stroke="#D4AF6A" strokeOpacity="0.4" />
-        </svg>
-      );
-    case "residencial":
-      return (
-        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice" className="h-full w-full" aria-hidden>
-          <rect width="200" height="300" fill="#0b0d12" />
-          <rect x="0" y="0" width="200" height="140" fill="#1c2233" />
-          <path d="M10 120 L190 90 L190 260 L10 260 Z" fill="#0d0f14" stroke="#4b4f58" />
-          {Array.from({ length: 12 }).map((_, i) => (
-            <rect key={i} x={22 + (i % 4) * 42} y={130 + Math.floor(i / 4) * 40} width="36" height="32" fill="#f2c46d" fillOpacity={i % 3 === 0 ? 0.55 : 0.25} />
-          ))}
-        </svg>
-      );
-    default:
-      return (
-        <svg viewBox="0 0 200 300" preserveAspectRatio="xMidYMid slice" className="h-full w-full" aria-hidden>
-          <rect width="200" height="300" fill="#0c0c0c" />
-          <g fill="none" stroke="#D4AF6A" strokeWidth="1.3">
-            <path d="M40 0 Q60 80 30 140 T70 300" />
-            <path d="M150 0 Q120 90 160 160 T120 300" strokeOpacity="0.6" />
-            <path d="M30 140 Q90 150 160 160" strokeOpacity="0.5" />
-          </g>
-        </svg>
-      );
-  }
-}
+const SERVICOS = [
+  {
+    id: "insulfilm",
+    titulo: "Insulfilm automotivo",
+    texto: "Mais segurança, conforto e privacidade, dentro das regras do CONTRAN.",
+    href: "#orcamento",
+    foto: "/img/insulfilm.webp",
+    alt: "Aplicador instalando película no vidro lateral de um carro preto em concessionária",
+    posicao: "object-center",
+    grade: "lg:col-span-7 lg:row-span-2",
+  },
+  {
+    id: "envelopamento",
+    titulo: "Envelopamento automotivo",
+    texto: "Fosco, brilho ou cromado. Visual novo sem tocar na pintura original.",
+    href: "/envelopamento",
+    foto: "/img/envelopamento.webp",
+    alt: "Aplicador envelopando um carro esportivo em prata fosco dentro da oficina",
+    posicao: "object-center",
+    grade: "lg:col-span-5",
+  },
+  {
+    id: "residencial",
+    titulo: "Películas residenciais e comerciais",
+    texto: "Proteção solar e privacidade para casas, escritórios e lojas.",
+    href: "/pelicula",
+    foto: "/img/fachada.webp",
+    alt: "Fachada envidraçada de concessionária ao anoitecer, com carros expostos",
+    posicao: "object-center",
+    grade: "lg:col-span-5",
+  },
+  {
+    id: "superficies",
+    titulo: "Envelopamento de superfícies",
+    texto: "Efeito mármore, madeira e porcelanato em móveis, paredes e balcões.",
+    href: "/arquitetonico",
+    foto: "/img/lounge-marmore.webp",
+    alt: "Lounge de concessionária com parede e balcão revestidos em efeito mármore",
+    posicao: "object-[50%_35%]",
+    grade: "lg:col-span-5",
+  },
+  {
+    id: "decorativo",
+    titulo: "Revestimentos decorativos",
+    texto: "Ambientes transformados com design e tecnologia, sem obra.",
+    href: "/arquitetonico",
+    foto: "/img/revestimento.webp",
+    alt: "Aplicador com luvas alisando revestimento em efeito nogueira com frisos dourados na sala de entrega de uma concessionária",
+    posicao: "object-[50%_45%]",
+    grade: "lg:col-span-7",
+  },
+];
 
 export function ServicosDiagonais() {
-  const servicos = [
-    { tipo: "insulfilm", titulo: "Insulfilm automotivo", texto: "Mais segurança, conforto e privacidade para o seu veículo.", href: "#orcamento" },
-    { tipo: "envelopamento", titulo: "Envelopamento automotivo", texto: "Renove o visual do carro com estilo e personalidade.", href: "/envelopamento" },
-    { tipo: "superficies", titulo: "Envelopamento de superfícies", texto: "Efeito porcelanato, mármore e madeira em móveis e paredes.", href: "/arquitetonico" },
-    { tipo: "residencial", titulo: "Películas residenciais e comerciais", texto: "Privacidade e proteção solar para casas, escritórios e lojas.", href: "/pelicula" },
-    { tipo: "decorativo", titulo: "Revestimentos decorativos", texto: "Transforme ambientes com design e tecnologia.", href: "/arquitetonico" },
-  ];
   return (
-    <div className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 pb-2 sem-barra lg:mx-0 lg:gap-0 lg:overflow-visible lg:px-0">
-      {servicos.map((s, i) => (
+    <div className="grid gap-4 sm:grid-cols-2 lg:auto-rows-[300px] lg:grid-cols-12">
+      {SERVICOS.map((s, i) => (
         <Link
-          key={s.tipo}
+          key={s.id}
           href={s.href}
           className={cn(
-            "group relative flex h-[360px] w-[78%] shrink-0 snap-center flex-col justify-end overflow-hidden rounded-2xl border border-white/[0.08] sm:w-[46%]",
-            "lg:h-[420px] lg:w-auto lg:flex-1 lg:rounded-none lg:border-0 lg:[clip-path:polygon(14%_0,100%_0,86%_100%,0_100%)]",
-            i > 0 && "lg:-ml-[2.4%]",
+            "group relative flex min-h-[340px] flex-col justify-end overflow-hidden rounded-[3px] bg-zinc-950 lg:min-h-0",
+            i === 0 && "sm:col-span-2 sm:min-h-[460px] lg:min-h-0",
+            s.grade,
           )}
         >
-          <div className="absolute inset-0 transition-transform duration-500 ease-saida group-hover:scale-[1.04]">
-            <ArteServico tipo={s.tipo} />
-          </div>
-          <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-transparent" aria-hidden />
-          <div className="relative flex flex-col gap-2 p-5 lg:px-[16%] lg:pb-7">
-            <h3 className="text-[15px] font-bold uppercase leading-tight tracking-[0.12em] text-white">{s.titulo}</h3>
-            <p className="text-[13px] leading-snug text-zinc-300">{s.texto}</p>
-            <span className="mt-1 inline-flex items-center gap-1 text-[11px] font-bold uppercase tracking-[0.18em] text-ouro">
-              Ver mais <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-150 ease-saida group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={s.foto}
+            alt={s.alt}
+            loading="lazy"
+            className={cn("absolute inset-0 h-full w-full object-cover transition-transform duration-700 ease-saida group-hover:scale-[1.03]", s.posicao)}
+          />
+          <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" aria-hidden />
+          <div className="relative flex flex-col gap-2 p-6 sm:p-8">
+            <span className="num text-[10.5px] font-medium tracking-[0.3em] text-ouro-soft">{String(i + 1).padStart(2, "0")}</span>
+            <h3 className={cn("font-serif font-light leading-[1.05] text-white", i === 0 ? "text-[2.2rem] sm:text-[2.8rem]" : "text-[1.75rem]")}>{s.titulo}</h3>
+            <p className="max-w-sm text-[13.5px] leading-relaxed text-zinc-300">{s.texto}</p>
+            <span className="mt-2 inline-flex items-center gap-1.5 text-[10.5px] font-medium uppercase tracking-[0.24em] text-ouro">
+              Conhecer <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 ease-saida group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
             </span>
           </div>
-          <span className="pointer-events-none absolute inset-y-0 right-0 hidden w-px bg-gradient-to-b from-transparent via-ouro/70 to-transparent lg:block lg:[transform:skewX(-17deg)] lg:origin-bottom" aria-hidden />
         </Link>
       ))}
     </div>
+  );
+}
+
+/* ---------------- padrão concessionária ---------------- */
+
+export function PadraoConcessionaria() {
+  const numeros = [
+    { valor: "99%", rotulo: "de bloqueio UV" },
+    { valor: "0", rotulo: "bolhas ou poeira aceitas" },
+    { valor: "5 anos", rotulo: "de garantia" },
+  ];
+  return (
+    <section className="relative isolate overflow-hidden">
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src="/img/detalhe-aplicacao.webp"
+        alt="Mão com luva aplicando película com espátula em vidro de carro, em close"
+        loading="lazy"
+        className="absolute inset-0 -z-20 h-full w-full object-cover object-center"
+      />
+      <div className="absolute inset-0 -z-10 bg-gradient-to-l from-black via-black/85 to-black/30" aria-hidden />
+      <div className="mx-auto flex max-w-7xl justify-end px-4 py-24 sm:px-6 md:py-36">
+        <div className="flex max-w-xl flex-col gap-8">
+          <div className="flex items-center gap-4">
+            <span className="h-px w-10 bg-ouro" aria-hidden />
+            <p className="text-[10.5px] font-medium uppercase tracking-[0.38em] text-ouro-soft">Padrão concessionária</p>
+          </div>
+          <h2 className="font-serif text-[2.6rem] font-light leading-[1.02] text-white text-balance sm:text-[3.6rem]">
+            O mesmo cuidado do showroom, <em className="italic text-ouro-soft">onde você estiver.</em>
+          </h2>
+          <p className="text-[15px] leading-[1.8] text-zinc-300">
+            Montamos uma área limpa e iluminada na sua garagem ou recebemos você no ponto de instalação. Corte sob medida, bordas seladas e conferência peça por peça antes da entrega.
+          </p>
+          <dl className="grid grid-cols-3 border-t border-white/15 pt-6">
+            {numeros.map((n, i) => (
+              <div key={n.rotulo} className={cn("flex flex-col gap-1", i > 0 && "border-l border-white/10 pl-4 sm:pl-6")}>
+                <dt className="order-2 text-[11px] leading-snug text-zinc-500">{n.rotulo}</dt>
+                <dd className="num font-serif text-[1.9rem] font-light text-white sm:text-[2.4rem]">{n.valor}</dd>
+              </div>
+            ))}
+          </dl>
+        </div>
+      </div>
+    </section>
   );
 }
 
@@ -234,31 +238,31 @@ export function AtendimentoLocal() {
             onClick={() => setLocal(o.id)}
             aria-pressed={local === o.id}
             className={cn(
-              "vidro flex flex-col gap-4 p-6 text-left transition-[border-color,box-shadow] duration-200 sm:p-8",
-              local === o.id ? "border-ouro/60 shadow-neon" : "hover:border-white/20",
+              "flex flex-col gap-4 rounded-[3px] border bg-black/40 p-6 text-left transition-[border-color,background-color] duration-200 sm:p-8",
+              local === o.id ? "border-ouro/60 bg-ouro/[0.04]" : "border-white/10 hover:border-white/25",
             )}
           >
             <div className="flex items-center justify-between">
-              <span className="grid h-12 w-12 place-items-center rounded-xl border border-ouro/40 bg-ouro/10">
-                <o.icone className="h-6 w-6 text-ouro" strokeWidth={1.5} aria-hidden />
+              <span className="grid h-11 w-11 place-items-center rounded-full border border-ouro/40">
+                <o.icone className="h-5 w-5 text-ouro" strokeWidth={1.3} aria-hidden />
               </span>
               <span className={cn("h-4 w-4 rounded-full border-2", local === o.id ? "border-ouro bg-ouro" : "border-zinc-600")} aria-hidden />
             </div>
-            <h3 className="display cromado text-2xl sm:text-3xl">{o.titulo}</h3>
+            <h3 className="font-serif text-[2rem] font-light leading-none text-white">{o.titulo}</h3>
             <p className="text-[15px] leading-relaxed text-zinc-300">{o.texto}</p>
-            <p className="text-xs font-semibold uppercase tracking-[0.16em] text-ouro/80">{o.detalhe}</p>
+            <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-ouro/80">{o.detalhe}</p>
           </button>
         ))}
       </div>
 
-      <ol className="grid gap-px overflow-hidden rounded-2xl border border-white/[0.07] bg-white/[0.07] sm:grid-cols-2 lg:grid-cols-5">
+      <ol className="grid gap-px overflow-hidden rounded-[3px] border border-white/[0.07] bg-white/[0.07] sm:grid-cols-2 lg:grid-cols-5">
         {PASSOS.map((p, i) => (
-          <li key={p.titulo} className="flex flex-col gap-2 bg-zinc-950 p-5">
+          <li key={p.titulo} className="flex flex-col gap-2 bg-[#070707] p-6">
             <div className="flex items-center gap-3">
-              <span className="num font-display text-sm font-extrabold italic text-ouro">{String(i + 1).padStart(2, "0")}</span>
+              <span className="num font-serif text-lg italic text-ouro">{String(i + 1).padStart(2, "0")}</span>
               <p.icone className="h-5 w-5 text-prata" strokeWidth={1.5} aria-hidden />
             </div>
-            <h4 className="text-sm font-bold uppercase tracking-[0.1em] text-white">{p.titulo}</h4>
+            <h4 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-white">{p.titulo}</h4>
             <p className="text-[13px] leading-snug text-zinc-400">{p.texto}</p>
           </li>
         ))}
@@ -267,7 +271,7 @@ export function AtendimentoLocal() {
       <form
         id="orcamento"
         onSubmit={(e) => e.preventDefault()}
-        className="vidro-forte grid scroll-mt-28 gap-4 p-6 sm:p-8 md:grid-cols-[1fr_1fr_auto] md:items-end"
+        className="grid scroll-mt-28 grid-cols-1 gap-4 rounded-[3px] border border-white/10 bg-[#0a0a0a] p-6 sm:p-8 md:grid-cols-[1fr_1fr_auto] md:items-end"
       >
         <div className="flex flex-col gap-1 md:col-span-3">
           <span className="rotulo text-ouro/90">Solicite seu orçamento</span>
@@ -332,7 +336,7 @@ export function ComparativoPeliculas() {
   ];
   return (
     <div className="flex flex-col gap-3">
-      <div className="overflow-x-auto rounded-2xl border border-white/[0.07]">
+      <div className="overflow-x-auto rounded-[3px] border border-white/[0.07]">
         <table className="w-full min-w-[640px] text-left text-sm">
           <thead>
             <tr className="border-b border-white/[0.07] bg-white/[0.02]">
@@ -378,7 +382,7 @@ export function Perguntas() {
     { p: "Como funciona a indicação?", r: `Você indica pelo painel do parceiro, o cliente recebe um código e, quando o serviço fecha, você ganha ${config.taxas.indicadorPct}% do valor por PIX.` },
   ];
   return (
-    <div className="flex flex-col divide-y divide-white/[0.07] rounded-2xl border border-white/[0.07]">
+    <div className="flex flex-col divide-y divide-white/[0.07] rounded-[3px] border border-white/[0.07]">
       {itens.map((i) => (
         <details key={i.p} className="group px-5 py-1 sm:px-6">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-semibold text-white [&::-webkit-details-marker]:hidden">

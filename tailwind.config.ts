@@ -22,14 +22,15 @@ const config: Config = {
         sans: ["var(--font-corpo)", "ui-sans-serif", "system-ui", "sans-serif"],
         display: ["var(--font-display)", "var(--font-corpo)", "ui-sans-serif", "sans-serif"],
         script: ["var(--font-script)", "cursive"],
+        serif: ["var(--font-serifa)", "Georgia", "serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       borderRadius: {
-        "3xl": "1.25rem",
+        "3xl": "0.625rem",
       },
       boxShadow: {
-        neon: "0 0 0 1px rgba(212,175,106,.45), 0 10px 30px -12px rgba(212,175,106,.45)",
-        "neon-lg": "0 0 0 1px rgba(212,175,106,.6), 0 14px 44px -12px rgba(212,175,106,.6)",
+        neon: "0 0 0 1px rgba(212,175,106,.55), 0 12px 32px -18px rgba(212,175,106,.35)",
+        "neon-lg": "0 0 0 1px rgba(212,175,106,.7), 0 16px 40px -18px rgba(212,175,106,.45)",
         esmeralda: "0 0 0 1px rgba(52,195,143,.4), 0 10px 30px -14px rgba(52,195,143,.5)",
         vidro: "inset 0 1px 0 0 rgba(255,255,255,.07), 0 24px 48px -28px rgba(0,0,0,.9)",
       },
