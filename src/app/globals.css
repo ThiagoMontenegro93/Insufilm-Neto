@@ -4,48 +4,68 @@
 
 :root {
   color-scheme: dark;
-  --fundo: #09090b; /* zinc-950 */
+  --fundo: #050505;
+  /* metal escovado: faixas claras e escuras alternadas, como o logotipo */
+  --cromo: linear-gradient(180deg, #ffffff 0%, #e4e5e8 28%, #9a9da3 48%, #5f6268 52%, #d9dadd 70%, #f6f6f7 86%, #a7aab0 100%);
+  --ouro: linear-gradient(180deg, #f6e3b4 0%, #d4af6a 45%, #a8803f 70%, #e8cd8e 100%);
 }
 
 html,
 body {
   background: var(--fundo);
-  color: #e4e4e7;
+  color: #d9dadd;
 }
 
 body {
-  font-feature-settings: "ss01", "ss02";
   -webkit-font-smoothing: antialiased;
 }
 
 ::selection {
-  background: rgba(0, 217, 255, 0.3);
+  background: rgba(212, 175, 106, 0.35);
   color: #fff;
 }
 
 @layer components {
-  /* Superfície de vidro: o "material" base do produto */
+  /* Superfície metálica escura: o "material" base do produto */
   .vidro {
-    @apply rounded-3xl border border-white/[0.08] bg-white/[0.035] shadow-vidro backdrop-blur-xl;
+    @apply rounded-3xl border border-white/[0.08] bg-gradient-to-b from-white/[0.05] to-white/[0.012] shadow-vidro backdrop-blur-xl;
   }
   .vidro-forte {
-    @apply rounded-3xl border border-white/[0.1] bg-zinc-900/70 shadow-vidro backdrop-blur-2xl;
+    @apply rounded-3xl border border-white/[0.1] bg-gradient-to-b from-zinc-900 to-black shadow-vidro;
   }
   .rotulo {
-    @apply font-mono text-[11px] uppercase tracking-[0.18em] text-zinc-400;
+    @apply font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-prata-escuro;
   }
   .campo {
-    @apply w-full rounded-2xl border border-white/10 bg-zinc-950/60 px-4 py-3 text-[15px] text-zinc-100 outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-zinc-600 focus:border-neon/60 focus:shadow-[0_0_0_4px_rgba(0,217,255,.12)];
+    @apply w-full rounded-xl border border-white/10 bg-black/60 px-4 py-3 text-[15px] text-zinc-100 outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-zinc-600 focus:border-ouro/70 focus:shadow-[0_0_0_4px_rgba(212,175,106,.12)];
+  }
+  /* tipografia larga e itálica do logotipo */
+  .display {
+    @apply font-display font-extrabold uppercase italic;
+    font-stretch: 125%;
+    font-variation-settings: "wdth" 125;
+  }
+  .cromado {
+    background: var(--cromo);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .texto-neon,
+  .dourado {
+    background: var(--ouro);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .linha-ouro {
+    background: linear-gradient(90deg, transparent, rgba(212, 175, 106, 0.8), transparent);
+    height: 1px;
   }
   .grade-fundo {
-    background-image: linear-gradient(rgba(255, 255, 255, 0.035) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255, 255, 255, 0.035) 1px, transparent 1px);
-    background-size: 48px 48px;
-    mask-image: radial-gradient(ellipse at 50% 0%, #000 30%, transparent 75%);
-  }
-  .texto-neon {
-    @apply text-neon;
-    text-shadow: 0 0 24px rgba(0, 217, 255, 0.55);
+    background-image: radial-gradient(ellipse 60% 50% at 70% 0%, rgba(212, 175, 106, 0.1), transparent 70%),
+      repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.018) 0 2px, transparent 2px 9px);
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 35%, transparent 80%);
   }
   .num {
     font-variant-numeric: tabular-nums;
@@ -68,9 +88,9 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid #00d9ff;
+  outline: 2px solid #d4af6a;
   outline-offset: 3px;
-  border-radius: 12px;
+  border-radius: 10px;
 }
 
 @media (prefers-reduced-motion: reduce) {

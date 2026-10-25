@@ -6,7 +6,7 @@
  */
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
-import { ArrowUpRight, Brush, Coins, ShieldCheck } from "lucide-react";
+import { ArrowUpRight, Brush, Gem, ShieldCheck } from "lucide-react";
 import { usePlataforma } from "@/lib/store";
 import { brl } from "@/lib/pricing";
 import { cn } from "@/lib/utils";
@@ -15,43 +15,44 @@ export function StoriesPilares() {
   const { config } = usePlataforma();
   const precos = config.servicos.peliculaSeguranca.map((p) => p.preco);
   const marcas = config.servicos.envelopamento.marcas.map((m) => m.preco);
+  const arq = config.servicos.arquitetonico.filter((a) => a.unidade === "m2").map((a) => a.preco);
 
   const pilares = [
     {
       id: "protecao",
       icone: ShieldCheck,
-      eyebrow: "Pilar 01 · Proteção",
+      eyebrow: "Proteção",
       titulo: "Vidro que segura o impacto.",
       texto: "Jateada para privacidade, antivandalismo para fachadas e alta rigidez para quem não pode ter estilhaço.",
       dado: `de ${brl(Math.min(...precos))} a ${brl(Math.max(...precos))}/m²`,
       href: "/pelicula",
       cta: "Calcular película",
-      fundo: "from-neon/25 via-neon/5 to-transparent",
-      cor: "text-neon",
+      fundo: "from-ouro/20 via-ouro/[0.04] to-transparent",
+      cor: "text-ouro",
     },
     {
       id: "design",
       icone: Brush,
-      eyebrow: "Pilar 02 · Design",
+      eyebrow: "Estilo",
       titulo: "Carro, parede e geladeira com cara nova.",
       texto: "3M, Avery Dennison e Oracal em brilho, fosco ou cromado. Mármore e madeira para ambientes.",
       dado: `a partir de ${brl(Math.min(...marcas))}/m²`,
       href: "/envelopamento",
       cta: "Simular envelopamento",
-      fundo: "from-fuchsia-500/20 via-neon/5 to-transparent",
-      cor: "text-fuchsia-300",
+      fundo: "from-zinc-500/20 via-zinc-500/[0.04] to-transparent",
+      cor: "text-prata-claro",
     },
     {
       id: "renda",
-      icone: Coins,
-      eyebrow: "Pilar 03 · Renda",
-      titulo: "Indicou, fechou, caiu no PIX.",
-      texto: "Cada indicação ganha um código rastreável pelo telefone do cliente. Você acompanha tudo até a comissão.",
-      dado: `${config.taxas.indicadorPct}% por serviço fechado`,
-      href: "/parceiro/dashboard",
-      cta: "Ver painel do parceiro",
-      fundo: "from-esmeralda/25 via-esmeralda/5 to-transparent",
-      cor: "text-esmeralda-soft",
+      icone: Gem,
+      eyebrow: "Sofisticação",
+      titulo: "Mármore, madeira e preto fosco sem obra.",
+      texto: "Envelopamento de superfícies e revestimentos decorativos para paredes, móveis, portas e geladeiras.",
+      dado: `a partir de ${brl(Math.min(...arq))}/m²`,
+      href: "/arquitetonico",
+      cta: "Simular superfícies",
+      fundo: "from-white/[0.10] via-white/[0.02] to-transparent",
+      cor: "text-prata",
     },
   ];
 
@@ -108,7 +109,7 @@ export function StoriesPilares() {
         className="-mx-4 flex snap-x snap-mandatory gap-3 overflow-x-auto px-4 sem-barra md:mx-0 md:grid md:grid-cols-3 md:gap-5 md:overflow-visible md:px-0"
         role="region"
         aria-roledescription="carrossel"
-        aria-label="Os três pilares"
+        aria-label="Proteção, estilo e sofisticação"
       >
         {pilares.map((p) => {
           const Icone = p.icone;
@@ -119,11 +120,11 @@ export function StoriesPilares() {
             >
               <div className={cn("pointer-events-none absolute inset-0 bg-gradient-to-b", p.fundo)} aria-hidden />
               <div className="relative flex items-center justify-between">
-                <span className="rotulo">{p.eyebrow}</span>
+                <span className={cn("text-[12px] font-bold uppercase tracking-[0.4em]", p.cor)}>{p.eyebrow}</span>
                 <Icone className={cn("h-6 w-6", p.cor)} aria-hidden />
               </div>
               <div className="relative flex flex-col gap-4">
-                <h3 className="text-balance text-[1.9rem] font-bold leading-[1] tracking-tight text-white">{p.titulo}</h3>
+                <h3 className="display cromado text-balance text-[1.6rem] leading-[1] tracking-[-0.02em]">{p.titulo}</h3>
                 <p className="text-[15px] leading-relaxed text-zinc-300">{p.texto}</p>
                 <p className={cn("num font-mono text-sm", p.cor)}>{p.dado}</p>
                 <Link href={p.href} className="group mt-2 inline-flex w-fit items-center gap-1.5 text-sm font-semibold text-white">

@@ -33,7 +33,7 @@ const cenaPelicula: Cena = (i) => (
         <circle cx="3" cy="3" r="0.6" fill="#fff" fillOpacity="0.2" />
       </pattern>
     </defs>
-    <rect x="40" y="18" width="160" height="144" rx="6" fill="#0f1a1e" stroke={i >= 3 ? "#00D9FF" : "#3f3f46"} strokeWidth={i >= 3 ? 3 : 2} />
+    <rect x="40" y="18" width="160" height="144" rx="6" fill="#151412" stroke={i >= 3 ? "#D4AF6A" : "#3f3f46"} strokeWidth={i >= 3 ? 3 : 2} />
     <line x1="120" y1="18" x2="120" y2="162" stroke="#3f3f46" strokeWidth="2" />
     <path d="M58 40 L90 30 M58 56 L104 40" stroke="#fff" strokeOpacity="0.18" strokeWidth="3" strokeLinecap="round" />
     {i >= 1 && <rect x="42" y="20" width="156" height="140" rx="5" fill="url(#jato)" opacity={i === 1 ? 1 : 0.55} />}
@@ -45,15 +45,15 @@ const cenaPelicula: Cena = (i) => (
       </g>
     )}
     {i >= 3 && (
-      <g stroke="#7DEBFF" strokeOpacity="0.9" fill="none" strokeWidth="1.4">
+      <g stroke="#F0DBA8" strokeOpacity="0.9" fill="none" strokeWidth="1.4">
         <path d="M78 110 L60 96 M78 110 L96 128 M78 110 L58 130 M78 110 L100 96 L112 104" />
       </g>
     )}
-    {i >= 3 && <rect x="42" y="20" width="156" height="140" rx="5" fill="#00D9FF" fillOpacity={i === 4 ? 0.16 : 0.08} />}
+    {i >= 3 && <rect x="42" y="20" width="156" height="140" rx="5" fill="#D4AF6A" fillOpacity={i === 4 ? 0.16 : 0.08} />}
     {i === 4 && (
       <g>
-        <path d="M120 52 L150 64 V92 C150 114 138 128 120 135 C102 128 90 114 90 92 V64 Z" fill="#09090b" fillOpacity="0.6" stroke="#00D9FF" strokeWidth="2.5" />
-        <path d="M107 93 L117 103 L135 84" stroke="#7DEBFF" strokeWidth="3.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+        <path d="M120 52 L150 64 V92 C150 114 138 128 120 135 C102 128 90 114 90 92 V64 Z" fill="#09090b" fillOpacity="0.6" stroke="#D4AF6A" strokeWidth="2.5" />
+        <path d="M107 93 L117 103 L135 84" stroke="#F0DBA8" strokeWidth="3.5" fill="none" strokeLinecap="round" strokeLinejoin="round" />
       </g>
     )}
   </svg>
@@ -86,14 +86,14 @@ const cenaAuto: Cena = (i) => {
           transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }}
         />
         {i >= 3 && <path d="M86 64 Q102 46 126 44 L166 44 Q184 46 196 62 Z" fill="url(#carbono)" />}
-        {cobertura > 0 && cobertura < 1 && <motion.rect y="30" width="2" height="80" fill="#00D9FF" initial={false} animate={{ x: 10 + 230 * cobertura }} transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }} />}
+        {cobertura > 0 && cobertura < 1 && <motion.rect y="30" width="2" height="80" fill="#D4AF6A" initial={false} animate={{ x: 10 + 230 * cobertura }} transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }} />}
       </g>
-      <path d="M92 64 Q106 50 126 48 L146 48 L146 64 Z M152 48 L166 48 Q180 50 190 62 L152 64 Z" fill="#0b1114" stroke={i === 4 ? "#00D9FF" : "#52525b"} />
-      <path d={CARRO} fill="none" stroke={i === 4 ? "#00D9FF" : "#71717a"} strokeWidth="1.5" />
+      <path d="M92 64 Q106 50 126 48 L146 48 L146 64 Z M152 48 L166 48 Q180 50 190 62 L152 64 Z" fill="#0c0c0c" stroke={i === 4 ? "#D4AF6A" : "#52525b"} />
+      <path d={CARRO} fill="none" stroke={i === 4 ? "#D4AF6A" : "#71717a"} strokeWidth="1.5" />
       {[64, 190].map((cx) => (
         <g key={cx}>
           <circle cx={cx} cy="100" r="17" fill="#09090b" stroke="#3f3f46" strokeWidth="3" />
-          <circle cx={cx} cy="100" r="7" fill={i === 4 ? "#00D9FF" : "#52525b"} />
+          <circle cx={cx} cy="100" r="7" fill={i === 4 ? "#D4AF6A" : "#52525b"} />
         </g>
       ))}
       <line x1="10" y1="118" x2="242" y2="118" stroke="#27272a" />
@@ -121,15 +121,15 @@ const cenaGeladeira: Cena = (i) => {
         <motion.rect x="84" y="16" width="72" fill="url(#veio)" initial={false} animate={{ height: 150 * madeira }} transition={{ duration: 0.6, ease: [0.23, 1, 0.32, 1] }} />
       </g>
       <line x1="84" y1="70" x2="156" y2="70" stroke="#09090b" strokeOpacity="0.5" strokeWidth="2" />
-      <rect x="84" y="16" width="72" height="150" rx="8" fill="none" stroke={i === 4 ? "#00D9FF" : "#52525b"} strokeWidth="1.5" />
+      <rect x="84" y="16" width="72" height="150" rx="8" fill="none" stroke={i === 4 ? "#D4AF6A" : "#52525b"} strokeWidth="1.5" />
       <rect x="146" y="34" width="4" height="22" rx="2" fill={i >= 3 ? "#d4a73a" : "#a1a1aa"} />
       <rect x="146" y="80" width="4" height="34" rx="2" fill={i >= 3 ? "#d4a73a" : "#a1a1aa"} />
       {i === 1 && (
-        <g stroke="#00D9FF" strokeDasharray="4 3" fill="none">
+        <g stroke="#D4AF6A" strokeDasharray="4 3" fill="none">
           <path d="M70 16 V166 M64 16 H76 M64 166 H76" />
           <path d="M84 176 H156" />
-          <text x="40" y="96" fill="#00D9FF" fontSize="10" fontFamily="monospace">1,8 m</text>
-          <text x="96" y="178" fill="#00D9FF" fontSize="9" fontFamily="monospace" dy="-1">4,5 m²</text>
+          <text x="40" y="96" fill="#D4AF6A" fontSize="10" fontFamily="monospace">1,8 m</text>
+          <text x="96" y="178" fill="#D4AF6A" fontSize="9" fontFamily="monospace" dy="-1">4,5 m²</text>
         </g>
       )}
       {i === 4 && <path d="M176 40 l3 7 7 3 -7 3 -3 7 -3 -7 -7 -3 7 -3Z" fill="#d4a73a" />}
@@ -160,8 +160,8 @@ const cenaParede: Cena = (i) => (
     <rect x="176" y="40" width="40" height="90" fill={i >= 3 ? "#8a5a33" : "#a1a1aa"} stroke="#3f3f46" />
     <circle cx="208" cy="88" r="2" fill={i >= 3 ? "#d4a73a" : "#52525b"} />
     {/* ilha */}
-    <rect x="104" y="112" width="60" height="34" rx="2" fill={i >= 3 ? "url(#marmore)" : "#71717a"} stroke={i === 4 ? "#00D9FF" : "#3f3f46"} />
-    {i === 4 && <rect x="10" y="10" width="220" height="160" fill="none" stroke="#00D9FF" strokeWidth="2" />}
+    <rect x="104" y="112" width="60" height="34" rx="2" fill={i >= 3 ? "url(#marmore)" : "#71717a"} stroke={i === 4 ? "#D4AF6A" : "#3f3f46"} />
+    {i === 4 && <rect x="10" y="10" width="220" height="160" fill="none" stroke="#D4AF6A" strokeWidth="2" />}
   </svg>
 );
 
@@ -181,7 +181,7 @@ function cenaDashboard(saldos: { saldo: number; progresso: number; status: strin
         <rect x="88" y="97" width="64" height="3" rx="1.5" fill="#27272a" />
         <motion.rect x="88" y="97" height="3" rx="1.5" fill={s.tom} initial={false} animate={{ width: (64 * s.progresso) / 100 }} transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1] }} />
         {[0, 1, 2, 3, 4].map((k) => (
-          <circle key={k} cx={92 + k * 14} cy="124" r="4" fill={k <= i - 1 || (i === 4 && k === 4) ? "#00D9FF" : "#27272a"} />
+          <circle key={k} cx={92 + k * 14} cy="124" r="4" fill={k <= i - 1 || (i === 4 && k === 4) ? "#D4AF6A" : "#27272a"} />
         ))}
         <rect x="82" y="146" width="76" height="18" rx="9" fill={i === 4 ? "#10B981" : "#27272a"} />
         <text x="120" y="158" fill={i === 4 ? "#09090b" : "#71717a"} fontSize="7" fontWeight="700" textAnchor="middle" fontFamily="sans-serif">
@@ -263,8 +263,8 @@ export function montarReels(c: PlatformConfig) {
       cena: cenaDashboard([
         { saldo: 0, progresso: 0, status: "CÓDIGO JORG", tom: "#71717a" },
         { saldo: 0, progresso: 20, status: "PENDENTE 20%", tom: "#FACC15" },
-        { saldo: 0, progresso: 40, status: "EM CONTATO 40%", tom: "#00D9FF" },
-        { saldo: 0, progresso: 60, status: "ORÇAMENTO 60%", tom: "#00D9FF" },
+        { saldo: 0, progresso: 40, status: "EM CONTATO 40%", tom: "#D4AF6A" },
+        { saldo: 0, progresso: 60, status: "ORÇAMENTO 60%", tom: "#D4AF6A" },
         { saldo: 200, progresso: 100, status: "PAGO 100%", tom: "#10B981" },
       ]),
       quadros: [

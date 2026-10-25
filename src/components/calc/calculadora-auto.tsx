@@ -71,7 +71,7 @@ export function CalculadoraAuto() {
               <span className="rotulo">Área total</span>
               <span className="num font-mono text-2xl font-semibold text-white">{num(area, 1)} m²</span>
             </span>
-            <input id="area" type="range" min={2} max={30} step={0.5} value={area} onChange={(e) => setArea(Number(e.target.value))} className="w-full accent-[#00D9FF]" />
+            <input id="area" type="range" min={2} max={30} step={0.5} value={area} onChange={(e) => setArea(Number(e.target.value))} className="w-full accent-[#D4AF6A]" />
             <span className="text-xs text-zinc-500">Média de um carro inteiro: {m2MedioTotal} m². Para teto, capô ou retrovisores, reduza a área.</span>
           </label>
         </section>

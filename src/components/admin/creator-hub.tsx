@@ -360,6 +360,29 @@ function AbaSite() {
           <input id="site-wpp" className="campo font-mono" inputMode="numeric" value={s.whatsappComercial} onChange={(e) => setRascunho({ ...s, whatsappComercial: e.target.value.replace(/\D/g, "") })} />
         </Campo>
         <NumeroCampo id="site-garantia" rotulo="Garantia exibida" sufixo="anos" valor={s.garantiaAnos} onChange={(n) => setRascunho({ ...s, garantiaAnos: n })} />
+        <Campo rotulo="Região atendida em domicílio" htmlFor="site-area">
+          <input id="site-area" className="campo" value={s.areaDomicilio} onChange={(e) => setRascunho({ ...s, areaDomicilio: e.target.value })} />
+        </Campo>
+        <Campo rotulo="Pontos de instalação (um por linha: nome — endereço)" htmlFor="site-pontos" dica="Vazio: o site diz que o ponto mais próximo é informado no orçamento">
+          <textarea
+            id="site-pontos"
+            rows={3}
+            className="campo resize-none text-sm"
+            value={s.pontosInstalacao.map((p) => `${p.nome} — ${p.endereco}`).join("\n")}
+            onChange={(e) =>
+              setRascunho({
+                ...s,
+                pontosInstalacao: e.target.value
+                  .split("\n")
+                  .filter((l) => l.trim())
+                  .map((l) => {
+                    const [nome, ...resto] = l.split("—");
+                    return { nome: nome.trim(), endereco: resto.join("—").trim() };
+                  }),
+              })
+            }
+          />
+        </Campo>
       </div>
       <BarraSalvar sujo={sujo} onSalvar={() => salvar("Conteúdo do site alterado")} onDescartar={descartar} />
     </Cartao>
@@ -399,7 +422,7 @@ export function CreatorHub() {
             <Tabs.Trigger
               key={a.id}
               value={a.id}
-              className="flex items-center gap-2 rounded-2xl px-3.5 py-2 text-sm font-medium text-zinc-400 transition-[background-color,color,box-shadow] duration-150 hover:text-white data-[state=active]:bg-neon/[0.12] data-[state=active]:text-neon data-[state=active]:shadow-[inset_0_0_0_1px_rgba(0,217,255,.35)]"
+              className="flex items-center gap-2 rounded-2xl px-3.5 py-2 text-sm font-medium text-zinc-400 transition-[background-color,color,box-shadow] duration-150 hover:text-white data-[state=active]:bg-neon/[0.12] data-[state=active]:text-neon data-[state=active]:shadow-[inset_0_0_0_1px_rgba(212,175,106,.35)]"
             >
               <span aria-hidden>{a.icone}</span>
               {a.rotulo}

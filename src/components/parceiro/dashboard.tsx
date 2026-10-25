@@ -152,8 +152,8 @@ export function DashboardParceiro() {
       <div className="grid grid-cols-2 gap-3 lg:grid-cols-[1fr_1fr_1fr_1.4fr]">
         {[
           { k: "Total já ganho", v: saldo.ganho, c: "text-white", b: "" },
-          { k: "Total já pago", v: saldo.pago, c: "text-neon", b: "" },
-          { k: "Pendente na fila", v: saldo.pendente, c: "text-alerta", b: "" },
+          { k: "Total já pago", v: saldo.pago, c: "text-prata-claro", b: "" },
+          { k: "Pendente na fila", v: saldo.pendente, c: "text-alerta", b: "col-span-2 lg:col-span-1" },
         ].map((s) => (
           <Cartao key={s.k} className={cn("flex flex-col gap-2 p-4 sm:p-5", s.b)}>
             <span className="rotulo text-[10px]">{s.k}</span>

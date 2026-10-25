@@ -1,14 +1,21 @@
-# FILMPROTECT HUB // NEXUS
+# JR Filmes // NEXUS
 
-**PROTEÇÃO INVISÍVEL. DESIGN VISÍVEL.**
+**Proteção • Estilo • Sofisticação** · *Seu estilo, nossa expertise.*
 
-SaaS de indicação e gestão para película de segurança e envelopamento (automotivo e arquitetônico). Interface 100% em português do Brasil, valores em reais (R$).
+Site e plataforma de indicação e gestão da JR Filmes: insulfilm automotivo, envelopamento automotivo e de superfícies, películas residenciais e comerciais e revestimentos decorativos. Atendimento **em domicílio** ou **em pontos de instalação**. Interface 100% em português do Brasil, valores em reais (R$).
+
+## Identidade visual
+
+- Preto profundo (`#050505`), metal escovado prata (gradiente `--cromo`) e acento dourado (`#D4AF6A`, gradiente `--ouro`).
+- Tipografia: Saira expandida, itálica e extra negrito para títulos e logotipo (`.display`), Montserrat no corpo, Great Vibes só na assinatura "Seu estilo, nossa expertise.", JetBrains Mono para códigos e valores.
+- Logotipo "JR FILMES" desenhado em CSS (texto cromado + corte dourado), sem arquivo de imagem. Para usar o logotipo oficial em vetor, troque o componente `Logo` em `src/components/layout/navegacao.tsx`.
+- Tokens em `tailwind.config.ts` (`ouro`, `prata`; `neon` é um apelido do dourado) e `src/app/globals.css`.
 
 ## Status: Etapa 1
 
 | Área | Rota | Estado |
 | --- | --- | --- |
-| Landing (hero escudo, stories 3 pilares, timeline 5 etapas, 5 sequências antes/depois, bottom nav) | `/` | Pronta |
+| Landing (logotipo cromado, faixa de 6 benefícios, 5 serviços em painéis diagonais, atendimento em domicílio ou em ponto de instalação com pedido de orçamento, stories Proteção/Estilo/Sofisticação, sequências antes/depois, comparativo de películas, timeline de indicação, dúvidas frequentes, bottom nav) | `/` | Pronta |
 | Calculadora película de segurança | `/pelicula` | Pronta |
 | Calculadora envelopamento automotivo | `/envelopamento` | Pronta |
 | Calculadora envelopamento arquitetônico | `/arquitetonico` | Pronta |

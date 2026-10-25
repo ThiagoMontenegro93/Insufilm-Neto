@@ -2,7 +2,7 @@
  * Validação 2: lê a página inicial pública da empresa e extrai os contatos que ela mesma divulga.
  * Respeita robots.txt, usa timeout curto e não segue para outras páginas.
  */
-const UA = "FilmProtectHUB-Validador/1.0 (+https://filmprotect.app/bot)";
+const UA = "JRFilmes-Validador/1.0";
 
 async function obter(url: string, ms = 5000) {
   const ctrl = new AbortController();

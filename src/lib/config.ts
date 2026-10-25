@@ -81,12 +81,16 @@ export interface PlatformConfig {
     slogan: string;
     whatsappComercial: string;
     garantiaAnos: number;
+    /** Região atendida em domicílio (casa, empresa, garagem). */
+    areaDomicilio: string;
+    /** Endereços dos pontos de instalação fixos. Vazio = "consulte o mais próximo". */
+    pontosInstalacao: { nome: string; endereco: string }[];
   };
   modulos: Modulo[];
 }
 
 export const CONFIG_PADRAO: PlatformConfig = {
-  versao: 1,
+  versao: 2,
   taxas: {
     plataformaPct: 30,
     indicadorPct: 5,
@@ -141,7 +145,7 @@ export const CONFIG_PADRAO: PlatformConfig = {
     { id: "condominio", nome: "Condomínio", ativo: true, mensagemModelo: "Olá, {empresa}! Temos película de segurança para portarias e áreas comuns, com garantia de 5 anos." },
     { id: "autopecas", nome: "Autopeças", ativo: true, mensagemModelo: "Olá, {empresa}! Que tal indicar película e envelopamento e ganhar 5% por serviço fechado?" },
     { id: "consultorio", nome: "Consultório", ativo: false, mensagemModelo: "Olá, {empresa}! Película jateada dá privacidade à recepção sem perder a luz natural." },
-    { id: "envelopamento", nome: "Envelopamento automotivo", ativo: true, mensagemModelo: "Olá, {empresa}! Conheça o FilmProtect HUB: orçamentos, indicações e repasse por PIX." },
+    { id: "envelopamento", nome: "Envelopamento automotivo", ativo: true, mensagemModelo: "Olá, {empresa}! A JR Filmes tem programa de indicação com repasse por PIX. Vamos conversar?" },
     { id: "marcenaria", nome: "Marcenaria", ativo: true, mensagemModelo: "Olá, {empresa}! Envelopamento arquitetônico renova móveis sem obra. Vamos conversar?" },
     { id: "vidracaria", nome: "Vidraçaria", ativo: true, mensagemModelo: "Olá, {empresa}! Indique película de segurança aos seus clientes e receba comissão." },
     { id: "geladeira", nome: "Assistência de geladeira", ativo: false, mensagemModelo: "Olá, {empresa}! Envelopamos geladeiras por valor fechado. Parceria?" },
@@ -153,10 +157,12 @@ export const CONFIG_PADRAO: PlatformConfig = {
     exigirOptOut: true,
   },
   site: {
-    nome: "FILMPROTECT HUB // NEXUS",
-    slogan: "PROTEÇÃO INVISÍVEL. DESIGN VISÍVEL.",
+    nome: "JR Filmes",
+    slogan: "Proteção • Estilo • Sofisticação",
     whatsappComercial: "5521000000000",
     garantiaAnos: 5,
+    areaDomicilio: "Rio de Janeiro e região",
+    pontosInstalacao: [],
   },
   modulos: [
     { id: "agenda", nome: "Agenda de aplicação", descricao: "Encaixe de horários por filial e aplicador", ativo: true },

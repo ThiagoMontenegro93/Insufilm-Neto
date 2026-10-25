@@ -8,7 +8,7 @@ const variantes = cva(
   {
     variants: {
       variante: {
-        neon: "bg-neon text-zinc-950 shadow-neon hover:shadow-neon-lg",
+        neon: "bg-gradient-to-b from-ouro-soft via-ouro to-ouro-deep text-black shadow-neon hover:shadow-neon-lg",
         esmeralda: "bg-esmeralda text-zinc-950 shadow-esmeralda hover:brightness-110",
         vidro: "border border-white/10 bg-white/[0.06] text-zinc-100 backdrop-blur-xl hover:bg-white/[0.1]",
         contorno: "border border-neon/40 text-neon hover:bg-neon/10",

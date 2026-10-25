@@ -86,8 +86,8 @@ export function Interruptor({
 export function Titulo({ eyebrow, titulo, descricao, className }: { eyebrow?: string; titulo: React.ReactNode; descricao?: React.ReactNode; className?: string }) {
   return (
     <div className={cn("flex max-w-2xl flex-col gap-3", className)}>
-      {eyebrow && <span className="rotulo text-neon/80">{eyebrow}</span>}
-      <h2 className="text-balance text-3xl font-bold leading-[1.05] tracking-tight text-white sm:text-4xl">{titulo}</h2>
+      {eyebrow && <span className="rotulo flex items-center gap-3 text-ouro"><span className="h-px w-8 bg-ouro/70" aria-hidden />{eyebrow}</span>}
+      <h2 className="display cromado text-balance text-[1.9rem] leading-[1] tracking-[-0.02em] sm:text-[2.6rem]">{titulo}</h2>
       {descricao && <p className="text-pretty text-[15px] leading-relaxed text-zinc-400 sm:text-base">{descricao}</p>}
     </div>
   );
