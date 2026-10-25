@@ -4,7 +4,7 @@ import { forwardRef } from "react";
 import { cn } from "@/lib/utils";
 
 const variantes = cva(
-  "inline-flex select-none items-center justify-center gap-2.5 whitespace-nowrap rounded-[3px] font-semibold uppercase tracking-[0.16em] transition-[transform,box-shadow,background-color,opacity] duration-150 ease-saida active:scale-[0.97] disabled:pointer-events-none disabled:opacity-40",
+  "inline-flex select-none items-center justify-center gap-2.5 whitespace-nowrap rounded-[3px] [&_svg]:shrink-0 font-semibold uppercase tracking-[0.16em] transition-[transform,box-shadow,background-color,opacity] duration-150 ease-saida active:scale-[0.97] disabled:pointer-events-none disabled:opacity-40",
   {
     variants: {
       variante: {

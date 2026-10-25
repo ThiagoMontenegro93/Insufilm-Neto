@@ -198,6 +198,28 @@ function AbaServicos() {
         </Cartao>
       </div>
 
+      <Cartao className="flex flex-col gap-4">
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <h3 className="font-semibold text-white">Antivandalismo · produto principal</h3>
+          <span className="text-xs text-zinc-500">Preço à vista em 0 mostra &quot;sob consulta&quot; no site</span>
+        </div>
+        <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          {s.antivandalismo.map((l) => {
+            const editar = (campo: "precoVista" | "precoCartao" | "parcelas", n: number) =>
+              setRascunho({ ...s, antivandalismo: s.antivandalismo.map((x) => (x.id === l.id ? { ...x, [campo]: n } : x)) });
+            const un = l.unidade === "m2" ? "m²" : "carro";
+            return (
+              <div key={l.id} className="flex flex-col gap-3 rounded-2xl border border-white/[0.08] p-4">
+                <span className="text-sm font-medium text-white">{l.nome}</span>
+                <NumeroCampo id={`av-${l.id}-vista`} rotulo={`À vista (PIX) · ${un}`} prefixo="R$" valor={l.precoVista} onChange={(n) => editar("precoVista", n)} />
+                <NumeroCampo id={`av-${l.id}-cartao`} rotulo={`No cartão · ${un}`} prefixo="R$" valor={l.precoCartao} onChange={(n) => editar("precoCartao", n)} />
+                <NumeroCampo id={`av-${l.id}-parc`} rotulo="Parcelas no cartão" sufixo="x" valor={l.parcelas} onChange={(n) => editar("parcelas", n)} />
+              </div>
+            );
+          })}
+        </div>
+      </Cartao>
+
       <Cartao forte className="flex flex-col gap-4">
         <h3 className="font-semibold text-white">Exemplos com os preços acima</h3>
         <div className="grid gap-3 md:grid-cols-3">

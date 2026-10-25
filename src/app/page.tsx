@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Calcadao, Hero } from "@/components/landing/hero";
-import { DestaqueAntivandalismo } from "@/components/landing/antivandalismo";
+import { BotaoWhatsapp, DestaqueAntivandalismo } from "@/components/landing/antivandalismo";
 import { StoriesPilares } from "@/components/landing/stories";
 import { TimelineEtapas } from "@/components/landing/timeline";
 import { AtendimentoLocal, ComparativoPeliculas, FaixaBeneficios, PadraoConcessionaria, Perguntas, ServicosDiagonais } from "@/components/landing/marca";
@@ -76,6 +76,7 @@ export default function Home() {
         <Perguntas />
       </section>
       <Calcadao />
+      <BotaoWhatsapp texto="Olá, JR Filmes! Quero um orçamento." />
     </div>
   );
 }

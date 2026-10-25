@@ -6,9 +6,32 @@
  * como funciona, o que faz e o que não faz, e contexto do Rio com fonte oficial (ISP-RJ).
  */
 import Link from "next/link";
-import { ArrowRight, Building2, Car, Check, ExternalLink, Home, ShieldCheck, Store, X } from "lucide-react";
+import {
+  ArrowRight,
+  BadgeCheck,
+  Building2,
+  CalendarClock,
+  Car,
+  Check,
+  Clock3,
+  ExternalLink,
+  EyeOff,
+  Home,
+  MessageCircle,
+  Ruler,
+  ShieldCheck,
+  Sparkles,
+  Store,
+  Sun,
+  Users,
+  Wrench,
+  X,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { usePlataforma } from "@/lib/store";
+import { brl } from "@/lib/pricing";
+import type { LinhaAntivandalismo } from "@/lib/config";
+import { cn } from "@/lib/utils";
 
 /* ---------------- ilustração: vidro trincado que não cede ---------------- */
 
@@ -103,6 +126,7 @@ export function VidroSeguro({ className = "" }: { className?: string }) {
 
 export function HeroAntivandalismo() {
   const { config } = usePlataforma();
+  const wa = useWhatsapp();
   return (
     <section className="relative overflow-hidden">
       <div className="pointer-events-none absolute -left-40 top-0 h-[420px] w-[420px] rounded-full bg-[#8fd3ff]/30 blur-3xl" aria-hidden />
@@ -120,14 +144,15 @@ export function HeroAntivandalismo() {
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button asChild tamanho="lg">
-              <Link href="#orcamento">
-                Avaliar meus vidros <ArrowRight className="h-4 w-4" aria-hidden />
-              </Link>
+              <a href={wa("Olá, JR Filmes! Quero um orçamento de película antivandalismo.")} target="_blank" rel="noreferrer">
+                <MessageCircle className="h-4 w-4" aria-hidden /> Quero um orçamento
+              </a>
             </Button>
             <Button asChild tamanho="lg" variante="contorno">
-              <Link href="#como-funciona">Como funciona</Link>
+              <Link href="#linhas">Ver as linhas</Link>
             </Button>
           </div>
+          <SelosConfianca />
         </div>
         <VidroSeguro className="mx-auto w-full max-w-[520px] drop-shadow-[0_30px_40px_rgba(14,22,36,.25)]" />
       </div>
@@ -315,5 +340,216 @@ export function DestaqueAntivandalismo() {
         </div>
       </div>
     </section>
+  );
+}
+
+/* ---------------- WhatsApp ---------------- */
+
+/** Link do WhatsApp comercial com a mensagem já escrita. */
+export function useWhatsapp() {
+  const { config } = usePlataforma();
+  return (texto: string) => `https://wa.me/${config.site.whatsappComercial}?text=${encodeURIComponent(texto)}`;
+}
+
+/** Botão flutuante, acima da barra inferior no celular. */
+export function BotaoWhatsapp({ texto = "Olá, JR Filmes! Quero um orçamento de película antivandalismo." }: { texto?: string }) {
+  const wa = useWhatsapp();
+  return (
+    <a
+      href={wa(texto)}
+      target="_blank"
+      rel="noreferrer"
+      aria-label="Falar no WhatsApp"
+      className="fixed bottom-[calc(env(safe-area-inset-bottom,0px)+6.5rem)] right-4 z-40 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_14px_30px_-10px_rgba(37,211,102,.7)] transition-transform duration-150 ease-saida hover:scale-105 active:scale-[0.97] lg:bottom-6 lg:right-6"
+    >
+      <MessageCircle className="h-6 w-6" aria-hidden />
+    </a>
+  );
+}
+
+/* ---------------- selos de confiança ---------------- */
+
+export function SelosConfianca() {
+  const { config } = usePlataforma();
+  const selos = [
+    { icone: BadgeCheck, texto: `Garantia de até ${config.site.garantiaAnos} anos` },
+    { icone: Clock3, texto: "Orçamento no mesmo dia" },
+    { icone: Home, texto: "Em domicílio ou no nosso ponto" },
+    { icone: Sparkles, texto: "Aplicação sem bolhas e sem poeira" },
+  ];
+  return (
+    <ul className="grid grid-cols-2 gap-x-6 gap-y-3 border-t border-linha/10 pt-6 sm:grid-cols-4">
+      {selos.map((s) => (
+        <li key={s.texto} className="flex items-center gap-2.5 text-[12.5px] font-medium leading-snug text-tx">
+          <s.icone className="h-4 w-4 shrink-0 text-ouro" strokeWidth={1.6} aria-hidden />
+          {s.texto}
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/* ---------------- benefícios ---------------- */
+
+const BENEFICIOS_AV = [
+  { icone: ShieldCheck, titulo: "Cacos presos", texto: "O vidro trinca, mas os pedaços ficam colados na película." },
+  { icone: Clock3, titulo: "Invasão mais lenta", texto: "Abrir passagem exige insistência, tempo e barulho." },
+  { icone: Users, titulo: "Menos ferimentos", texto: "Ninguém se corta com estilhaços voando para dentro." },
+  { icone: Sun, titulo: "Bloqueio de UV", texto: "Até 99% dos raios UV, protegendo pele, móveis e vitrine." },
+  { icone: EyeOff, titulo: "Privacidade opcional", texto: "Versões fumê e espelhada para quem quer menos exposição." },
+  { icone: Sparkles, titulo: "Quase invisível", texto: "A versão transparente não muda a fachada nem a vitrine." },
+];
+
+export function BeneficiosAntivandalismo() {
+  return (
+    <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-[3px] border border-linha/10 bg-linha/10 md:grid-cols-3">
+      {BENEFICIOS_AV.map((b) => (
+        <li key={b.titulo} className="flex flex-col gap-3 bg-sup p-6">
+          <b.icone className="h-6 w-6 text-ouro" strokeWidth={1.3} aria-hidden />
+          <h3 className="font-serif text-[1.4rem] font-normal leading-tight text-tx">{b.titulo}</h3>
+          <p className="text-[13.5px] leading-relaxed text-tx3">{b.texto}</p>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+/* ---------------- linhas com preço ---------------- */
+
+const ICONE_LINHA: Record<string, typeof Car> = { carro: Car, casa: Home, loja: Store, fachada: Building2 };
+
+function Preco({ l }: { l: LinhaAntivandalismo }) {
+  const un = l.unidade === "m2" ? "/m²" : "";
+  if (l.precoVista <= 0) {
+    return (
+      <div className="flex flex-col gap-1">
+        <span className="font-serif text-[2rem] font-light leading-none text-tx">Sob consulta</span>
+        <span className="text-[12.5px] text-tx3">Mande fotos e medidas e receba o valor no mesmo dia</span>
+      </div>
+    );
+  }
+  const parcela = l.precoCartao > 0 && l.parcelas > 0 ? l.precoCartao / l.parcelas : 0;
+  return (
+    <div className="flex flex-col gap-1">
+      <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-tx3">À vista no PIX</span>
+      <span className="num font-serif text-[2.4rem] font-light leading-none text-tx">
+        {brl(l.precoVista)}
+        <small className="text-base text-tx3">{un}</small>
+      </span>
+      {parcela > 0 && (
+        <span className="num text-[13px] text-tx2">
+          ou {brl(l.precoCartao)}
+          {un} no cartão em até {l.parcelas}× de {brl(parcela)}
+        </span>
+      )}
+    </div>
+  );
+}
+
+export function LinhasAntivandalismo() {
+  const { config } = usePlataforma();
+  const wa = useWhatsapp();
+  return (
+    <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+      {config.servicos.antivandalismo.map((l, i) => {
+        const Icone = ICONE_LINHA[l.id] ?? ShieldCheck;
+        return (
+          <article
+            key={l.id}
+            className={cn(
+              "relative flex flex-col gap-5 rounded-[3px] border bg-sup p-6",
+              i === 0 ? "border-ouro/60 shadow-[0_24px_50px_-30px_rgba(150,110,38,.55)]" : "border-linha/10",
+            )}
+          >
+            {i === 0 && (
+              <span className="absolute -top-3 left-6 rounded-full bg-ouro px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.18em] text-white">Mais pedido</span>
+            )}
+            <div className="flex items-center gap-3">
+              <span className="grid h-11 w-11 place-items-center rounded-full border border-ouro/40">
+                <Icone className="h-5 w-5 text-ouro" strokeWidth={1.4} aria-hidden />
+              </span>
+              <div className="flex flex-col">
+                <h3 className="font-serif text-[1.55rem] font-normal leading-tight text-tx">{l.nome}</h3>
+                <span className="text-[12px] text-tx3">{l.uso}</span>
+              </div>
+            </div>
+            <ul className="flex flex-col gap-2.5">
+              {l.especificacoes.map((e) => (
+                <li key={e} className="flex gap-2 text-[13.5px] leading-snug text-tx2">
+                  <Check className="mt-0.5 h-4 w-4 shrink-0 text-[#1f7a55]" strokeWidth={2.4} aria-hidden />
+                  {e}
+                </li>
+              ))}
+              <li className="flex gap-2 text-[13.5px] font-semibold leading-snug text-tx">
+                <BadgeCheck className="mt-0.5 h-4 w-4 shrink-0 text-ouro" aria-hidden />
+                Garantia de {l.garantiaAnos} anos
+              </li>
+            </ul>
+            <div className="mt-auto flex flex-col gap-4 border-t border-linha/10 pt-5">
+              <Preco l={l} />
+              <Button asChild variante={i === 0 ? "neon" : "contorno"} className="w-full">
+                <a href={wa(`Olá, JR Filmes! Quero orçamento de película antivandalismo para ${l.nome.toLowerCase()} (${l.uso.toLowerCase()}).`)} target="_blank" rel="noreferrer">
+                  <MessageCircle className="h-4 w-4 shrink-0" aria-hidden /> Quero esta proteção
+                </a>
+              </Button>
+            </div>
+          </article>
+        );
+      })}
+    </div>
+  );
+}
+
+/* ---------------- processo de compra ---------------- */
+
+const PROCESSO = [
+  { icone: MessageCircle, titulo: "Contato", texto: "Chame no WhatsApp ou preencha o pedido de orçamento." },
+  { icone: Ruler, titulo: "Orçamento no mesmo dia", texto: "Com fotos e medidas, ou com visita técnica para fachadas." },
+  { icone: CalendarClock, titulo: "Agendamento", texto: "Na sua casa, na sua loja ou no ponto de instalação, com hora marcada." },
+  { icone: Wrench, titulo: "Instalação limpa", texto: "Sem bolhas, sem poeira e sem tirar o vidro do lugar." },
+];
+
+export function ProcessoCompra() {
+  return (
+    <ol className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+      {PROCESSO.map((p, i) => (
+        <li key={p.titulo} className="flex flex-col gap-3 border-t-2 border-ouro pt-5">
+          <div className="flex items-center gap-3">
+            <span className="num font-serif text-2xl italic text-ouro">{i + 1}</span>
+            <p.icone className="h-5 w-5 text-tx3" strokeWidth={1.5} aria-hidden />
+          </div>
+          <h3 className="text-[14px] font-semibold uppercase tracking-[0.12em] text-tx">{p.titulo}</h3>
+          <p className="text-[14px] leading-relaxed text-tx3">{p.texto}</p>
+        </li>
+      ))}
+    </ol>
+  );
+}
+
+/* ---------------- garantia ---------------- */
+
+export function SeloGarantia() {
+  const { config } = usePlataforma();
+  const wa = useWhatsapp();
+  return (
+    <div className="grid items-center gap-8 rounded-[3px] border border-ouro/40 bg-sup p-8 md:grid-cols-[auto_1fr_auto] md:p-10">
+      <div className="grid h-28 w-28 place-items-center rounded-full border-2 border-ouro text-center">
+        <div className="flex flex-col leading-none">
+          <span className="num font-serif text-5xl font-light text-ouro">{config.site.garantiaAnos}</span>
+          <span className="text-[10px] font-semibold uppercase tracking-[0.2em] text-tx">anos</span>
+        </div>
+      </div>
+      <div className="flex flex-col gap-2">
+        <h3 className="font-serif text-[2rem] font-light leading-tight text-tx">Garantia por escrito</h3>
+        <p className="max-w-xl text-[14.5px] leading-relaxed text-tx2">
+          Cada aplicação sai com certificado de garantia. Se a película descolar ou bolhar dentro do prazo, corrigimos sem custo, conforme o certificado.
+        </p>
+      </div>
+      <Button asChild tamanho="lg">
+        <a href={wa("Olá, JR Filmes! Quero saber mais sobre a garantia da película antivandalismo.")} target="_blank" rel="noreferrer">
+          Receber orçamento <ArrowRight className="h-4 w-4" aria-hidden />
+        </a>
+      </Button>
+    </div>
   );
 }

@@ -13,6 +13,21 @@ export interface ItemPreco {
   preco: number; // em reais
 }
 
+/** Linha de película antivandalismo vendida como pacote (carro) ou por m² (imóvel). */
+export interface LinhaAntivandalismo {
+  id: string;
+  nome: string;
+  uso: string;
+  unidade: "veiculo" | "m2";
+  especificacoes: string[];
+  garantiaAnos: number;
+  /** Preço à vista (PIX ou espécie), em reais. 0 = sob consulta. */
+  precoVista: number;
+  /** Preço no cartão, em reais. 0 = sem opção parcelada exibida. */
+  precoCartao: number;
+  parcelas: number;
+}
+
 export interface Acabamento {
   id: string;
   nome: string;
@@ -61,6 +76,7 @@ export interface PlatformConfig {
       m2MedioTotal: number;
     };
     arquitetonico: ItemPreco[];
+    antivandalismo: LinhaAntivandalismo[];
   };
   financeiro: {
     saqueMinimo: number;
@@ -90,7 +106,7 @@ export interface PlatformConfig {
 }
 
 export const CONFIG_PADRAO: PlatformConfig = {
-  versao: 2,
+  versao: 3,
   taxas: {
     plataformaPct: 30,
     indicadorPct: 5,
@@ -122,6 +138,53 @@ export const CONFIG_PADRAO: PlatformConfig = {
       { id: "objeto", nome: "Objeto", descricao: "Bancadas, ilhas e peças avulsas", unidade: "m2", preco: 100 },
       { id: "geladeira", nome: "Geladeira", descricao: "Envelopamento completo, valor fechado", unidade: "fixo", preco: 650 },
       { id: "porta", nome: "Porta", descricao: "Uma folha, frente e verso", unidade: "fixo", preco: 180 },
+    ],
+    // Preços em 0 = "sob consulta" até o dono definir no Creator Hub.
+    antivandalismo: [
+      {
+        id: "carro",
+        nome: "Carros",
+        uso: "Vidros laterais e traseiro",
+        unidade: "veiculo",
+        especificacoes: ["Poliéster de segurança transparente ou fumê", "Segura os cacos se o vidro for quebrado", "Dentro da transparência exigida pelo CONTRAN", "Aplicação no mesmo dia, com hora marcada"],
+        garantiaAnos: 5,
+        precoVista: 0,
+        precoCartao: 0,
+        parcelas: 10,
+      },
+      {
+        id: "casa",
+        nome: "Casas e apartamentos",
+        uso: "Janelas, portas de vidro e varandas",
+        unidade: "m2",
+        especificacoes: ["Transparente, quase invisível", "Protege a família de estilhaços", "Bloqueia até 99% dos raios UV", "Aplicação sem tirar o vidro do lugar"],
+        garantiaAnos: 5,
+        precoVista: 0,
+        precoCartao: 0,
+        parcelas: 10,
+      },
+      {
+        id: "loja",
+        nome: "Lojas e vitrines",
+        uso: "Vitrines, portas e divisórias de vidro",
+        unidade: "m2",
+        especificacoes: ["Atrasa a abertura do vão em tentativa de furto", "Opção com controle solar para a vitrine não desbotar", "Aplicação fora do horário de funcionamento", "Vitrine continua limpa e transparente"],
+        garantiaAnos: 5,
+        precoVista: 0,
+        precoCartao: 0,
+        parcelas: 10,
+      },
+      {
+        id: "fachada",
+        nome: "Fachadas de vidro",
+        uso: "Prédios, portarias, halls e condomínios",
+        unidade: "m2",
+        especificacoes: ["Visita técnica e medição no local", "Opções transparente, fumê ou espelhada", "Execução por etapas, sem parar o prédio", "Registro com fotos de cada vão aplicado"],
+        garantiaAnos: 5,
+        precoVista: 0,
+        precoCartao: 0,
+        parcelas: 10,
+      },
     ],
   },
   financeiro: {
