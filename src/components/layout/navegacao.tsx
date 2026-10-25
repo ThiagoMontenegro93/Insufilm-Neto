@@ -13,6 +13,16 @@ export const ITENS_NAV = [
   { href: "/parceiro/dashboard", rotulo: "Parceiro", icone: Wallet },
 ] as const;
 
+/** Menu do topo: o produto principal (antivandalismo) aparece logo depois da Home. */
+const ITENS_TOPO = [
+  { href: "/", rotulo: "Home" },
+  { href: "/antivandalismo", rotulo: "Antivandalismo" },
+  { href: "/pelicula", rotulo: "Insulfilm" },
+  { href: "/envelopamento", rotulo: "Envelopamento" },
+  { href: "/arquitetonico", rotulo: "Superfícies" },
+  { href: "/parceiro/dashboard", rotulo: "Parceiro" },
+];
+
 /** Logotipo JR FILMES em metal escovado com o corte dourado da perna do R. */
 export function Logo({ compacto = false, sufixo }: { compacto?: boolean; sufixo?: string }) {
   return (
@@ -41,17 +51,17 @@ export function NavTopo() {
     <header className="sticky top-0 z-40 border-b border-white/[0.06] bg-black/75 backdrop-blur-xl" style={{ top: "env(safe-area-inset-top, 0px)" }}>
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6">
         <Logo />
-        <nav className="hidden items-center gap-1 md:flex" aria-label="Principal">
-          {ITENS_NAV.map((i) => (
+        <nav className="hidden items-center gap-0.5 lg:flex" aria-label="Principal">
+          {ITENS_TOPO.map((i) => (
             <Link
               key={i.href}
               href={i.href}
               className={cn(
-                "relative px-3 py-2 text-[12.5px] font-semibold uppercase tracking-[0.14em] transition-colors duration-150",
+                "relative px-2.5 py-2 text-[12px] font-semibold uppercase tracking-[0.14em] transition-colors duration-150",
                 ativo(path, i.href) ? "text-ouro after:absolute after:inset-x-3 after:-bottom-[13px] after:h-px after:bg-ouro" : "text-zinc-400 hover:text-white",
               )}
             >
-              {i.rotulo === "Película" ? "Insulfilm" : i.rotulo === "Auto" ? "Envelopamento" : i.rotulo === "Arq" ? "Superfícies" : i.rotulo}
+              {i.rotulo}
             </Link>
           ))}
         </nav>
@@ -76,7 +86,7 @@ export function NavInferior() {
   return (
     <nav
       aria-label="Atalhos"
-      className="fixed inset-x-0 bottom-0 z-50 px-4 md:hidden"
+      className="fixed inset-x-0 bottom-0 z-50 px-4 lg:hidden"
       style={{ paddingBottom: "max(14px, env(safe-area-inset-bottom, 0px))" }}
     >
       <ul className="mx-auto flex max-w-md items-stretch justify-between rounded-[24px] border border-white/10 bg-zinc-950/80 p-1.5 shadow-[0_20px_50px_-12px_rgba(0,0,0,.9)] backdrop-blur-2xl">
@@ -115,7 +125,7 @@ const SEGMENTOS = [
 
 export function Rodape() {
   return (
-    <footer className="relative border-t border-white/[0.06] pb-seguro md:pb-10">
+    <footer className="relative border-t border-white/[0.06] pb-seguro lg:pb-10">
       <div className="linha-ouro absolute inset-x-0 top-0" aria-hidden />
       <div className="mx-auto flex max-w-7xl flex-col gap-10 px-4 pt-12 sm:px-6">
         <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">

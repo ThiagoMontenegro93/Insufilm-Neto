@@ -197,13 +197,13 @@ const PASSOS = [
   { icone: BadgeCheck, titulo: "Garantia e suporte", texto: "Certificado de garantia e acompanhamento depois." },
 ];
 
-const SERVICOS_PEDIDO = ["Insulfilm automotivo", "Envelopamento automotivo", "Envelopamento de superfícies", "Películas residenciais e comerciais", "Revestimentos decorativos"];
+const SERVICOS_PEDIDO = ["Película antivandalismo", "Insulfilm automotivo", "Envelopamento automotivo", "Envelopamento de superfícies", "Películas residenciais e comerciais", "Revestimentos decorativos"];
 
-export function AtendimentoLocal() {
+export function AtendimentoLocal({ servicoInicial = SERVICOS_PEDIDO[0] }: { servicoInicial?: string }) {
   const { config } = usePlataforma();
   const { site } = config;
   const [local, setLocal] = useState<"domicilio" | "ponto">("domicilio");
-  const [servico, setServico] = useState(SERVICOS_PEDIDO[0]);
+  const [servico, setServico] = useState(servicoInicial);
   const [bairro, setBairro] = useState("");
   const [nome, setNome] = useState("");
 
@@ -381,6 +381,10 @@ export function Perguntas() {
     { p: "Tem garantia?", r: `Sim. Os serviços têm garantia de até ${config.site.garantiaAnos} anos, conforme a linha escolhida, com certificado e suporte depois da instalação.` },
     { p: "Como funciona a indicação?", r: `Você indica pelo painel do parceiro, o cliente recebe um código e, quando o serviço fecha, você ganha ${config.taxas.indicadorPct}% do valor por PIX.` },
   ];
+  return <ListaPerguntas itens={itens} />;
+}
+
+export function ListaPerguntas({ itens }: { itens: { p: string; r: string }[] }) {
   return (
     <div className="flex flex-col divide-y divide-linha/[0.07] rounded-[3px] border border-linha/[0.07]">
       {itens.map((i) => (

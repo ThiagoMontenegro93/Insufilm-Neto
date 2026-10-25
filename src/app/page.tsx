@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Calcadao, Hero } from "@/components/landing/hero";
+import { DestaqueAntivandalismo } from "@/components/landing/antivandalismo";
 import { StoriesPilares } from "@/components/landing/stories";
 import { TimelineEtapas } from "@/components/landing/timeline";
 import { AtendimentoLocal, ComparativoPeliculas, FaixaBeneficios, PadraoConcessionaria, Perguntas, ServicosDiagonais } from "@/components/landing/marca";
@@ -11,6 +12,7 @@ export default function Home() {
   return (
     <div className="tema-claro">
       <Hero />
+      <DestaqueAntivandalismo />
       <FaixaBeneficios />
 
       <section className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-16 sm:px-6 md:py-28">
