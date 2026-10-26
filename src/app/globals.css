@@ -82,6 +82,13 @@ body {
     background-clip: text;
     color: transparent;
   }
+  /* logotipo em tinta azul-noite escovada, para fundos claros */
+  .tinta {
+    background: linear-gradient(180deg, #3b4a63 0%, #0e1624 48%, #2a3850 56%, #0e1624 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
   .texto-neon,
   .dourado {
     background: var(--ouro-grad);

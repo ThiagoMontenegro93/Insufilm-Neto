@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Calcadao, Hero } from "@/components/landing/hero";
 import { BotaoWhatsapp, DestaqueAntivandalismo } from "@/components/landing/antivandalismo";
+import { ProtecaoSolar } from "@/components/landing/sol";
 import { StoriesPilares } from "@/components/landing/stories";
 import { TimelineEtapas } from "@/components/landing/timeline";
 import { AtendimentoLocal, ComparativoPeliculas, FaixaBeneficios, PadraoConcessionaria, Perguntas, ServicosDiagonais } from "@/components/landing/marca";
@@ -12,6 +13,7 @@ export default function Home() {
   return (
     <div className="tema-claro">
       <Hero />
+      <ProtecaoSolar />
       <DestaqueAntivandalismo />
       <FaixaBeneficios />
 
