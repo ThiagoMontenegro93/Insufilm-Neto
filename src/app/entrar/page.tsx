@@ -25,7 +25,7 @@ export default function Entrar() {
       <Cartao forte className="flex w-full flex-col gap-6">
         <div className="flex flex-col gap-2">
           <span className="rotulo text-neon/80">Acesso</span>
-          <h1 className="text-3xl font-bold tracking-tight text-white">Entrar no HUB</h1>
+          <h1 className="text-3xl font-bold tracking-tight text-tx">Entrar no HUB</h1>
         </div>
         <form onSubmit={enviar} className="flex flex-col gap-4">
           <Campo rotulo="E-mail" htmlFor="email">

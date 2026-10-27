@@ -44,7 +44,7 @@ export function FaixaBeneficios() {
         {BENEFICIOS.map((b) => (
           <li key={b.titulo} className="flex flex-col gap-3 pr-4">
             <b.icone className="h-5 w-5 text-ouro" strokeWidth={1.2} aria-hidden />
-            <h3 className="font-serif text-[1.3rem] font-normal leading-tight text-tx">{b.titulo}</h3>
+            <h3 className="font-sans tracking-[-0.02em] text-[1.04rem] font-semibold leading-tight text-tx">{b.titulo}</h3>
             <p className="text-[13px] leading-relaxed text-tx4">{b.texto}</p>
           </li>
         ))}
@@ -131,7 +131,7 @@ export function ServicosDiagonais() {
           <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/30 to-transparent" aria-hidden />
           <div className="relative flex flex-col gap-2 p-6 sm:p-8">
             <span className="num text-[10.5px] font-medium tracking-[0.3em] text-ouro-soft">{String(i + 1).padStart(2, "0")}</span>
-            <h3 className={cn("font-serif font-light leading-[1.05] text-white", i === 0 ? "text-[2.2rem] sm:text-[2.8rem]" : "text-[1.75rem]")}>{s.titulo}</h3>
+            <h3 className={cn("font-sans tracking-[-0.02em] font-bold leading-[1.05] text-white", i === 0 ? "text-[1.76rem] sm:text-[2.24rem]" : "text-[1.4rem]")}>{s.titulo}</h3>
             <p className="max-w-sm text-[13.5px] leading-relaxed text-zinc-300">{s.texto}</p>
             <span className="mt-2 inline-flex items-center gap-1.5 text-[10.5px] font-medium uppercase tracking-[0.24em] text-ouro">
               Conhecer <ArrowUpRight className="h-3.5 w-3.5 transition-transform duration-200 ease-saida group-hover:-translate-y-0.5 group-hover:translate-x-0.5" aria-hidden />
@@ -167,8 +167,8 @@ export function PadraoConcessionaria() {
             <span className="h-px w-10 bg-ouro" aria-hidden />
             <p className="text-[10.5px] font-medium uppercase tracking-[0.38em] text-ouro-soft">Padrão concessionária</p>
           </div>
-          <h2 className="font-serif text-[2.6rem] font-light leading-[1.02] text-white text-balance sm:text-[3.6rem]">
-            O mesmo cuidado do showroom, <em className="italic text-ouro-soft">onde você estiver.</em>
+          <h2 className="font-sans tracking-[-0.02em] text-[2.08rem] font-bold leading-[1.02] text-white text-balance sm:text-[2.88rem]">
+            O mesmo cuidado do showroom, <em className="not-italic text-ouro-soft">onde você estiver.</em>
           </h2>
           <p className="text-[15px] leading-[1.8] text-zinc-300">
             Montamos uma área limpa e iluminada na sua garagem ou recebemos você no ponto de instalação. Corte sob medida, bordas seladas e conferência peça por peça antes da entrega.
@@ -177,7 +177,7 @@ export function PadraoConcessionaria() {
             {numeros.map((n, i) => (
               <div key={n.rotulo} className={cn("flex flex-col gap-1", i > 0 && "border-l border-white/10 pl-4 sm:pl-6")}>
                 <dt className="order-2 text-[11px] leading-snug text-zinc-500">{n.rotulo}</dt>
-                <dd className="num font-serif text-[1.9rem] font-light text-white sm:text-[2.4rem]">{n.valor}</dd>
+                <dd className="num font-sans tracking-[-0.02em] text-[1.52rem] font-bold text-white sm:text-[1.92rem]">{n.valor}</dd>
               </div>
             ))}
           </dl>
@@ -248,7 +248,7 @@ export function AtendimentoLocal({ servicoInicial = SERVICOS_PEDIDO[0] }: { serv
               </span>
               <span className={cn("h-4 w-4 rounded-full border-2", local === o.id ? "border-ouro bg-ouro" : "border-linha/30")} aria-hidden />
             </div>
-            <h3 className="font-serif text-[2rem] font-light leading-none text-tx">{o.titulo}</h3>
+            <h3 className="font-sans tracking-[-0.02em] text-[1.6rem] font-bold leading-none text-tx">{o.titulo}</h3>
             <p className="text-[15px] leading-relaxed text-tx2">{o.texto}</p>
             <p className="text-[10.5px] font-medium uppercase tracking-[0.22em] text-ouro/80">{o.detalhe}</p>
           </button>
@@ -259,7 +259,7 @@ export function AtendimentoLocal({ servicoInicial = SERVICOS_PEDIDO[0] }: { serv
         {PASSOS.map((p, i) => (
           <li key={p.titulo} className="flex flex-col gap-2 bg-sup p-6">
             <div className="flex items-center gap-3">
-              <span className="num font-serif text-lg italic text-ouro">{String(i + 1).padStart(2, "0")}</span>
+              <span className="num font-sans tracking-[-0.02em] text-lg italic text-ouro">{String(i + 1).padStart(2, "0")}</span>
               <p.icone className="h-5 w-5 text-prata" strokeWidth={1.5} aria-hidden />
             </div>
             <h4 className="text-[13px] font-semibold uppercase tracking-[0.14em] text-tx">{p.titulo}</h4>

@@ -49,9 +49,9 @@ function Numero({ id, rotulo, valor, onChange, sufixo, prefixo, passo = 0.1, dic
   return (
     <Campo rotulo={rotulo} htmlFor={id} dica={dica}>
       <div className="relative">
-        {prefixo && <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-mono text-sm text-zinc-500">{prefixo}</span>}
+        {prefixo && <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-mono text-sm text-tx4">{prefixo}</span>}
         <input id={id} type="number" inputMode="decimal" min={0} step={passo} value={Number.isFinite(valor) ? valor : 0} onChange={(e) => onChange(Number(e.target.value))} className={cn("campo num font-mono", prefixo && "pl-11", sufixo && "pr-12")} />
-        {sufixo && <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-sm text-zinc-500">{sufixo}</span>}
+        {sufixo && <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-sm text-tx4">{sufixo}</span>}
       </div>
     </Campo>
   );
@@ -93,8 +93,8 @@ function AbaPainel({ irPara }: { irPara: (aba: string) => void }) {
         ].map((k) => (
           <Cartao key={k.r} className="flex flex-col gap-1.5">
             <span className="rotulo">{k.r}</span>
-            <span className="num text-2xl font-bold text-white">{k.v}</span>
-            <span className="text-xs text-zinc-500">{k.d}</span>
+            <span className="num text-2xl font-bold text-tx">{k.v}</span>
+            <span className="text-xs text-tx4">{k.d}</span>
           </Cartao>
         ))}
       </div>
@@ -106,7 +106,7 @@ function AbaPainel({ irPara }: { irPara: (aba: string) => void }) {
           </h3>
           <ul className="flex flex-col gap-2">
             {al.map((a, i) => (
-              <li key={i} className="flex flex-wrap items-center gap-2 text-sm text-zinc-300">
+              <li key={i} className="flex flex-wrap items-center gap-2 text-sm text-tx2">
                 <Selo tom={a.tipo === "PERDA_ALTA" ? "perigo" : "alerta"}>{a.tipo === "ESTOQUE_MINIMO" ? "Repor" : a.tipo === "BOBINA_ACABANDO" ? "Acabando" : "Perda alta"}</Selo>
                 {a.mensagem}
               </li>
@@ -117,7 +117,7 @@ function AbaPainel({ irPara }: { irPara: (aba: string) => void }) {
 
       <Cartao className="flex flex-col gap-4">
         <div className="flex flex-wrap items-center justify-between gap-3">
-          <h3 className="font-semibold text-white">Saldo por material</h3>
+          <h3 className="font-semibold text-tx">Saldo por material</h3>
           <div className="flex gap-2">
             <Button tamanho="sm" onClick={() => irPara("baixa")}>
               <Scissors className="h-4 w-4" aria-hidden /> Dar baixa
@@ -130,7 +130,7 @@ function AbaPainel({ irPara }: { irPara: (aba: string) => void }) {
         <div className="overflow-x-auto">
           <table className="w-full min-w-[760px] text-sm">
             <thead>
-              <tr className="border-b border-white/[0.07] text-left">
+              <tr className="border-b border-linha/[0.07] text-left">
                 {["Material", "Fornecedor", "Saldo", "Mínimo", "Bobinas", "Custo médio", "Valor"].map((h) => (
                   <th key={h} className="rotulo px-3 py-3 font-semibold">{h}</th>
                 ))}
@@ -141,17 +141,17 @@ function AbaPainel({ irPara }: { irPara: (aba: string) => void }) {
                 const s = saldo[m.id];
                 const baixo = (s?.m2 ?? 0) < m.estoqueMinimoM2;
                 return (
-                  <tr key={m.id} className="border-b border-white/[0.05] last:border-0">
+                  <tr key={m.id} className="border-b border-linha/[0.05] last:border-0">
                     <td className="px-3 py-3">
-                      <span className="font-medium text-white">{m.nome}</span>
-                      <span className="block text-xs text-zinc-500">{nomeCategoria(m.categoria)}</span>
+                      <span className="font-medium text-tx">{m.nome}</span>
+                      <span className="block text-xs text-tx4">{nomeCategoria(m.categoria)}</span>
                     </td>
-                    <td className="px-3 py-3 text-zinc-400">{fornecedores.find((f) => f.id === m.fornecedorId)?.nome ?? "–"}</td>
-                    <td className={cn("num px-3 py-3 font-mono", baixo ? "text-alerta" : "text-white")}>{fmtM2(s?.m2 ?? 0)}</td>
-                    <td className="num px-3 py-3 font-mono text-zinc-500">{fmtM2(m.estoqueMinimoM2)}</td>
-                    <td className="num px-3 py-3 font-mono text-zinc-400">{s?.bobinas ?? 0}</td>
-                    <td className="num px-3 py-3 font-mono text-zinc-300">{s ? `${brl(s.custoMedioM2)}/m²` : "–"}</td>
-                    <td className="num px-3 py-3 font-mono text-zinc-300">{brl(s?.valor ?? 0)}</td>
+                    <td className="px-3 py-3 text-tx3">{fornecedores.find((f) => f.id === m.fornecedorId)?.nome ?? "–"}</td>
+                    <td className={cn("num px-3 py-3 font-mono", baixo ? "text-alerta" : "text-tx")}>{fmtM2(s?.m2 ?? 0)}</td>
+                    <td className="num px-3 py-3 font-mono text-tx4">{fmtM2(m.estoqueMinimoM2)}</td>
+                    <td className="num px-3 py-3 font-mono text-tx3">{s?.bobinas ?? 0}</td>
+                    <td className="num px-3 py-3 font-mono text-tx2">{s ? `${brl(s.custoMedioM2)}/m²` : "–"}</td>
+                    <td className="num px-3 py-3 font-mono text-tx2">{brl(s?.valor ?? 0)}</td>
                   </tr>
                 );
               })}
@@ -206,7 +206,7 @@ function AbaBaixa() {
   return (
     <form onSubmit={enviar} className="grid grid-cols-1 gap-5 lg:grid-cols-[minmax(0,1.15fr)_minmax(0,0.85fr)]">
       <Cartao className="flex flex-col gap-5">
-        <h3 className="font-semibold text-white">Baixa por serviço</h3>
+        <h3 className="font-semibold text-tx">Baixa por serviço</h3>
         <Campo rotulo="Bobina usada" htmlFor="bx-bobina" dica="Retalhos aparecem primeiro: use a sobra antes de abrir bobina nova.">
           <select id="bx-bobina" className="campo" value={bobinaId} onChange={(e) => setBobinaId(e.target.value)}>
             {ativas.map((x) => (
@@ -244,18 +244,18 @@ function AbaBaixa() {
       </Cartao>
 
       <Cartao forte className="flex flex-col gap-4">
-        <h3 className="flex items-center gap-2 font-semibold text-white">
+        <h3 className="flex items-center gap-2 font-semibold text-tx">
           <Ruler className="h-4 w-4 text-neon" aria-hidden /> Como fica o corte
         </h3>
         {b ? (
           <>
             <div className="flex flex-col gap-2">
-              <div className="flex justify-between text-xs text-zinc-500">
+              <div className="flex justify-between text-xs text-tx4">
                 <span>{b.codigo}</span>
                 <span className="num font-mono">{fmtM(b.comprimentoRestanteM)} de {fmtM(b.comprimentoInicialM)}</span>
               </div>
               {/* barra da bobina: o que fica, o que sai no corte */}
-              <div className="flex h-3 overflow-hidden rounded-full bg-white/[0.06]" aria-hidden>
+              <div className="flex h-3 overflow-hidden rounded-full bg-linha/[0.06]" aria-hidden>
                 <div className="bg-zinc-500/60" style={{ width: `${Math.max(0, ((b.comprimentoRestanteM - corte) / b.comprimentoInicialM) * 100)}%` }} />
                 <div className="bg-neon" style={{ width: `${Math.min(100, (Math.min(corte, b.comprimentoRestanteM) / b.comprimentoInicialM) * 100)}%` }} />
               </div>
@@ -269,9 +269,9 @@ function AbaBaixa() {
                 ["Custo do material", brl(custo)],
                 ["Fica na bobina", excede ? `faltam ${fmtM(corte - b.comprimentoRestanteM)}` : fmtM(b.comprimentoRestanteM - corte)],
               ].map(([k, v]) => (
-                <div key={k} className="flex items-baseline justify-between gap-3 border-b border-white/[0.05] pb-2 last:border-0">
-                  <dt className="text-zinc-400">{k}</dt>
-                  <dd className="num font-mono font-semibold text-white">{v}</dd>
+                <div key={k} className="flex items-baseline justify-between gap-3 border-b border-linha/[0.05] pb-2 last:border-0">
+                  <dt className="text-tx3">{k}</dt>
+                  <dd className="num font-mono font-semibold text-tx">{v}</dd>
                 </div>
               ))}
             </dl>
@@ -281,12 +281,12 @@ function AbaBaixa() {
                 Essa bobina só tem {fmtM(b.comprimentoRestanteM)}. Escolha outra bobina do mesmo material ou corte em duas baixas.
               </p>
             )}
-            <p className="text-xs text-zinc-500">
+            <p className="text-xs text-tx4">
               A bobina tem largura fixa de {fmtM(b.larguraM)}, então cada metro cortado vale {fmtM2(b.larguraM)}. A diferença entre o cortado e o aplicado é a perda do serviço.
             </p>
           </>
         ) : (
-          <p className="text-sm text-zinc-500">Cadastre uma bobina na aba Entrada.</p>
+          <p className="text-sm text-tx4">Cadastre uma bobina na aba Entrada.</p>
         )}
       </Cartao>
     </form>
@@ -311,7 +311,7 @@ function AbaBobinas() {
             ))}
           </select>
         </Campo>
-        <label className="flex items-center gap-2 pb-3 text-sm text-zinc-400">
+        <label className="flex items-center gap-2 pb-3 text-sm text-tx3">
           <input type="checkbox" checked={mostrarFinalizadas} onChange={(e) => setMostrarFinalizadas(e.target.checked)} /> Mostrar finalizadas
         </label>
       </div>
@@ -320,23 +320,23 @@ function AbaBobinas() {
           const m = materiais.find((x) => x.id === b.materialId);
           const pct = pctRestante(b);
           return (
-            <div key={b.id} className="flex flex-col gap-3 rounded-2xl border border-white/[0.08] bg-zinc-950/60 p-4">
+            <div key={b.id} className="flex flex-col gap-3 rounded-2xl border border-linha/[0.08] bg-zinc-950/60 p-4">
               <div className="flex items-start justify-between gap-2">
                 <div className="flex min-w-0 flex-col">
-                  <span className="num font-mono text-xs text-zinc-500">{b.codigo}</span>
-                  <span className="font-medium leading-tight text-white">{m?.nome}</span>
-                  <span className="text-xs text-zinc-500">{fornecedores.find((f) => f.id === b.fornecedorId)?.nome}{b.notaFiscal ? ` · ${b.notaFiscal}` : ""}</span>
+                  <span className="num font-mono text-xs text-tx4">{b.codigo}</span>
+                  <span className="font-medium leading-tight text-tx">{m?.nome}</span>
+                  <span className="text-xs text-tx4">{fornecedores.find((f) => f.id === b.fornecedorId)?.nome}{b.notaFiscal ? ` · ${b.notaFiscal}` : ""}</span>
                 </div>
                 <Selo tom={b.status === "FINALIZADA" ? "neutro" : b.origemBobinaId ? "esmeralda" : pct <= 10 ? "alerta" : b.status === "LACRADA" ? "neon" : "neutro"}>
                   {b.origemBobinaId ? "Retalho" : b.status === "LACRADA" ? "Lacrada" : b.status === "FINALIZADA" ? "Acabou" : `${pct}%`}
                 </Selo>
               </div>
               <BarraProgresso valor={pct} tom={pct <= 10 ? "alerta" : "neon"} />
-              <div className="num flex justify-between font-mono text-xs text-zinc-400">
+              <div className="num flex justify-between font-mono text-xs text-tx3">
                 <span>{fmtM(b.comprimentoRestanteM)} × {fmtM(b.larguraM)}</span>
-                <span className="text-white">{fmtM2(m2Restante(b))}</span>
+                <span className="text-tx">{fmtM2(m2Restante(b))}</span>
               </div>
-              <div className="num flex justify-between font-mono text-xs text-zinc-500">
+              <div className="num flex justify-between font-mono text-xs text-tx4">
                 <span>{brl(custoM2Bobina(b))}/m²</span>
                 <span>entrada {b.dataEntrada.split("-").reverse().join("/")}</span>
               </div>
@@ -357,7 +357,7 @@ function AbaBobinas() {
           );
         })}
       </div>
-      {lista.length === 0 && <p className="text-sm text-zinc-500">Nenhuma bobina com esse filtro.</p>}
+      {lista.length === 0 && <p className="text-sm text-tx4">Nenhuma bobina com esse filtro.</p>}
     </Cartao>
   );
 }
@@ -395,7 +395,7 @@ function AbaEntrada() {
       }}
     >
       <Cartao className="flex flex-col gap-5">
-        <h3 className="font-semibold text-white">Entrada de bobina (compra)</h3>
+        <h3 className="font-semibold text-tx">Entrada de bobina (compra)</h3>
         <div className="grid gap-4 sm:grid-cols-2">
           <Campo rotulo="Material" htmlFor="en-mat">
             <select id="en-mat" className="campo" value={materialId} onChange={(e) => trocarMaterial(e.target.value)}>
@@ -423,7 +423,7 @@ function AbaEntrada() {
         {ok && <p role="status" className="rounded-xl border border-esmeralda/30 bg-esmeralda/10 px-3 py-2 text-sm text-esmeralda-soft">{ok}</p>}
       </Cartao>
       <Cartao forte className="flex flex-col gap-3">
-        <h3 className="font-semibold text-white">Resumo da compra</h3>
+        <h3 className="font-semibold text-tx">Resumo da compra</h3>
         <dl className="flex flex-col gap-2.5 text-sm">
           {[
             ["Área por bobina", fmtM2(area)],
@@ -431,9 +431,9 @@ function AbaEntrada() {
             ["Total da compra", brl(custo * qtd)],
             ["Área total", fmtM2(Math.round(area * qtd * 100) / 100)],
           ].map(([k, v]) => (
-            <div key={k} className="flex justify-between gap-3 border-b border-white/[0.05] pb-2 last:border-0">
-              <dt className="text-zinc-400">{k}</dt>
-              <dd className="num font-mono font-semibold text-white">{v}</dd>
+            <div key={k} className="flex justify-between gap-3 border-b border-linha/[0.05] pb-2 last:border-0">
+              <dt className="text-tx3">{k}</dt>
+              <dd className="num font-mono font-semibold text-tx">{v}</dd>
             </div>
           ))}
         </dl>
@@ -454,19 +454,19 @@ function AbaFornecedores() {
         {fornecedores.map((x) => (
           <Cartao key={x.id} className="flex flex-col gap-2 p-4 sm:p-5">
             <div className="flex items-start justify-between gap-2">
-              <span className="font-semibold text-white">{x.nome}</span>
+              <span className="font-semibold text-tx">{x.nome}</span>
               <Selo>{x.prazoEntregaDias} dias</Selo>
             </div>
-            <span className="text-sm text-zinc-400">{x.marcas}</span>
-            <span className="num font-mono text-xs text-zinc-500">{[x.telefone, x.email, x.site].filter(Boolean).join(" · ")}</span>
-            <span className="text-xs text-zinc-500">{materiais.filter((m) => m.fornecedorId === x.id).length} materiais cadastrados</span>
-            {x.observacoes && <span className="text-xs text-zinc-400">{x.observacoes}</span>}
+            <span className="text-sm text-tx3">{x.marcas}</span>
+            <span className="num font-mono text-xs text-tx4">{[x.telefone, x.email, x.site].filter(Boolean).join(" · ")}</span>
+            <span className="text-xs text-tx4">{materiais.filter((m) => m.fornecedorId === x.id).length} materiais cadastrados</span>
+            {x.observacoes && <span className="text-xs text-tx3">{x.observacoes}</span>}
             <Button tamanho="sm" variante="fantasma" className="w-fit" onClick={() => setF(x)}>Editar</Button>
           </Cartao>
         ))}
       </div>
       <Cartao forte className="flex flex-col gap-4 self-start">
-        <h3 className="font-semibold text-white">{f.id ? "Editar fornecedor" : "Novo fornecedor"}</h3>
+        <h3 className="font-semibold text-tx">{f.id ? "Editar fornecedor" : "Novo fornecedor"}</h3>
         <Texto id="fo-nome" rotulo="Nome" valor={f.nome} onChange={(v) => setF({ ...f, nome: v })} />
         <Texto id="fo-cnpj" rotulo="CNPJ" valor={f.cnpj ?? ""} onChange={(v) => setF({ ...f, cnpj: v })} />
         <Texto id="fo-marcas" rotulo="Marcas / linhas" valor={f.marcas} onChange={(v) => setF({ ...f, marcas: v })} />
@@ -504,7 +504,7 @@ function AbaMateriais() {
       <Cartao className="overflow-x-auto">
         <table className="w-full min-w-[620px] text-sm">
           <thead>
-            <tr className="border-b border-white/[0.07] text-left">
+            <tr className="border-b border-linha/[0.07] text-left">
               {["Material", "Categoria", "Fornecedor", "Largura", "Mínimo", "Retalho mín.", ""].map((h) => (
                 <th key={h} className="rotulo px-3 py-3 font-semibold">{h}</th>
               ))}
@@ -512,13 +512,13 @@ function AbaMateriais() {
           </thead>
           <tbody>
             {materiais.map((x) => (
-              <tr key={x.id} className="border-b border-white/[0.05] last:border-0">
-                <td className="px-3 py-3 font-medium text-white">{x.nome}</td>
-                <td className="px-3 py-3 text-zinc-400">{nomeCategoria(x.categoria)}</td>
-                <td className="px-3 py-3 text-zinc-400">{fornecedores.find((f) => f.id === x.fornecedorId)?.nome}</td>
-                <td className="num px-3 py-3 font-mono text-zinc-300">{fmtM(x.larguraM)}</td>
-                <td className="num px-3 py-3 font-mono text-zinc-300">{fmtM2(x.estoqueMinimoM2)}</td>
-                <td className="num px-3 py-3 font-mono text-zinc-300">{fmtM(x.retalhoMinimoM)}</td>
+              <tr key={x.id} className="border-b border-linha/[0.05] last:border-0">
+                <td className="px-3 py-3 font-medium text-tx">{x.nome}</td>
+                <td className="px-3 py-3 text-tx3">{nomeCategoria(x.categoria)}</td>
+                <td className="px-3 py-3 text-tx3">{fornecedores.find((f) => f.id === x.fornecedorId)?.nome}</td>
+                <td className="num px-3 py-3 font-mono text-tx2">{fmtM(x.larguraM)}</td>
+                <td className="num px-3 py-3 font-mono text-tx2">{fmtM2(x.estoqueMinimoM2)}</td>
+                <td className="num px-3 py-3 font-mono text-tx2">{fmtM(x.retalhoMinimoM)}</td>
                 <td className="px-3 py-3"><Button tamanho="sm" variante="fantasma" onClick={() => setM(x)}>Editar</Button></td>
               </tr>
             ))}
@@ -526,7 +526,7 @@ function AbaMateriais() {
         </table>
       </Cartao>
       <Cartao forte className="flex flex-col gap-4 self-start">
-        <h3 className="font-semibold text-white">{m.id ? "Editar material" : "Novo material"}</h3>
+        <h3 className="font-semibold text-tx">{m.id ? "Editar material" : "Novo material"}</h3>
         <Texto id="ma-nome" rotulo="Nome" valor={m.nome} onChange={(v) => setM({ ...m, nome: v })} placeholder="Ex.: 3M Safety S70 incolor" />
         <Campo rotulo="Categoria" htmlFor="ma-cat">
           <select id="ma-cat" className="campo" value={m.categoria} onChange={(e) => setM({ ...m, categoria: e.target.value as CategoriaMaterial })}>
@@ -573,7 +573,7 @@ function AbaMovimentos() {
     <Cartao className="overflow-x-auto">
       <table className="w-full min-w-[860px] text-sm">
         <thead>
-          <tr className="border-b border-white/[0.07] text-left">
+          <tr className="border-b border-linha/[0.07] text-left">
             {["Data", "Tipo", "Bobina", "Material", "Metros", "Cortado", "Aplicado", "Perda", "Custo", "Referência"].map((h) => (
               <th key={h} className="rotulo px-3 py-3 font-semibold">{h}</th>
             ))}
@@ -581,17 +581,17 @@ function AbaMovimentos() {
         </thead>
         <tbody>
           {movimentos.map((m) => (
-            <tr key={m.id} className="border-b border-white/[0.05] last:border-0">
-              <td className="num px-3 py-3 font-mono text-zinc-400">{m.data.split("-").reverse().join("/")}</td>
+            <tr key={m.id} className="border-b border-linha/[0.05] last:border-0">
+              <td className="num px-3 py-3 font-mono text-tx3">{m.data.split("-").reverse().join("/")}</td>
               <td className="px-3 py-3"><Selo tom={tom[m.tipo]}>{m.tipo}</Selo></td>
-              <td className="num px-3 py-3 font-mono text-xs text-zinc-400">{bobinas.find((b) => b.id === m.bobinaId)?.codigo}</td>
-              <td className="px-3 py-3 text-zinc-300">{materiais.find((x) => x.id === m.materialId)?.nome}</td>
+              <td className="num px-3 py-3 font-mono text-xs text-tx3">{bobinas.find((b) => b.id === m.bobinaId)?.codigo}</td>
+              <td className="px-3 py-3 text-tx2">{materiais.find((x) => x.id === m.materialId)?.nome}</td>
               <td className={cn("num px-3 py-3 font-mono", m.comprimentoM < 0 ? "text-perigo" : "text-esmeralda-soft")}>{m.comprimentoM > 0 ? "+" : ""}{fmtM(m.comprimentoM)}</td>
-              <td className="num px-3 py-3 font-mono text-zinc-300">{m.m2Cortado ? fmtM2(m.m2Cortado) : "–"}</td>
-              <td className="num px-3 py-3 font-mono text-zinc-300">{m.m2Aplicado ? fmtM2(m.m2Aplicado) : "–"}</td>
-              <td className="num px-3 py-3 font-mono text-zinc-300">{m.m2Perda ? fmtM2(m.m2Perda) : "–"}</td>
-              <td className="num px-3 py-3 font-mono text-white">{brl(m.custo)}</td>
-              <td className="px-3 py-3 text-zinc-400">{m.referencia ?? m.observacao ?? "–"}</td>
+              <td className="num px-3 py-3 font-mono text-tx2">{m.m2Cortado ? fmtM2(m.m2Cortado) : "–"}</td>
+              <td className="num px-3 py-3 font-mono text-tx2">{m.m2Aplicado ? fmtM2(m.m2Aplicado) : "–"}</td>
+              <td className="num px-3 py-3 font-mono text-tx2">{m.m2Perda ? fmtM2(m.m2Perda) : "–"}</td>
+              <td className="num px-3 py-3 font-mono text-tx">{brl(m.custo)}</td>
+              <td className="px-3 py-3 text-tx3">{m.referencia ?? m.observacao ?? "–"}</td>
             </tr>
           ))}
         </tbody>
@@ -617,7 +617,7 @@ function AbaPrecos() {
   return (
     <div className="flex flex-col gap-5">
       <Cartao className="flex flex-col gap-4">
-        <h3 className="font-semibold text-white">Premissas</h3>
+        <h3 className="font-semibold text-tx">Premissas</h3>
         <div className="grid gap-4 sm:grid-cols-3 lg:grid-cols-5">
           <Numero id="pr-mo" rotulo="Mão de obra" prefixo="R$" sufixo="/m²" passo={1} valor={p.maoDeObraM2} onChange={(n) => setP({ ...p, maoDeObraM2: n })} />
           <Numero id="pr-imp" rotulo="Impostos" sufixo="%" passo={0.5} valor={p.impostosPct} onChange={(n) => setP({ ...p, impostosPct: n })} />
@@ -625,14 +625,14 @@ function AbaPrecos() {
           <Numero id="pr-mar" rotulo="Margem" sufixo="%" passo={1} valor={p.margemPct} onChange={(n) => setP({ ...p, margemPct: n })} />
           <Numero id="pr-car" rotulo="Taxa do cartão 10x" sufixo="%" passo={0.5} valor={p.taxaCartaoPct} onChange={(n) => setP({ ...p, taxaCartaoPct: n })} />
         </div>
-        <p className="text-xs text-zinc-500">
+        <p className="text-xs text-tx4">
           Preço = (custo médio do material × (1 + perda da categoria) + mão de obra) ÷ (1 − impostos − comissão − margem). No cartão, a taxa também sai da conta. O custo médio vem das bobinas em estoque.
         </p>
       </Cartao>
       <Cartao className="overflow-x-auto">
         <table className="w-full min-w-[720px] text-sm">
           <thead>
-            <tr className="border-b border-white/[0.07] text-left">
+            <tr className="border-b border-linha/[0.07] text-left">
               {["Material", "Custo médio", "Perda", "Custo direto", "Preço PIX", "Preço cartão"].map((h) => (
                 <th key={h} className="rotulo px-3 py-3 font-semibold">{h}</th>
               ))}
@@ -640,13 +640,13 @@ function AbaPrecos() {
           </thead>
           <tbody>
             {linhas.map(({ m, custo, preco }) => (
-              <tr key={m.id} className="border-b border-white/[0.05] last:border-0">
-                <td className="px-3 py-3 font-medium text-white">{m.nome}</td>
-                <td className="num px-3 py-3 font-mono text-zinc-300">{custo ? `${brl(custo)}/m²` : "sem estoque"}</td>
-                <td className="num px-3 py-3 font-mono text-zinc-400">{perdaPadrao(m.categoria)}%</td>
-                <td className="num px-3 py-3 font-mono text-zinc-300">{custo ? `${brl(preco.custoDireto)}/m²` : "–"}</td>
+              <tr key={m.id} className="border-b border-linha/[0.05] last:border-0">
+                <td className="px-3 py-3 font-medium text-tx">{m.nome}</td>
+                <td className="num px-3 py-3 font-mono text-tx2">{custo ? `${brl(custo)}/m²` : "sem estoque"}</td>
+                <td className="num px-3 py-3 font-mono text-tx3">{perdaPadrao(m.categoria)}%</td>
+                <td className="num px-3 py-3 font-mono text-tx2">{custo ? `${brl(preco.custoDireto)}/m²` : "–"}</td>
                 <td className="num px-3 py-3 font-mono font-semibold text-neon">{custo ? `${brl(preco.pix)}/m²` : "–"}</td>
-                <td className="num px-3 py-3 font-mono text-white">{custo ? `${brl(preco.cartao)}/m²` : "–"}</td>
+                <td className="num px-3 py-3 font-mono text-tx">{custo ? `${brl(preco.cartao)}/m²` : "–"}</td>
               </tr>
             ))}
           </tbody>
@@ -671,12 +671,12 @@ function PainelEstoqueInterno() {
     <Tabs.Root value={aba} onValueChange={setAba} className="flex flex-col gap-6">
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="-mx-4 w-[calc(100%+2rem)] overflow-x-auto px-4 sem-barra sm:mx-0 sm:w-auto sm:max-w-full sm:px-0">
-          <Tabs.List className="inline-flex min-w-max gap-1 rounded-3xl border border-white/[0.08] bg-white/[0.03] p-1.5" aria-label="Seções do estoque">
+          <Tabs.List className="inline-flex min-w-max gap-1 rounded-3xl border border-linha/[0.08] bg-linha/[0.03] p-1.5" aria-label="Seções do estoque">
             {ABAS.map((a) => (
               <Tabs.Trigger
                 key={a.id}
                 value={a.id}
-                className="rounded-2xl px-3.5 py-2 text-sm font-medium text-zinc-400 transition-[background-color,color] duration-150 hover:text-white data-[state=active]:bg-neon/[0.12] data-[state=active]:text-neon"
+                className="rounded-2xl px-3.5 py-2 text-sm font-medium text-tx3 transition-[background-color,color] duration-150 hover:text-tx data-[state=active]:bg-neon/[0.12] data-[state=active]:text-neon"
               >
                 {a.rotulo}
               </Tabs.Trigger>

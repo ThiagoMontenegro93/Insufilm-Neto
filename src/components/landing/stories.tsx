@@ -124,7 +124,7 @@ export function StoriesPilares() {
                 <Icone className={cn("h-5 w-5", p.cor)} strokeWidth={1.3} aria-hidden />
               </div>
               <div className="relative flex flex-col gap-4">
-                <h3 className="text-balance font-serif text-[2.1rem] font-light leading-[1.02] text-tx">{p.titulo}</h3>
+                <h3 className="text-balance font-sans tracking-[-0.02em] text-[1.68rem] font-bold leading-[1.02] text-tx">{p.titulo}</h3>
                 <p className="text-[15px] leading-relaxed text-tx2">{p.texto}</p>
                 <p className={cn("num text-[12px] uppercase tracking-[0.18em]", p.cor)}>{p.dado}</p>
                 <Link href={p.href} className="group mt-2 inline-flex w-fit items-center gap-1.5 text-[10.5px] font-medium uppercase tracking-[0.24em] text-ouro">

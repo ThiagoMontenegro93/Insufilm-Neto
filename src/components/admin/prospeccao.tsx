@@ -68,7 +68,7 @@ export function PainelProspeccao() {
         <Cartao className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
             <Radar className="h-5 w-5 text-neon" aria-hidden />
-            <h3 className="font-semibold text-white">Captação por área</h3>
+            <h3 className="font-semibold text-tx">Captação por área</h3>
           </div>
           <div className="grid gap-3 sm:grid-cols-2">
             <Campo rotulo="Área / bairro" htmlFor="pros-area">
@@ -92,7 +92,7 @@ export function PainelProspeccao() {
         <Cartao className="flex flex-col gap-4">
           <div className="flex items-center gap-2">
             <ScanSearch className="h-5 w-5 text-neon" aria-hidden />
-            <h3 className="font-semibold text-white">Captação por CNPJ</h3>
+            <h3 className="font-semibold text-tx">Captação por CNPJ</h3>
           </div>
           <Campo rotulo="CNPJs, um por linha" htmlFor="pros-cnpj">
             <textarea id="pros-cnpj" rows={3} className="campo resize-none font-mono text-sm" placeholder="12.345.678/0001-90" value={cnpjs} onChange={(e) => setCnpjs(e.target.value)} />
@@ -109,9 +109,9 @@ export function PainelProspeccao() {
           return (
             <Cartao key={v.titulo} className={cn("flex flex-col gap-3 p-5", i === 3 && "border-esmeralda/30")}>
               <Icone className={cn("h-5 w-5", i === 3 ? "text-esmeralda" : "text-neon")} aria-hidden />
-              <span className="font-semibold text-white">{v.titulo}</span>
-              <p className="text-sm leading-relaxed text-zinc-400">{v.texto}</p>
-              <span className="mt-auto font-mono text-[11px] text-zinc-500">{v.pontos}</span>
+              <span className="font-semibold text-tx">{v.titulo}</span>
+              <p className="text-sm leading-relaxed text-tx3">{v.texto}</p>
+              <span className="mt-auto font-mono text-[11px] text-tx4">{v.pontos}</span>
             </Cartao>
           );
         })}
@@ -119,14 +119,14 @@ export function PainelProspeccao() {
 
       <Cartao className="flex flex-col gap-4 p-0 sm:p-0">
         <div className="flex flex-wrap items-center justify-between gap-3 px-5 pt-5 sm:px-6">
-          <h3 className="font-semibold text-white">Leads validados</h3>
-          <span className="font-mono text-xs text-zinc-500">mínimo para disparo: {minimo}/100</span>
+          <h3 className="font-semibold text-tx">Leads validados</h3>
+          <span className="font-mono text-xs text-tx4">mínimo para disparo: {minimo}/100</span>
         </div>
         {aviso && <p className="mx-5 rounded-2xl border border-alerta/20 bg-alerta/[0.06] px-4 py-2.5 text-sm text-alerta sm:mx-6">{aviso}</p>}
         <div className="overflow-x-auto">
           <table className="w-full min-w-[920px] text-left text-sm">
             <thead>
-              <tr className="border-b border-white/[0.06] text-zinc-500">
+              <tr className="border-b border-linha/[0.06] text-tx4">
                 {["Empresa", "Contatos captados", "Google", "Dupla validação", "Score", "Disparo"].map((h) => (
                   <th key={h} className="rotulo px-5 py-3 font-normal first:pl-6">
                     {h}
@@ -139,29 +139,29 @@ export function PainelProspeccao() {
                 const p = pontuarLead(l);
                 const ok = podeProspectar(l, minimo);
                 return (
-                  <tr key={l.id} className="border-b border-white/[0.04] align-top last:border-0">
+                  <tr key={l.id} className="border-b border-linha/[0.04] align-top last:border-0">
                     <td className="max-w-[240px] px-5 py-4 pl-6">
-                      <p className="font-medium text-white">{l.empresa}</p>
-                      <p className="text-xs text-zinc-500">{l.endereco}</p>
+                      <p className="font-medium text-tx">{l.empresa}</p>
+                      <p className="text-xs text-tx4">{l.endereco}</p>
                       {l.site && <p className="mt-1 font-mono text-xs text-neon/80">{l.site}</p>}
-                      {l.cnpj && <p className="mt-1 font-mono text-xs text-zinc-500">{l.cnpj}</p>}
+                      {l.cnpj && <p className="mt-1 font-mono text-xs text-tx4">{l.cnpj}</p>}
                     </td>
-                    <td className="px-5 py-4 font-mono text-xs text-zinc-300">
+                    <td className="px-5 py-4 font-mono text-xs text-tx2">
                       <div className="flex flex-col gap-1">
                         {l.email && <span>{l.email}</span>}
                         {l.whatsapp && <span>{l.whatsapp}</span>}
                         {l.instagram && <span>@{l.instagram}</span>}
-                        {!l.email && !l.whatsapp && !l.instagram && <span className="text-zinc-600">nenhum</span>}
+                        {!l.email && !l.whatsapp && !l.instagram && <span className="text-tx4">nenhum</span>}
                       </div>
                     </td>
                     <td className="px-5 py-4">
                       {l.google?.encontrado ? (
-                        <span className="num flex items-center gap-1 text-zinc-200">
+                        <span className="num flex items-center gap-1 text-tx">
                           <Star className="h-3.5 w-3.5 fill-alerta text-alerta" aria-hidden />
-                          {l.google.avaliacao?.toFixed(1).replace(".", ",")} <span className="text-xs text-zinc-500">({l.google.totalAvaliacoes})</span>
+                          {l.google.avaliacao?.toFixed(1).replace(".", ",")} <span className="text-xs text-tx4">({l.google.totalAvaliacoes})</span>
                         </span>
                       ) : (
-                        <span className="text-zinc-600">—</span>
+                        <span className="text-tx4">—</span>
                       )}
                     </td>
                     <td className="px-5 py-4">
@@ -170,7 +170,7 @@ export function PainelProspeccao() {
                           { k: "Google Maps", v: p.validadoGoogle },
                           { k: "Site oficial", v: p.validadoSite },
                         ].map((x) => (
-                          <span key={x.k} className={cn("flex items-center gap-1.5", x.v ? "text-esmeralda-soft" : "text-zinc-600")}>
+                          <span key={x.k} className={cn("flex items-center gap-1.5", x.v ? "text-esmeralda-soft" : "text-tx4")}>
                             {x.v ? <Check className="h-3.5 w-3.5" /> : <X className="h-3.5 w-3.5" />} {x.k}
                           </span>
                         ))}
@@ -180,7 +180,7 @@ export function PainelProspeccao() {
                       <Selo tom={p.total >= minimo ? "esmeralda" : "perigo"} title={p.detalhes.map((d) => `${d.rotulo} +${d.pontos}`).join("\n")}>
                         {p.total}/100
                       </Selo>
-                      {l.optOut && <p className="mt-1.5 text-xs text-zinc-500">opt-out</p>}
+                      {l.optOut && <p className="mt-1.5 text-xs text-tx4">opt-out</p>}
                     </td>
                     <td className="px-5 py-4">
                       <div className="flex gap-1.5">
@@ -200,7 +200,7 @@ export function PainelProspeccao() {
                           )}
                         </Button>
                       </div>
-                      {!ok.ok && <p className="mt-1.5 max-w-[150px] text-xs text-zinc-500">{ok.motivo}</p>}
+                      {!ok.ok && <p className="mt-1.5 max-w-[150px] text-xs text-tx4">{ok.motivo}</p>}
                     </td>
                   </tr>
                 );
@@ -214,15 +214,15 @@ export function PainelProspeccao() {
         <Cartao forte className="flex flex-col gap-4 border-esmeralda/30">
           <div className="flex items-center justify-between">
             <span className="rotulo">Prévia da mensagem · {previa.empresa}</span>
-            <button className="text-zinc-500 hover:text-white" onClick={() => setPrevia(null)} aria-label="Fechar prévia">
+            <button className="text-tx4 hover:text-tx" onClick={() => setPrevia(null)} aria-label="Fechar prévia">
               <X className="h-4 w-4" />
             </button>
           </div>
-          <p className="rounded-2xl bg-zinc-950/70 p-4 text-[15px] leading-relaxed text-zinc-200">
+          <p className="rounded-2xl bg-zinc-950/70 p-4 text-[15px] leading-relaxed text-tx">
             {preencherMensagem(modelo, previa)}
-            <span className="mt-3 block text-xs text-zinc-500">Responda SAIR para não receber mais mensagens.</span>
+            <span className="mt-3 block text-xs text-tx4">Responda SAIR para não receber mais mensagens.</span>
           </p>
-          <p className="text-sm text-zinc-400">
+          <p className="text-sm text-tx3">
             O envio sai pela WhatsApp Cloud API como mensagem modelo aprovada. Status atual:{" "}
             <span className="font-mono text-alerta">{config.apis.find((a) => a.id === "whatsapp-cloud")?.status}</span>.
           </p>
@@ -233,10 +233,10 @@ export function PainelProspeccao() {
         <span className="rotulo">Fontes e integrações usadas</span>
         <div className="grid gap-2 sm:grid-cols-2 lg:grid-cols-3">
           {FONTES.map((f) => (
-            <div key={f.nome} className="flex flex-col gap-1 rounded-2xl border border-white/[0.06] bg-zinc-950/50 p-4 font-mono">
-              <span className="text-sm text-white">{f.nome}</span>
+            <div key={f.nome} className="flex flex-col gap-1 rounded-2xl border border-linha/[0.06] bg-zinc-950/50 p-4 font-mono">
+              <span className="text-sm text-tx">{f.nome}</span>
               <span className="text-[11px] text-neon/80">{f.origem}</span>
-              <span className="text-[11px] text-zinc-500">{f.uso}</span>
+              <span className="text-[11px] text-tx4">{f.uso}</span>
             </div>
           ))}
         </div>

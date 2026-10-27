@@ -16,7 +16,7 @@ export default function PaginaPelicula() {
       <div className="mx-auto flex max-w-7xl flex-col gap-14 px-4 pb-20 sm:px-6">
         <CalcPelicula />
         <section className="flex flex-col gap-6">
-          <h2 className="text-2xl font-bold tracking-tight text-white">Da jateada à alta rigidez</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-tx">Da jateada à alta rigidez</h2>
           <div className="max-w-md"><GaleriaReels apenas={["pelicula"]} /></div>
         </section>
       </div>

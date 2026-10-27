@@ -8,11 +8,11 @@ const variantes = cva(
   {
     variants: {
       variante: {
-        neon: "bg-gradient-to-b from-ouro-soft via-ouro to-ouro-deep text-black hover:brightness-110",
+        neon: "bg-gradient-to-b from-[#2f74ea] to-[#1450c4] text-white shadow-[0_12px_28px_-14px_rgba(26,95,216,.8)] hover:brightness-110",
         esmeralda: "bg-esmeralda text-zinc-950 shadow-esmeralda hover:brightness-110",
         vidro: "border border-white/25 bg-black/20 text-white backdrop-blur-md hover:border-white/50 hover:bg-white/[0.06]",
         contorno: "border border-neon/40 text-neon hover:bg-neon/10",
-        fantasma: "text-zinc-300 hover:bg-white/[0.06] hover:text-white",
+        fantasma: "text-tx2 hover:bg-linha/[0.06] hover:text-tx",
         perigo: "border border-perigo/40 text-perigo hover:bg-perigo/10",
       },
       tamanho: {

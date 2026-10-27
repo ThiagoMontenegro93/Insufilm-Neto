@@ -63,7 +63,7 @@ function NumeroCampo({ id, rotulo, valor, onChange, sufixo, prefixo, passo = 1, 
   return (
     <Campo rotulo={rotulo} htmlFor={id} dica={dica}>
       <div className="relative">
-        {prefixo && <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-mono text-sm text-zinc-500">{prefixo}</span>}
+        {prefixo && <span className="pointer-events-none absolute left-4 top-1/2 -translate-y-1/2 font-mono text-sm text-tx4">{prefixo}</span>}
         <input
           id={id}
           type="number"
@@ -74,7 +74,7 @@ function NumeroCampo({ id, rotulo, valor, onChange, sufixo, prefixo, passo = 1, 
           onChange={(e) => onChange(Number(e.target.value))}
           className={cn("campo num font-mono", prefixo && "pl-11", sufixo && "pr-12")}
         />
-        {sufixo && <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-sm text-zinc-500">{sufixo}</span>}
+        {sufixo && <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-sm text-tx4">{sufixo}</span>}
       </div>
     </Campo>
   );
@@ -90,7 +90,7 @@ function AbaGeral() {
   return (
     <div className="grid gap-5 lg:grid-cols-[1.1fr_0.9fr]">
       <Cartao className="flex flex-col gap-5">
-        <h3 className="text-lg font-semibold text-white">Taxas da plataforma</h3>
+        <h3 className="text-lg font-semibold text-tx">Taxas da plataforma</h3>
         <div className="grid gap-4 sm:grid-cols-2">
           <NumeroCampo id="tx-plat" rotulo="Sua taxa (dono)" sufixo="%" valor={t.plataformaPct} onChange={(n) => setRascunho({ ...t, plataformaPct: n })} dica={config.taxas.plataformaPct !== t.plataformaPct ? `Era ${config.taxas.plataformaPct}%` : "Era 20%, aumentou para 30%"} />
           <NumeroCampo id="tx-ind" rotulo="Comissão do indicador" sufixo="%" valor={t.indicadorPct} onChange={(n) => setRascunho({ ...t, indicadorPct: n })} dica="Fixa por serviço fechado" />
@@ -107,32 +107,32 @@ function AbaGeral() {
 
       <Cartao forte className="flex flex-col gap-5">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-semibold text-white">Simulação de split</h3>
+          <h3 className="text-lg font-semibold text-tx">Simulação de split</h3>
           <Selo tom="neon">ao vivo</Selo>
         </div>
         <NumeroCampo id="sim-valor" rotulo="Valor do serviço" prefixo="R$" passo={10} valor={simulado} onChange={setSimulado} />
         <dl className="flex flex-col gap-3">
           {[
-            { k: `Desconto cupom ${t.descontoCupomPct}%`, v: -s.desconto, c: "text-zinc-400", p: 0 },
+            { k: `Desconto cupom ${t.descontoCupomPct}%`, v: -s.desconto, c: "text-tx3", p: 0 },
             { k: `Você ${t.plataformaPct}%`, v: s.plataforma, c: "text-neon", p: t.plataformaPct },
             { k: `Indicador ${t.indicadorPct}%`, v: s.indicador, c: "text-esmeralda-soft", p: t.indicadorPct },
-            { k: `Locatário ${Math.max(0, locatarioPct)}%`, v: s.locatario, c: "text-white", p: Math.max(0, locatarioPct) },
+            { k: `Locatário ${Math.max(0, locatarioPct)}%`, v: s.locatario, c: "text-tx", p: Math.max(0, locatarioPct) },
           ].map((l) => (
             <div key={l.k} className="flex flex-col gap-1.5">
               <div className="flex items-baseline justify-between">
-                <dt className="text-sm text-zinc-400">{l.k}</dt>
+                <dt className="text-sm text-tx3">{l.k}</dt>
                 <dd className={cn("num font-mono font-semibold", l.c)}>{brl(l.v)}</dd>
               </div>
               {l.p > 0 && (
-                <div className="h-1 overflow-hidden rounded-full bg-white/[0.06]">
+                <div className="h-1 overflow-hidden rounded-full bg-linha/[0.06]">
                   <div className={cn("h-full rounded-full", l.c === "text-neon" ? "bg-neon" : l.c === "text-esmeralda-soft" ? "bg-esmeralda" : "bg-zinc-300")} style={{ width: `${l.p}%` }} />
                 </div>
               )}
             </div>
           ))}
         </dl>
-        <p className="text-xs text-zinc-500">
-          Cada alteração salva gera <span className="font-mono text-zinc-300">CONFIG_PLATAFORMA_ALTERADA</span> com snapshot JSON em{" "}
+        <p className="text-xs text-tx4">
+          Cada alteração salva gera <span className="font-mono text-tx2">CONFIG_PLATAFORMA_ALTERADA</span> com snapshot JSON em{" "}
           <Link className="text-neon underline-offset-4 hover:underline" href="/admin/auditoria">
             /admin/auditoria
           </Link>
@@ -159,13 +159,13 @@ function AbaServicos() {
     <div className="flex flex-col gap-5">
       <div className="grid gap-5 lg:grid-cols-3">
         <Cartao className="flex flex-col gap-4">
-          <h3 className="font-semibold text-white">Película de segurança</h3>
+          <h3 className="font-semibold text-tx">Película de segurança</h3>
           {s.peliculaSeguranca.map((i) => (
             <NumeroCampo key={i.id} id={`pel-${i.id}`} rotulo={`${i.nome} · m²`} prefixo="R$" valor={i.preco} onChange={(n) => editarLista("peliculaSeguranca", i.id, n)} />
           ))}
         </Cartao>
         <Cartao className="flex flex-col gap-4">
-          <h3 className="font-semibold text-white">Envelopamento automotivo</h3>
+          <h3 className="font-semibold text-tx">Envelopamento automotivo</h3>
           {s.envelopamento.marcas.map((m) => (
             <NumeroCampo
               key={m.id}
@@ -193,7 +193,7 @@ function AbaServicos() {
           <NumeroCampo id="env-media" rotulo="Total médio de um carro" sufixo="m²" valor={s.envelopamento.m2MedioTotal} onChange={(n) => setRascunho({ ...s, envelopamento: { ...s.envelopamento, m2MedioTotal: n } })} />
         </Cartao>
         <Cartao className="flex flex-col gap-4">
-          <h3 className="font-semibold text-white">Arquitetônico</h3>
+          <h3 className="font-semibold text-tx">Arquitetônico</h3>
           {s.arquitetonico.map((i) => (
             <NumeroCampo key={i.id} id={`arq-${i.id}`} rotulo={`${i.nome} · ${i.unidade === "m2" ? "m²" : "fixo"}`} prefixo="R$" valor={i.preco} onChange={(n) => editarLista("arquitetonico", i.id, n)} />
           ))}
@@ -202,8 +202,8 @@ function AbaServicos() {
 
       <Cartao className="flex flex-col gap-4">
         <div className="flex flex-wrap items-center justify-between gap-2">
-          <h3 className="font-semibold text-white">Antivandalismo · produto principal</h3>
-          <span className="text-xs text-zinc-500">Preço à vista em 0 mostra &quot;sob consulta&quot; no site</span>
+          <h3 className="font-semibold text-tx">Antivandalismo · produto principal</h3>
+          <span className="text-xs text-tx4">Preço à vista em 0 mostra &quot;sob consulta&quot; no site</span>
         </div>
         <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
           {s.antivandalismo.map((l) => {
@@ -211,8 +211,8 @@ function AbaServicos() {
               setRascunho({ ...s, antivandalismo: s.antivandalismo.map((x) => (x.id === l.id ? { ...x, [campo]: n } : x)) });
             const un = l.unidade === "m2" ? "m²" : "carro";
             return (
-              <div key={l.id} className="flex flex-col gap-3 rounded-2xl border border-white/[0.08] p-4">
-                <span className="text-sm font-medium text-white">{l.nome}</span>
+              <div key={l.id} className="flex flex-col gap-3 rounded-2xl border border-linha/[0.08] p-4">
+                <span className="text-sm font-medium text-tx">{l.nome}</span>
                 <NumeroCampo id={`av-${l.id}-vista`} rotulo={`À vista (PIX) · ${un}`} prefixo="R$" valor={l.precoVista} onChange={(n) => editar("precoVista", n)} />
                 <NumeroCampo id={`av-${l.id}-cartao`} rotulo={`No cartão · ${un}`} prefixo="R$" valor={l.precoCartao} onChange={(n) => editar("precoCartao", n)} />
                 <NumeroCampo id={`av-${l.id}-parc`} rotulo="Parcelas no cartão" sufixo="x" valor={l.parcelas} onChange={(n) => editar("parcelas", n)} />
@@ -223,27 +223,27 @@ function AbaServicos() {
       </Cartao>
 
       <Cartao forte className="flex flex-col gap-4">
-        <h3 className="font-semibold text-white">Exemplos com os preços acima</h3>
+        <h3 className="font-semibold text-tx">Exemplos com os preços acima</h3>
         <div className="grid gap-3 md:grid-cols-3">
           {[
             { t: `Civic total fosco 3M`, conta: `${civic.areaM2} m² × ${brl(civic.valorM2)}`, v: civic.total, st: "ORCAMENTO" },
             { t: "Geladeira madeira 4,5 m²", conta: "valor fixo", v: gel, st: "ORCAMENTO" },
             { t: "Parede 3 × 2 m", conta: `6 m² × ${brl(s.arquitetonico.find((a) => a.id === "parede")!.preco)}`, v: parede, st: "ORCAMENTO" },
           ].map((e) => (
-            <div key={e.t} className="flex flex-col gap-2 rounded-2xl border border-white/[0.08] bg-zinc-950/60 p-4">
+            <div key={e.t} className="flex flex-col gap-2 rounded-2xl border border-linha/[0.08] bg-zinc-950/60 p-4">
               <div className="flex items-center justify-between gap-2">
-                <span className="text-sm font-medium text-white">{e.t}</span>
+                <span className="text-sm font-medium text-tx">{e.t}</span>
                 <Selo tom="alerta">{e.st}</Selo>
               </div>
-              <span className="num font-mono text-xs text-zinc-500">{e.conta}</span>
-              <span className="num text-2xl font-bold text-white">{brl(e.v)}</span>
-              <span className="num font-mono text-xs text-zinc-400">
+              <span className="num font-mono text-xs text-tx4">{e.conta}</span>
+              <span className="num text-2xl font-bold text-tx">{brl(e.v)}</span>
+              <span className="num font-mono text-xs text-tx3">
                 Você <span className="text-neon">{brl(sp(e.v).plataforma)}</span> · Indicador <span className="text-esmeralda-soft">{brl(sp(e.v).indicador)}</span>
               </span>
             </div>
           ))}
         </div>
-        <p className="text-xs text-zinc-500">Esses preços alimentam /pelicula, /envelopamento e /arquitetonico assim que você salva.</p>
+        <p className="text-xs text-tx4">Esses preços alimentam /pelicula, /envelopamento e /arquitetonico assim que você salva.</p>
       </Cartao>
       <BarraSalvar sujo={sujo} onSalvar={() => salvar("Tabela de preços de serviços alterada")} onDescartar={descartar} />
     </div>
@@ -260,15 +260,15 @@ function AbaFinanceiro() {
         <NumeroCampo id="fin-idade" rotulo="Idade mínima" sufixo="anos" valor={f.idadeMinima} onChange={(n) => setRascunho({ ...f, idadeMinima: n })} />
         <NumeroCampo id="fin-auto" rotulo="Aprovação automática até" prefixo="R$" valor={f.autoAprovacaoAte} onChange={(n) => setRascunho({ ...f, autoAprovacaoAte: n })} dica="Acima disso, aprovação manual" />
       </div>
-      <div className="flex flex-col divide-y divide-white/[0.06] rounded-2xl border border-white/[0.08]">
+      <div className="flex flex-col divide-y divide-white/[0.06] rounded-2xl border border-linha/[0.08]">
         {[
           { id: "fin-dupla", k: "duplaConfirmacaoPix" as const, t: "Dupla confirmação PIX", d: "O parceiro revisa valor e chave e confirma de novo antes de enviar." },
           { id: "fin-kyc", k: "kycObrigatorio" as const, t: "KYC selfie + CPF antes do primeiro saque", d: "Documento e selfie ficam em bucket privado, com acesso auditado." },
         ].map((o) => (
           <div key={o.k} className="flex items-center justify-between gap-4 p-4">
             <div className="flex min-w-0 flex-col gap-1">
-              <span className="font-medium text-white">{o.t}</span>
-              <span className="text-sm text-zinc-500">{o.d}</span>
+              <span className="font-medium text-tx">{o.t}</span>
+              <span className="text-sm text-tx4">{o.d}</span>
             </div>
             <div className="flex items-center gap-3">
               <Selo tom={f[o.k] ? "esmeralda" : "neutro"}>{f[o.k] ? "ATIVO" : "INATIVO"}</Selo>
@@ -300,13 +300,13 @@ function AbaApis() {
           <Cartao key={a.id} className="flex flex-col gap-4">
             <div className="flex items-start justify-between gap-3">
               <div className="flex min-w-0 flex-col gap-1">
-                <span className="font-semibold text-white">{a.nome}</span>
-                <span className="text-sm text-zinc-500">{a.finalidade}</span>
+                <span className="font-semibold text-tx">{a.nome}</span>
+                <span className="text-sm text-tx4">{a.finalidade}</span>
               </div>
               <Selo tom={a.status === "OK" ? "esmeralda" : "alerta"}>{a.status === "OK" ? "OK" : "NÃO CONFIGURADO"}</Selo>
             </div>
-            <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-zinc-500">
-              {a.envVar ? <span className="rounded-lg bg-white/[0.05] px-2 py-1 text-zinc-300">{a.envVar}</span> : <span>sem chave (API pública)</span>}
+            <div className="flex flex-wrap items-center gap-2 font-mono text-xs text-tx4">
+              {a.envVar ? <span className="rounded-lg bg-linha/[0.05] px-2 py-1 text-tx2">{a.envVar}</span> : <span>sem chave (API pública)</span>}
               {a.chaveMascarada && a.envVar && <span>{a.chaveMascarada}</span>}
             </div>
             {a.envVar && (
@@ -331,7 +331,7 @@ function AbaApis() {
           </Cartao>
         ))}
       </div>
-      <p className="text-xs text-zinc-500">Em produção, as chaves ficam em variáveis de ambiente (Vercel) ou criptografadas no banco. O painel nunca mostra a chave inteira.</p>
+      <p className="text-xs text-tx4">Em produção, as chaves ficam em variáveis de ambiente (Vercel) ou criptografadas no banco. O painel nunca mostra a chave inteira.</p>
       <BarraSalvar sujo={sujo} onSalvar={() => salvar("Status de integrações alterado")} onDescartar={descartar} />
     </div>
   );
@@ -346,7 +346,7 @@ function AbaNichos() {
         {n.map((x) => (
           <Cartao key={x.id} className={cn("flex flex-col gap-3 transition-opacity", !x.ativo && "opacity-60")}>
             <div className="flex items-center justify-between gap-3">
-              <span className="font-semibold text-white">{x.nome}</span>
+              <span className="font-semibold text-tx">{x.nome}</span>
               <Interruptor id={`nicho-${x.id}`} rotulo={`Ativar ${x.nome}`} ligado={x.ativo} onChange={(v) => setRascunho(n.map((y) => (y.id === x.id ? { ...y, ativo: v } : y)))} />
             </div>
             <label className="rotulo" htmlFor={`msg-${x.id}`}>
@@ -362,7 +362,7 @@ function AbaNichos() {
           </Cartao>
         ))}
       </div>
-      <p className="text-xs text-zinc-500">Variáveis: {"{empresa}"} e {"{avaliacao}"}. No WhatsApp Cloud API a mensagem precisa ser um modelo aprovado pela Meta.</p>
+      <p className="text-xs text-tx4">Variáveis: {"{empresa}"} e {"{avaliacao}"}. No WhatsApp Cloud API a mensagem precisa ser um modelo aprovado pela Meta.</p>
       <BarraSalvar sujo={sujo} onSalvar={() => salvar("Nichos de prospecção alterados")} onDescartar={descartar} />
     </div>
   );
@@ -425,8 +425,8 @@ function AbaModulos() {
               <Selo tom={x.ativo ? "neon" : "neutro"}>{x.ativo ? "Ativo" : "Novo"}</Selo>
               <Interruptor id={`mod-${x.id}`} rotulo={`Ativar ${x.nome}`} ligado={x.ativo} onChange={(v) => setRascunho(m.map((y) => (y.id === x.id ? { ...y, ativo: v } : y)))} />
             </div>
-            <span className="font-semibold leading-tight text-white">{x.nome}</span>
-            <span className="text-sm text-zinc-500">{x.descricao}</span>
+            <span className="font-semibold leading-tight text-tx">{x.nome}</span>
+            <span className="text-sm text-tx4">{x.descricao}</span>
           </Cartao>
         ))}
       </div>
@@ -441,16 +441,16 @@ export function CreatorHub() {
   return (
     <Tabs.Root value={aba} onValueChange={setAba} className="flex flex-col gap-6">
       <div className="-mx-4 overflow-x-auto px-4 sem-barra sm:mx-0 sm:px-0">
-        <Tabs.List className="inline-flex min-w-max gap-1 rounded-3xl border border-white/[0.08] bg-white/[0.03] p-1.5" aria-label="Seções do Creator Hub">
+        <Tabs.List className="inline-flex min-w-max gap-1 rounded-3xl border border-linha/[0.08] bg-linha/[0.03] p-1.5" aria-label="Seções do Creator Hub">
           {ABAS.map((a) => (
             <Tabs.Trigger
               key={a.id}
               value={a.id}
-              className="flex items-center gap-2 rounded-2xl px-3.5 py-2 text-sm font-medium text-zinc-400 transition-[background-color,color,box-shadow] duration-150 hover:text-white data-[state=active]:bg-neon/[0.12] data-[state=active]:text-neon data-[state=active]:shadow-[inset_0_0_0_1px_rgba(212,175,106,.35)]"
+              className="flex items-center gap-2 rounded-2xl px-3.5 py-2 text-sm font-medium text-tx3 transition-[background-color,color,box-shadow] duration-150 hover:text-tx data-[state=active]:bg-neon/[0.12] data-[state=active]:text-neon data-[state=active]:shadow-[inset_0_0_0_1px_rgba(212,175,106,.35)]"
             >
               <span aria-hidden>{a.icone}</span>
               {a.rotulo}
-              {a.id === "auditoria" && logs.length > 0 && <span className="num rounded-full bg-white/10 px-1.5 font-mono text-[10px] text-zinc-300">{logs.length}</span>}
+              {a.id === "auditoria" && logs.length > 0 && <span className="num rounded-full bg-linha/10 px-1.5 font-mono text-[10px] text-tx2">{logs.length}</span>}
             </Tabs.Trigger>
           ))}
         </Tabs.List>

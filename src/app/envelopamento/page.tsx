@@ -16,7 +16,7 @@ export default function PaginaEnvelopamento() {
       <div className="mx-auto flex max-w-7xl flex-col gap-14 px-4 pb-20 sm:px-6">
         <CalculadoraAuto />
         <section className="flex flex-col gap-6">
-          <h2 className="text-2xl font-bold tracking-tight text-white">Total fosco, passo a passo</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-tx">Total fosco, passo a passo</h2>
           <div className="max-w-md"><GaleriaReels apenas={["auto"]} /></div>
         </section>
       </div>

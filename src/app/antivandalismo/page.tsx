@@ -11,7 +11,7 @@ import {
   SegmentosAntivandalismo,
   SeloGarantia,
 } from "@/components/landing/antivandalismo";
-import { Calcadao } from "@/components/landing/hero";
+import { Divisor } from "@/components/landing/hero";
 import { AtendimentoLocal } from "@/components/landing/marca";
 import { PerguntasAntivandalismo } from "@/components/landing/perguntas-antivandalismo";
 import { Titulo } from "@/components/ui/primitivos";
@@ -26,7 +26,7 @@ export default function PaginaAntivandalismo() {
   return (
     <div className="tema-claro">
       <HeroAntivandalismo />
-      <Calcadao />
+      <Divisor />
 
       <ContextoRio />
 
@@ -74,7 +74,7 @@ export default function PaginaAntivandalismo() {
         <Titulo eyebrow="Dúvidas frequentes" titulo="Antes de proteger." />
         <PerguntasAntivandalismo />
       </section>
-      <Calcadao />
+      <Divisor />
       <BotaoWhatsapp />
     </div>
   );

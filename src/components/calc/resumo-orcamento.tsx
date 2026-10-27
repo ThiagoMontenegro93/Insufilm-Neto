@@ -44,43 +44,43 @@ export function ResumoOrcamento({
       </div>
 
       <ul className="flex flex-col gap-2.5">
-        {linhas.length === 0 && <li className="text-sm text-zinc-500">Adicione um item para ver o valor.</li>}
+        {linhas.length === 0 && <li className="text-sm text-tx4">Adicione um item para ver o valor.</li>}
         {linhas.map((l, i) => (
           <li key={i} className="flex items-baseline justify-between gap-4 text-sm">
-            <span className="min-w-0 text-zinc-400">{l.rotulo}</span>
-            <span className="num shrink-0 font-mono text-zinc-200">{brl(l.valor)}</span>
+            <span className="min-w-0 text-tx3">{l.rotulo}</span>
+            <span className="num shrink-0 font-mono text-tx">{brl(l.valor)}</span>
           </li>
         ))}
       </ul>
 
-      <div className="flex flex-col gap-1 border-t border-white/[0.08] pt-5">
-        {areaM2 !== undefined && <span className="num font-mono text-xs text-zinc-500">Área total {num(areaM2)} m²</span>}
+      <div className="flex flex-col gap-1 border-t border-linha/[0.08] pt-5">
+        {areaM2 !== undefined && <span className="num font-mono text-xs text-tx4">Área total {num(areaM2)} m²</span>}
         {split.desconto > 0 && <span className="num text-sm text-esmeralda-soft">Desconto do cupom −{brl(split.desconto)}</span>}
-        <span className="num text-4xl font-bold tracking-tight text-white">{brl(split.liquido)}</span>
+        <span className="num text-4xl font-bold tracking-tight text-tx">{brl(split.liquido)}</span>
       </div>
 
       <Campo rotulo="Código de indicação (opcional)" htmlFor="codigo-indicacao" erro={codigoInvalido ? "Use o formato IND-20240512-JORG-001." : undefined} dica={lido ? `Indicado por ${lido.parceiro}` : "Recebeu um código de alguém? Cole aqui."}>
         <input id="codigo-indicacao" className="campo font-mono uppercase" placeholder="IND-20240512-JORG-001" value={codigo} onChange={(e) => setCodigo(e.target.value)} autoComplete="off" />
       </Campo>
 
-      <div className="rounded-2xl border border-white/[0.08]">
+      <div className="rounded-2xl border border-linha/[0.08]">
         <button
           type="button"
           onClick={() => setVerSplit((v) => !v)}
           aria-expanded={verSplit}
-          className="flex w-full items-center justify-between px-4 py-3 text-left text-sm text-zinc-300"
+          className="flex w-full items-center justify-between px-4 py-3 text-left text-sm text-tx2"
         >
           Divisão do valor (visão interna)
           <ChevronDown className={cn("h-4 w-4 transition-transform duration-200 ease-saida", verSplit && "rotate-180")} aria-hidden />
         </button>
         {verSplit && (
-          <dl className="grid grid-cols-3 gap-px overflow-hidden rounded-b-2xl border-t border-white/[0.08] bg-white/[0.06]">
+          <dl className="grid grid-cols-3 gap-px overflow-hidden rounded-b-2xl border-t border-linha/[0.08] bg-linha/[0.06]">
             {[
               { k: `Você ${config.taxas.plataformaPct}%`, v: split.plataforma, c: "text-neon" },
               { k: `Indicador ${lido ? config.taxas.indicadorPct : 0}%`, v: split.indicador, c: "text-esmeralda-soft" },
-              { k: "Locatário", v: split.locatario, c: "text-zinc-100" },
+              { k: "Locatário", v: split.locatario, c: "text-tx" },
             ].map((s) => (
-              <div key={s.k} className="flex flex-col gap-1 bg-zinc-950/90 px-3 py-3">
+              <div key={s.k} className="flex flex-col gap-1 bg-sup px-3 py-3">
                 <dt className="rotulo text-[10px]">{s.k}</dt>
                 <dd className={cn("num font-mono text-sm font-semibold", s.c)}>{brl(s.v)}</dd>
               </div>
@@ -105,7 +105,7 @@ export function ResumoOrcamento({
           Gerar orçamento
         </Button>
       )}
-      <p className="text-xs leading-relaxed text-zinc-500">Valor estimado com os preços vigentes. O valor final é confirmado na medição.</p>
+      <p className="text-xs leading-relaxed text-tx4">Valor estimado com os preços vigentes. O valor final é confirmado na medição.</p>
     </aside>
   );
 }

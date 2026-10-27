@@ -1,10 +1,10 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Identidade JR Filmes: preto profundo, metal escovado prata e acento dourado.
- * `neon` continua como nome do acento por compatibilidade com os componentes; hoje é o dourado.
+ * Identidade JR Filmes: branco, preto e azul royal do logotipo.
+ * `ouro` e `neon` continuam como nomes do acento por compatibilidade com os componentes; hoje o acento é o azul.
  */
-const ouro = { DEFAULT: "rgb(var(--ouro) / <alpha-value>)", soft: "#F0DBA8", deep: "#9C7A3C" };
+const ouro = { DEFAULT: "rgb(var(--ouro) / <alpha-value>)", soft: "#7FB0FF", deep: "#0F47B3" };
 /** Tons que mudam com o tema: escuro por padrão, claro dentro de `.tema-claro`. */
 const tom = (v: string) => `rgb(var(--${v}) / <alpha-value>)`;
 
@@ -24,6 +24,8 @@ const config: Config = {
         linha: tom("linha"),
         sup: tom("sup"),
         mar: "#0E6BA8",
+        azul: { DEFAULT: "#1A5FD8", claro: "#3B82F6", escuro: "#0B3C9C" },
+        noite: { DEFAULT: "#0A1222", fundo: "#060B16" },
         alerta: "#E8B04A",
         perigo: "#E5484D",
       },
@@ -31,17 +33,17 @@ const config: Config = {
         sans: ["var(--font-corpo)", "ui-sans-serif", "system-ui", "sans-serif"],
         display: ["var(--font-display)", "var(--font-corpo)", "ui-sans-serif", "sans-serif"],
         script: ["var(--font-script)", "cursive"],
-        serif: ["var(--font-serifa)", "Georgia", "serif"],
+        serif: ["var(--font-corpo)", "ui-sans-serif", "sans-serif"],
         mono: ["var(--font-mono)", "ui-monospace", "SFMono-Regular", "monospace"],
       },
       borderRadius: {
         "3xl": "0.625rem",
       },
       boxShadow: {
-        neon: "0 0 0 1px rgba(212,175,106,.55), 0 12px 32px -18px rgba(212,175,106,.35)",
-        "neon-lg": "0 0 0 1px rgba(212,175,106,.7), 0 16px 40px -18px rgba(212,175,106,.45)",
+        neon: "0 0 0 1px rgba(26,95,216,.45), 0 12px 32px -18px rgba(26,95,216,.45)",
+        "neon-lg": "0 0 0 1px rgba(26,95,216,.6), 0 16px 40px -18px rgba(26,95,216,.55)",
         esmeralda: "0 0 0 1px rgba(52,195,143,.4), 0 10px 30px -14px rgba(52,195,143,.5)",
-        vidro: "inset 0 1px 0 0 rgba(255,255,255,.07), 0 24px 48px -28px rgba(0,0,0,.9)",
+        vidro: "inset 0 1px 0 0 rgb(var(--linha) / .07), 0 24px 48px -30px rgb(var(--sombra) / .55)",
       },
       transitionTimingFunction: {
         saida: "cubic-bezier(0.23, 1, 0.32, 1)",

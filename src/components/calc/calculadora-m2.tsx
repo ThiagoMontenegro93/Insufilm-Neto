@@ -49,7 +49,7 @@ export function CalculadoraM2({ itens, servico, rotuloVao = "Vão" }: { itens: I
                     <button
                       type="button"
                       onClick={() => setLinhas((ls) => ls.filter((x) => x.chave !== l.chave))}
-                      className="grid h-8 w-8 place-items-center rounded-lg text-zinc-500 transition-colors hover:bg-perigo/10 hover:text-perigo"
+                      className="grid h-8 w-8 place-items-center rounded-lg text-tx4 transition-colors hover:bg-perigo/10 hover:text-perigo"
                       aria-label={`Remover ${rotuloVao.toLowerCase()} ${idx + 1}`}
                     >
                       <Trash2 className="h-4 w-4" />
@@ -70,17 +70,17 @@ export function CalculadoraM2({ itens, servico, rotuloVao = "Vão" }: { itens: I
                       onClick={() => atualizar(l.chave, "itemId", it.id)}
                       className={cn(
                         "flex flex-col gap-1 rounded-2xl border px-4 py-3 text-left transition-[border-color,background-color,box-shadow] duration-150",
-                        on ? "border-neon/60 bg-neon/[0.08] shadow-neon" : "border-white/[0.08] bg-white/[0.02] hover:border-white/20",
+                        on ? "border-neon/60 bg-neon/[0.08] shadow-neon" : "border-linha/[0.08] bg-linha/[0.02] hover:border-linha/20",
                       )}
                     >
                       <span className="flex items-baseline justify-between gap-2">
-                        <span className={cn("font-semibold", on ? "text-white" : "text-zinc-200")}>{it.nome}</span>
+                        <span className={cn("font-semibold", on ? "text-tx" : "text-tx")}>{it.nome}</span>
                         <span className="num shrink-0 font-mono text-xs text-neon">
                           {brl(it.preco)}
                           {it.unidade === "m2" ? "/m²" : ""}
                         </span>
                       </span>
-                      <span className="text-xs text-zinc-500">{it.descricao}</span>
+                      <span className="text-xs text-tx4">{it.descricao}</span>
                     </button>
                   );
                 })}
@@ -99,14 +99,14 @@ export function CalculadoraM2({ itens, servico, rotuloVao = "Vão" }: { itens: I
                     </label>
                   </>
                 ) : (
-                  <p className="col-span-2 self-end pb-3 text-sm text-zinc-400">Valor fechado por unidade.</p>
+                  <p className="col-span-2 self-end pb-3 text-sm text-tx3">Valor fechado por unidade.</p>
                 )}
                 <label className="flex min-w-0 flex-col gap-2">
                   <span className="rotulo">Qtd.</span>
                   <input id={`qtd-${l.chave}`} type="number" inputMode="numeric" min={1} step={1} className="campo num font-mono" value={l.quantidade} onChange={(e) => atualizar(l.chave, "quantidade", Number(e.target.value))} />
                 </label>
               </div>
-              {det && item.unidade === "m2" && <p className="num font-mono text-xs text-zinc-500">{num(det.area)} m² × {brl(item.preco)}</p>}
+              {det && item.unidade === "m2" && <p className="num font-mono text-xs text-tx4">{num(det.area)} m² × {brl(item.preco)}</p>}
             </fieldset>
           );
         })}

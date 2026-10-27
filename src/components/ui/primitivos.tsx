@@ -9,7 +9,7 @@ const tons = {
   esmeralda: "border-esmeralda/30 bg-esmeralda/10 text-esmeralda-soft",
   alerta: "border-alerta/30 bg-alerta/10 text-alerta",
   perigo: "border-perigo/30 bg-perigo/10 text-perigo",
-  neutro: "border-white/10 bg-white/[0.05] text-zinc-300",
+  neutro: "border-linha/10 bg-linha/[0.05] text-tx2",
 } as const;
 
 export type Tom = keyof typeof tons;
@@ -44,7 +44,7 @@ export function Campo({
         {rotulo}
       </label>
       {children}
-      {erro ? <p className="text-sm text-perigo">{erro}</p> : dica ? <p className="text-xs text-zinc-500">{dica}</p> : null}
+      {erro ? <p className="text-sm text-perigo">{erro}</p> : dica ? <p className="text-xs text-tx4">{dica}</p> : null}
     </div>
   );
 }
@@ -70,7 +70,7 @@ export function Interruptor({
       onClick={() => onChange(!ligado)}
       className={cn(
         "relative h-7 w-12 shrink-0 rounded-full border transition-colors duration-200",
-        ligado ? "border-esmeralda/50 bg-esmeralda/30" : "border-white/10 bg-white/[0.06]",
+        ligado ? "border-esmeralda/50 bg-esmeralda/30" : "border-linha/10 bg-linha/[0.06]",
       )}
     >
       <span
@@ -87,7 +87,7 @@ export function Titulo({ eyebrow, titulo, descricao, className }: { eyebrow?: st
   return (
     <div className={cn("flex max-w-2xl flex-col gap-3", className)}>
       {eyebrow && <span className="rotulo flex items-center gap-3 text-ouro"><span className="h-px w-8 bg-ouro/70" aria-hidden />{eyebrow}</span>}
-      <h2 className="text-balance font-serif text-[2.4rem] font-light leading-[1.02] tracking-[-0.01em] text-tx sm:text-[3.4rem] [&_em]:italic [&_em]:text-ouro">{titulo}</h2>
+      <h2 className="text-balance font-sans text-[1.92rem] font-bold leading-[1.02] tracking-[-0.01em] text-tx sm:text-[2.72rem] [&_em]:not-italic [&_em]:text-ouro">{titulo}</h2>
       {descricao && <p className="text-pretty text-[15px] leading-relaxed text-tx3 sm:text-base">{descricao}</p>}
     </div>
   );

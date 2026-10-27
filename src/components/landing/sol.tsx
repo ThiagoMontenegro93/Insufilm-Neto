@@ -46,16 +46,16 @@ const PARA_QUEM = [
  */
 export function ProtecaoSolar() {
   return (
-    <section id="protecao-uv" className="relative scroll-mt-24 overflow-hidden bg-gradient-to-b from-[#fbf7ef] via-[#fff6dc] to-[#fbf7ef]">
-      <div className="pointer-events-none absolute -left-40 top-24 h-[420px] w-[420px] rounded-full bg-[#ffd76a]/30 blur-3xl" aria-hidden />
+    <section id="protecao-uv" className="relative scroll-mt-24 overflow-hidden bg-white">
+      <div className="pointer-events-none absolute -left-40 top-24 h-[420px] w-[420px] rounded-full bg-azul/[0.06] blur-3xl" aria-hidden />
       <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:py-28 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
         <figure className="relative">
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
-            src="/img/rio-sol-carro.webp"
-            alt="Ilustração de uma motorista sorrindo dentro do carro com película, enquanto o sol forte bate no vidro na orla do Rio"
+            src="/img/jr-carro-rio.webp"
+            alt="Sedã preto com insulfilm sob o sol forte da orla do Rio"
             loading="lazy"
-            className="aspect-square w-full rounded-[3px] object-cover shadow-[0_40px_80px_-40px_rgba(180,120,0,.55)]"
+            className="aspect-square w-full rounded-[3px] object-cover shadow-[0_40px_80px_-40px_rgba(15,30,60,.55)]"
           />
           <figcaption className="absolute -bottom-5 left-4 right-4 flex items-center gap-3 rounded-[3px] bg-white px-4 py-3 text-[13px] text-tx shadow-[0_20px_40px_-24px_rgba(14,22,36,.5)] sm:left-auto sm:right-6 sm:max-w-xs">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#ffd54a] to-[#f59e0b] text-white">
@@ -98,9 +98,9 @@ export function ProtecaoSolar() {
 
           <ul className="grid gap-4 sm:grid-cols-3">
             {NUMEROS.map((n) => (
-              <li key={n.valor} className="flex flex-col gap-2 rounded-[3px] border border-[#f5b301]/25 bg-white/80 p-5 backdrop-blur">
-                <n.icone className="h-5 w-5 text-[#e09a00]" strokeWidth={1.6} aria-hidden />
-                <p className="font-serif text-[1.9rem] font-normal leading-none text-tx">{n.valor}</p>
+              <li key={n.valor} className="flex flex-col gap-2 rounded-[3px] border border-linha/[0.08] bg-[#f4f6f9] p-5">
+                <n.icone className="h-5 w-5 text-ouro" strokeWidth={1.6} aria-hidden />
+                <p className="font-sans tracking-[-0.02em] text-[1.52rem] font-semibold leading-none text-tx">{n.valor}</p>
                 <p className="text-[13px] font-semibold text-tx">{n.titulo}</p>
                 <p className="text-[12.5px] leading-relaxed text-tx3">{n.texto}</p>
               </li>

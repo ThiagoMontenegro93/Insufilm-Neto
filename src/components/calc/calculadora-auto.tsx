@@ -25,12 +25,12 @@ function Opcao({ on, onClick, titulo, valor, sub }: { on: boolean; onClick: () =
       onClick={onClick}
       className={cn(
         "flex min-w-0 flex-col gap-1 rounded-2xl border px-4 py-3 text-left transition-[border-color,background-color,box-shadow] duration-150",
-        on ? "border-neon/60 bg-neon/[0.08] shadow-neon" : "border-white/[0.08] bg-white/[0.02] hover:border-white/20",
+        on ? "border-neon/60 bg-neon/[0.08] shadow-neon" : "border-linha/[0.08] bg-linha/[0.02] hover:border-linha/20",
       )}
     >
-      <span className="font-semibold text-white">{titulo}</span>
+      <span className="font-semibold text-tx">{titulo}</span>
       <span className="num font-mono text-xs text-neon">{valor}</span>
-      {sub && <span className="text-xs text-zinc-500">{sub}</span>}
+      {sub && <span className="text-xs text-tx4">{sub}</span>}
     </button>
   );
 }
@@ -69,10 +69,10 @@ export function CalculadoraAuto() {
           <label className="flex flex-col gap-3">
             <span className="flex items-baseline justify-between">
               <span className="rotulo">Área total</span>
-              <span className="num font-mono text-2xl font-semibold text-white">{num(area, 1)} m²</span>
+              <span className="num font-mono text-2xl font-semibold text-tx">{num(area, 1)} m²</span>
             </span>
-            <input id="area" type="range" min={2} max={30} step={0.5} value={area} onChange={(e) => setArea(Number(e.target.value))} className="w-full accent-[#D4AF6A]" />
-            <span className="text-xs text-zinc-500">Média de um carro inteiro: {m2MedioTotal} m². Para teto, capô ou retrovisores, reduza a área.</span>
+            <input id="area" type="range" min={2} max={30} step={0.5} value={area} onChange={(e) => setArea(Number(e.target.value))} className="w-full accent-[#1A5FD8]" />
+            <span className="text-xs text-tx4">Média de um carro inteiro: {m2MedioTotal} m². Para teto, capô ou retrovisores, reduza a área.</span>
           </label>
         </section>
 
@@ -92,7 +92,7 @@ export function CalculadoraAuto() {
               <Opcao key={a.id} on={acab === a.id} onClick={() => setAcab(a.id)} titulo={a.nome} valor={a.adicionalM2 ? `+${brl(a.adicionalM2)}/m²` : "incluso"} />
             ))}
           </div>
-          <p className="num font-mono text-sm text-zinc-400">
+          <p className="num font-mono text-sm text-tx3">
             {num(area, 1)} m² × ({brl(p.marca.preco)} + {brl(p.acabamento.adicionalM2)}) = <span className="text-neon">{brl(p.total)}</span>
           </p>
         </section>

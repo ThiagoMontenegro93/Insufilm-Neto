@@ -16,7 +16,7 @@ export default function PaginaArquitetonico() {
       <div className="mx-auto flex max-w-7xl flex-col gap-14 px-4 pb-20 sm:px-6">
         <CalcArquitetonico />
         <section className="flex flex-col gap-6">
-          <h2 className="text-2xl font-bold tracking-tight text-white">Transformações reais</h2>
+          <h2 className="text-2xl font-bold tracking-tight text-tx">Transformações reais</h2>
           <GaleriaReels apenas={["geladeira", "parede"]} />
         </section>
       </div>

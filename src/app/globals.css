@@ -2,49 +2,48 @@
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  color-scheme: dark;
-  --fundo: #050505;
-  /* metal escovado: faixas claras e escuras alternadas, como o logotipo */
-  --cromo: linear-gradient(180deg, #ffffff 0%, #e4e5e8 28%, #9a9da3 48%, #5f6268 52%, #d9dadd 70%, #f6f6f7 86%, #a7aab0 100%);
-  --ouro-grad: linear-gradient(180deg, #f6e3b4 0%, #d4af6a 45%, #a8803f 70%, #e8cd8e 100%);
-  /* tokens de tema em "r g b" para aceitar opacidade do Tailwind */
-  --ouro: 212 175 106;
-  --tx: 255 255 255;
-  --tx2: 212 212 216;
-  --tx3: 161 161 170;
-  --tx4: 113 113 122;
-  --linha: 255 255 255;
-  --sup: 10 10 10;
-}
-
-/* Tema claro e solar da vitrine: areia de Copacabana, tinta azul-noite e dourado mais fechado para contraste. */
+:root,
 .tema-claro {
-  --ouro: 150 110 38;
-  --tx: 14 22 36;
-  --tx2: 52 62 78;
-  --tx3: 88 98 114;
-  --tx4: 120 128 140;
-  --linha: 14 22 36;
+  color-scheme: light;
+  --fundo: #ffffff;
+  /* metal escovado do logotipo antigo, mantido para selos e detalhes */
+  --cromo: linear-gradient(180deg, #ffffff 0%, #e4e5e8 28%, #9a9da3 48%, #5f6268 52%, #d9dadd 70%, #f6f6f7 86%, #a7aab0 100%);
+  /* acento azul royal do logotipo JR */
+  --ouro-grad: linear-gradient(180deg, #5b9bff 0%, #1a5fd8 55%, #0f47b3 100%);
+  /* tokens de tema em "r g b" para aceitar opacidade do Tailwind */
+  --ouro: 26 95 216;
+  --tx: 10 14 22;
+  --tx2: 46 54 68;
+  --tx3: 84 94 110;
+  --tx4: 118 126 140;
+  --linha: 10 18 34;
   --sup: 255 255 255;
-  background: #fbf7ef;
+  --sombra: 15 30 60;
+}
+.tema-claro {
+  background: #ffffff;
   color: rgb(var(--tx2));
 }
-/* ilhas escuras (fotos, faixas pretas) dentro do tema claro */
-.tema-claro .escuro {
-  --ouro: 212 175 106;
+
+/* Painéis e faixas em azul-noite: Creator Hub, parceiro, rodapé e ilhas sobre fotos. */
+.escuro {
+  color-scheme: dark;
+  --ouro: 92 152 255;
+  --ouro-grad: linear-gradient(180deg, #7fb0ff 0%, #3b82f6 55%, #1a5fd8 100%);
   --tx: 255 255 255;
   --tx2: 212 212 216;
   --tx3: 161 161 170;
   --tx4: 113 113 122;
   --linha: 255 255 255;
-  --sup: 10 10 10;
+  --sup: 10 16 28;
+  --sombra: 0 0 0;
+  color: rgb(var(--tx2));
 }
 
 html,
 body {
   background: var(--fundo);
-  color: #d9dadd;
+  color: rgb(var(--tx2));
 }
 
 body {
@@ -52,23 +51,29 @@ body {
 }
 
 ::selection {
-  background: rgba(212, 175, 106, 0.35);
-  color: #fff;
+  background: rgba(26, 95, 216, 0.25);
+  color: inherit;
 }
 
 @layer components {
-  /* Superfície metálica escura: o "material" base do produto */
+  /* Cartão base: branco com borda fina no tema claro, azul-noite translúcido nos painéis escuros */
   .vidro {
-    @apply rounded-3xl border border-white/[0.08] bg-gradient-to-b from-white/[0.05] to-white/[0.012] shadow-vidro backdrop-blur-xl;
+    @apply rounded-3xl border border-linha/[0.08] bg-sup shadow-vidro;
+  }
+  .escuro .vidro {
+    @apply bg-transparent bg-gradient-to-b from-white/[0.05] to-white/[0.012] backdrop-blur-xl;
   }
   .vidro-forte {
-    @apply rounded-3xl border border-white/[0.1] bg-gradient-to-b from-zinc-900 to-black shadow-vidro;
+    @apply rounded-3xl border border-linha/[0.1] bg-gradient-to-b from-[#f5f8fd] to-white shadow-vidro;
+  }
+  .escuro .vidro-forte {
+    @apply from-[#101a2c] to-[#060b16];
   }
   .rotulo {
     @apply font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-tx4;
   }
   .campo {
-    @apply w-full rounded-xl border border-linha/10 bg-sup/60 px-4 py-3 text-[15px] text-tx outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-zinc-600 focus:border-ouro/70 focus:shadow-[0_0_0_4px_rgb(var(--ouro)/.14)];
+    @apply w-full rounded-xl border border-linha/10 bg-sup/60 px-4 py-3 text-[15px] text-tx outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-tx4/70 focus:border-ouro/70 focus:shadow-[0_0_0_4px_rgb(var(--ouro)/.14)];
   }
   /* tipografia larga e itálica do logotipo */
   .display {
@@ -97,12 +102,12 @@ body {
     color: transparent;
   }
   .linha-ouro {
-    background: linear-gradient(90deg, transparent, rgba(212, 175, 106, 0.8), transparent);
+    background: linear-gradient(90deg, transparent, rgba(26, 95, 216, 0.8), transparent);
     height: 1px;
   }
   .grade-fundo {
-    background-image: radial-gradient(ellipse 60% 50% at 70% 0%, rgba(212, 175, 106, 0.1), transparent 70%),
-      repeating-linear-gradient(115deg, rgba(255, 255, 255, 0.018) 0 2px, transparent 2px 9px);
+    background-image: radial-gradient(ellipse 60% 50% at 70% 0%, rgb(var(--ouro) / 0.1), transparent 70%),
+      repeating-linear-gradient(115deg, rgb(var(--linha) / 0.02) 0 2px, transparent 2px 9px);
     mask-image: radial-gradient(ellipse at 50% 0%, #000 35%, transparent 80%);
   }
   .num {
@@ -126,7 +131,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid #d4af6a;
+  outline: 2px solid #1a5fd8;
   outline-offset: 3px;
   border-radius: 10px;
 }
