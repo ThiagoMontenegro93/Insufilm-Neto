@@ -419,7 +419,27 @@ export function BeneficiosAntivandalismo() {
 const ICONE_LINHA: Record<string, typeof Car> = { carro: Car, casa: Home, loja: Store, fachada: Building2 };
 
 function Preco({ l }: { l: LinhaAntivandalismo }) {
+  const { config } = usePlataforma();
   const un = l.unidade === "m2" ? "/m²" : "";
+  // Carro com preço por porte cadastrado: mostra "a partir de" e a tabela de portes.
+  const porPorte = l.unidade === "veiculo" ? config.servicos.portes.filter((p) => p.precoAntivandalismo > 0) : [];
+  if (porPorte.length > 0) {
+    const menor = Math.min(...porPorte.map((p) => p.precoAntivandalismo));
+    return (
+      <div className="flex flex-col gap-2">
+        <span className="text-[11px] font-semibold uppercase tracking-[0.18em] text-tx3">A partir de, no PIX</span>
+        <span className="num font-sans tracking-[-0.02em] text-[1.92rem] font-bold leading-none text-tx">{brl(menor)}</span>
+        <ul className="flex flex-col gap-1 text-[12.5px] text-tx2">
+          {porPorte.map((p) => (
+            <li key={p.id} className="flex justify-between gap-3">
+              <span>{p.nome}</span>
+              <span className="num font-mono">{brl(p.precoAntivandalismo)}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    );
+  }
   if (l.precoVista <= 0) {
     return (
       <div className="flex flex-col gap-1">

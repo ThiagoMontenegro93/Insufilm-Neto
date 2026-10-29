@@ -7,20 +7,22 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import * as Tabs from "@radix-ui/react-tabs";
-import { AlertTriangle, ExternalLink, KeyRound, RotateCcw, Save } from "lucide-react";
+import { AlertTriangle, ExternalLink, KeyRound, Plus, RotateCcw, Save, Trash2 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Campo, Cartao, Interruptor, Selo } from "@/components/ui/primitivos";
 import { usePlataforma } from "@/lib/store";
-import type { PlatformConfig } from "@/lib/config";
+import type { PlatformConfig, PorteVeiculo } from "@/lib/config";
 import { brl, calcularSplit, precoEnvelopamento, precoLinhas } from "@/lib/pricing";
 import { cn } from "@/lib/utils";
 import { PainelProspeccao } from "./prospeccao";
 import { PainelEstoque } from "./estoque";
+import { AbaCustos } from "./custos";
 import { ListaAuditoria } from "./auditoria";
 
 const ABAS = [
   { id: "geral", rotulo: "Geral", icone: "⚙️" },
   { id: "servicos", rotulo: "Serviços", icone: "🎨" },
+  { id: "custos", rotulo: "Custos", icone: "🧮" },
   { id: "financeiro", rotulo: "Financeiro", icone: "💰" },
   { id: "apis", rotulo: "APIs", icone: "🔌" },
   { id: "nichos", rotulo: "Nichos", icone: "🎯" },
@@ -59,7 +61,7 @@ function BarraSalvar({ sujo, onSalvar, onDescartar }: { sujo: boolean; onSalvar:
   );
 }
 
-function NumeroCampo({ id, rotulo, valor, onChange, sufixo, prefixo, passo = 1, dica }: { id: string; rotulo: string; valor: number; onChange: (n: number) => void; sufixo?: string; prefixo?: string; passo?: number; dica?: string }) {
+function NumeroCampo({ id, rotulo, valor, onChange, sufixo, prefixo, passo = 1, dica, bloqueado }: { id: string; rotulo: string; valor: number; onChange: (n: number) => void; sufixo?: string; prefixo?: string; passo?: number; dica?: string; bloqueado?: boolean }) {
   return (
     <Campo rotulo={rotulo} htmlFor={id} dica={dica}>
       <div className="relative">
@@ -72,7 +74,8 @@ function NumeroCampo({ id, rotulo, valor, onChange, sufixo, prefixo, passo = 1, 
           step={passo}
           value={Number.isFinite(valor) ? valor : 0}
           onChange={(e) => onChange(Number(e.target.value))}
-          className={cn("campo num font-mono", prefixo && "pl-11", sufixo && "pr-12")}
+          disabled={bloqueado}
+          className={cn("campo num font-mono disabled:cursor-not-allowed disabled:opacity-60", prefixo && "pl-11", sufixo && "pr-12")}
         />
         {sufixo && <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 font-mono text-sm text-tx4">{sufixo}</span>}
       </div>
@@ -161,7 +164,7 @@ function AbaServicos() {
         <Cartao className="flex flex-col gap-4">
           <h3 className="font-semibold text-tx">Película de segurança</h3>
           {s.peliculaSeguranca.map((i) => (
-            <NumeroCampo key={i.id} id={`pel-${i.id}`} rotulo={`${i.nome} · m²`} prefixo="R$" valor={i.preco} onChange={(n) => editarLista("peliculaSeguranca", i.id, n)} />
+            <NumeroCampo key={i.id} id={`pel-${i.id}`} rotulo={`${i.nome} · m²`} prefixo="R$" valor={i.preco} bloqueado={i.custo?.automatico} dica={i.custo?.automatico ? "Calculado pelo custo · aba Custos" : undefined} onChange={(n) => editarLista("peliculaSeguranca", i.id, n)} />
           ))}
         </Cartao>
         <Cartao className="flex flex-col gap-4">
@@ -173,6 +176,8 @@ function AbaServicos() {
               rotulo={`${m.nome} · m²`}
               prefixo="R$"
               valor={m.preco}
+              bloqueado={m.custo?.automatico}
+              dica={m.custo?.automatico ? "Calculado pelo custo · aba Custos" : undefined}
               onChange={(n) => setRascunho({ ...s, envelopamento: { ...s.envelopamento, marcas: s.envelopamento.marcas.map((x) => (x.id === m.id ? { ...x, preco: n } : x)) } })}
             />
           ))}
@@ -195,7 +200,7 @@ function AbaServicos() {
         <Cartao className="flex flex-col gap-4">
           <h3 className="font-semibold text-tx">Arquitetônico</h3>
           {s.arquitetonico.map((i) => (
-            <NumeroCampo key={i.id} id={`arq-${i.id}`} rotulo={`${i.nome} · ${i.unidade === "m2" ? "m²" : "fixo"}`} prefixo="R$" valor={i.preco} onChange={(n) => editarLista("arquitetonico", i.id, n)} />
+            <NumeroCampo key={i.id} id={`arq-${i.id}`} rotulo={`${i.nome} · ${i.unidade === "m2" ? "m²" : "fixo"}`} prefixo="R$" valor={i.preco} bloqueado={i.custo?.automatico} dica={i.custo?.automatico ? "Calculado pelo custo · aba Custos" : undefined} onChange={(n) => editarLista("arquitetonico", i.id, n)} />
           ))}
         </Cartao>
       </div>
@@ -213,14 +218,16 @@ function AbaServicos() {
             return (
               <div key={l.id} className="flex flex-col gap-3 rounded-2xl border border-linha/[0.08] p-4">
                 <span className="text-sm font-medium text-tx">{l.nome}</span>
-                <NumeroCampo id={`av-${l.id}-vista`} rotulo={`À vista (PIX) · ${un}`} prefixo="R$" valor={l.precoVista} onChange={(n) => editar("precoVista", n)} />
-                <NumeroCampo id={`av-${l.id}-cartao`} rotulo={`No cartão · ${un}`} prefixo="R$" valor={l.precoCartao} onChange={(n) => editar("precoCartao", n)} />
+                <NumeroCampo id={`av-${l.id}-vista`} rotulo={`À vista (PIX) · ${un}`} prefixo="R$" valor={l.precoVista} bloqueado={l.custo?.automatico} dica={l.custo?.automatico ? "Calculado pelo custo · aba Custos" : undefined} onChange={(n) => editar("precoVista", n)} />
+                <NumeroCampo id={`av-${l.id}-cartao`} rotulo={`No cartão · ${un}`} prefixo="R$" valor={l.precoCartao} bloqueado={l.custo?.automatico} onChange={(n) => editar("precoCartao", n)} />
                 <NumeroCampo id={`av-${l.id}-parc`} rotulo="Parcelas no cartão" sufixo="x" valor={l.parcelas} onChange={(n) => editar("parcelas", n)} />
               </div>
             );
           })}
         </div>
       </Cartao>
+
+      <TabelaPortes portes={s.portes} onChange={(portes) => setRascunho({ ...s, portes })} />
 
       <Cartao forte className="flex flex-col gap-4">
         <h3 className="font-semibold text-tx">Exemplos com os preços acima</h3>
@@ -243,10 +250,93 @@ function AbaServicos() {
             </div>
           ))}
         </div>
-        <p className="text-xs text-tx4">Esses preços alimentam /pelicula, /envelopamento e /arquitetonico assim que você salva.</p>
+        <p className="text-xs text-tx4">Esses preços alimentam /pelicula, /envelopamento e /arquitetonico assim que você salva. Os campos travados são calculados pelo custo do fornecedor na aba Custos.</p>
       </Cartao>
       <BarraSalvar sujo={sujo} onSalvar={() => salvar("Tabela de preços de serviços alterada")} onDescartar={descartar} />
     </div>
+  );
+}
+
+/**
+ * Preço pelo porte do veículo: o profissional define pela experiência quanto cobra
+ * de um compacto, de um SUV ou de um caminhão. 0 = sob consulta no site.
+ */
+function TabelaPortes({ portes, onChange }: { portes: PorteVeiculo[]; onChange: (p: PorteVeiculo[]) => void }) {
+  const editar = <K extends keyof PorteVeiculo>(id: string, campo: K, valor: PorteVeiculo[K]) =>
+    onChange(portes.map((p) => (p.id === id ? { ...p, [campo]: valor } : p)));
+  const adicionar = () =>
+    onChange([...portes, { id: `porte-${Date.now().toString(36)}`, nome: "Novo porte", exemplos: "", m2Envelopamento: 0, precoInsulfilm: 0, precoAntivandalismo: 0 }]);
+  const remover = (id: string) => onChange(portes.filter((p) => p.id !== id));
+  const numero = (id: string, campo: "m2Envelopamento" | "precoInsulfilm" | "precoAntivandalismo", valor: number, rotulo: string, prefixo?: string, sufixo?: string) => (
+    <label className="flex min-w-0 flex-col gap-1">
+      <span className="text-[11px] text-tx4 lg:sr-only">{rotulo}</span>
+      <span className="relative">
+        {prefixo && <span className="pointer-events-none absolute left-3 top-1/2 -translate-y-1/2 font-mono text-xs text-tx4">{prefixo}</span>}
+        <input
+          type="number"
+          inputMode="decimal"
+          min={0}
+          step={campo === "m2Envelopamento" ? 0.5 : 5}
+          value={valor}
+          onChange={(e) => editar(id, campo, Math.max(0, Number(e.target.value) || 0))}
+          aria-label={rotulo}
+          className={cn("campo num w-full font-mono", prefixo && "pl-9", sufixo && "pr-9")}
+        />
+        {sufixo && <span className="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 font-mono text-xs text-tx4">{sufixo}</span>}
+      </span>
+    </label>
+  );
+  const colunas = "lg:grid-cols-[1fr_1.3fr_110px_130px_130px_40px]";
+  return (
+    <Cartao className="flex flex-col gap-4">
+      <div className="flex flex-wrap items-center justify-between gap-2">
+        <div className="flex flex-col gap-0.5">
+          <h3 className="font-semibold text-tx">Preço por porte de veículo</h3>
+          <p className="text-xs text-tx4">Valor fechado que você cobra por tamanho de carro. Em 0, o site mostra &quot;sob consulta&quot;.</p>
+        </div>
+        <Button variante="contorno" tamanho="sm" onClick={adicionar}>
+          <Plus className="h-4 w-4" aria-hidden /> Adicionar porte
+        </Button>
+      </div>
+      <div className={cn("hidden gap-3 px-1 text-[11px] font-semibold uppercase tracking-[0.12em] text-tx4 lg:grid", colunas)}>
+        <span>Porte</span>
+        <span>Exemplos de modelo</span>
+        <span>Envelopar</span>
+        <span>Insulfilm</span>
+        <span>Antivandalismo</span>
+        <span className="sr-only">Remover</span>
+      </div>
+      <ul className="flex flex-col gap-3">
+        {portes.map((p) => (
+          <li key={p.id} className={cn("grid grid-cols-2 items-end gap-3 rounded-2xl border border-linha/[0.08] p-3 lg:rounded-none lg:border-0 lg:p-0", colunas)}>
+            <label className="col-span-2 flex min-w-0 flex-col gap-1 sm:col-span-1">
+              <span className="text-[11px] text-tx4 lg:sr-only">Porte</span>
+              <input className="campo w-full" value={p.nome} onChange={(e) => editar(p.id, "nome", e.target.value)} aria-label="Nome do porte" />
+            </label>
+            <label className="col-span-2 flex min-w-0 flex-col gap-1 sm:col-span-1">
+              <span className="text-[11px] text-tx4 lg:sr-only">Exemplos de modelo</span>
+              <input className="campo w-full" value={p.exemplos} placeholder="Mobi, HB20, Onix" onChange={(e) => editar(p.id, "exemplos", e.target.value)} aria-label="Exemplos de modelo" />
+            </label>
+            {numero(p.id, "m2Envelopamento", p.m2Envelopamento, "Envelopar (m²)", undefined, "m²")}
+            {numero(p.id, "precoInsulfilm", p.precoInsulfilm, "Insulfilm (R$)", "R$")}
+            {numero(p.id, "precoAntivandalismo", p.precoAntivandalismo, "Antivandalismo (R$)", "R$")}
+            <button
+              type="button"
+              onClick={() => remover(p.id)}
+              disabled={portes.length <= 1}
+              aria-label={`Remover ${p.nome}`}
+              className="grid h-11 w-11 place-items-center justify-self-end rounded-xl text-tx4 transition-colors duration-150 hover:bg-perigo/10 hover:text-perigo disabled:opacity-30"
+            >
+              <Trash2 className="h-4 w-4" aria-hidden />
+            </button>
+          </li>
+        ))}
+      </ul>
+      <p className="text-xs text-tx4">
+        Envelopar: área média do porte, multiplicada pelo valor da marca e do acabamento em /envelopamento. Insulfilm aparece em /pelicula. Antivandalismo, quando preenchido, substitui o
+        &quot;sob consulta&quot; do card de carros.
+      </p>
+    </Cartao>
   );
 }
 
@@ -458,6 +548,7 @@ export function CreatorHub() {
 
       <Tabs.Content value="geral"><AbaGeral /></Tabs.Content>
       <Tabs.Content value="servicos"><AbaServicos /></Tabs.Content>
+      <Tabs.Content value="custos"><AbaCustos /></Tabs.Content>
       <Tabs.Content value="financeiro"><AbaFinanceiro /></Tabs.Content>
       <Tabs.Content value="apis"><AbaApis /></Tabs.Content>
       <Tabs.Content value="nichos"><AbaNichos /></Tabs.Content>

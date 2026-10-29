@@ -5,7 +5,11 @@ import { gerarCodigoIndicacao, lerCodigoIndicacao, normalizarTelefone, mascararT
 import { statusInicialSaque, tipoChavePix, validarSaque } from "../payout";
 import { cnpjValido, podeProspectar, pontuarLead, type Lead } from "../prospect";
 
-const cfg = CONFIG_PADRAO;
+// Preços fixos para testar o motor de orçamento sem depender dos custos de exemplo.
+const cfg = structuredClone(CONFIG_PADRAO);
+const fixar = (lista: { id: string; preco: number }[], precos: Record<string, number>) => lista.forEach((i) => i.id in precos && (i.preco = precos[i.id]));
+fixar(cfg.servicos.envelopamento.marcas, { "3m-1080": 120 });
+fixar(cfg.servicos.arquitetonico, { parede: 90, geladeira: 650 });
 
 describe("split", () => {
   it("R$1.000 = 300 plataforma + 50 indicador + 650 locatário", () => {

@@ -78,6 +78,18 @@ interface Ctx extends EstadoEstoque {
 const EstoqueContext = createContext<Ctx | null>(null);
 const CHAVE = "fph.estoque.v1";
 
+/** Lê o estoque salvo no navegador fora do provider (ex.: Creator Hub puxando o custo médio). */
+export function lerEstoqueSalvo(): EstadoEstoque {
+  try {
+    const bruto = localStorage.getItem(CHAVE);
+    const salvo = bruto ? (JSON.parse(bruto) as EstadoEstoque) : null;
+    if (salvo && salvo.versao === ESTOQUE_EXEMPLO.versao) return salvo;
+  } catch {
+    /* sem armazenamento */
+  }
+  return ESTOQUE_EXEMPLO;
+}
+
 const hoje = () => new Date().toISOString().slice(0, 10);
 
 export function EstoqueProvider({ children }: { children: React.ReactNode }) {

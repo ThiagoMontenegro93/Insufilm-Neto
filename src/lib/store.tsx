@@ -7,6 +7,7 @@
  */
 import { createContext, useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { CONFIG_PADRAO, type PlatformConfig } from "./config";
+import { recalcularPrecos } from "./custos";
 
 export interface LogAuditoria {
   id: string;
@@ -76,6 +77,8 @@ export function ConfigProvider({ children }: { children: React.ReactNode }) {
     setConfig((atual) => {
       const rascunho = structuredClone(atual);
       mutar(rascunho);
+      // itens com "preço pelo custo" são reprecificados a cada mudança de custo ou premissa
+      recalcularPrecos(rascunho);
       const { antes, depois } = diff(atual, rascunho);
       if (Object.keys(depois).length === 0) return atual;
       const log: LogAuditoria = {
