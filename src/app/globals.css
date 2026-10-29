@@ -1,0 +1,147 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root,
+.tema-claro {
+  color-scheme: light;
+  --fundo: #ffffff;
+  /* metal escovado do logotipo antigo, mantido para selos e detalhes */
+  --cromo: linear-gradient(180deg, #ffffff 0%, #e4e5e8 28%, #9a9da3 48%, #5f6268 52%, #d9dadd 70%, #f6f6f7 86%, #a7aab0 100%);
+  /* acento azul royal do logotipo JR */
+  --ouro-grad: linear-gradient(180deg, #5b9bff 0%, #1a5fd8 55%, #0f47b3 100%);
+  /* tokens de tema em "r g b" para aceitar opacidade do Tailwind */
+  --ouro: 26 95 216;
+  --tx: 10 14 22;
+  --tx2: 46 54 68;
+  --tx3: 84 94 110;
+  --tx4: 118 126 140;
+  --linha: 10 18 34;
+  --sup: 255 255 255;
+  --sombra: 15 30 60;
+}
+.tema-claro {
+  background: #ffffff;
+  color: rgb(var(--tx2));
+}
+
+/* Painéis e faixas em azul-noite: Creator Hub, parceiro, rodapé e ilhas sobre fotos. */
+.escuro {
+  color-scheme: dark;
+  --ouro: 92 152 255;
+  --ouro-grad: linear-gradient(180deg, #7fb0ff 0%, #3b82f6 55%, #1a5fd8 100%);
+  --tx: 255 255 255;
+  --tx2: 212 212 216;
+  --tx3: 161 161 170;
+  --tx4: 113 113 122;
+  --linha: 255 255 255;
+  --sup: 10 16 28;
+  --sombra: 0 0 0;
+  color: rgb(var(--tx2));
+}
+
+html,
+body {
+  background: var(--fundo);
+  color: rgb(var(--tx2));
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+}
+
+::selection {
+  background: rgba(26, 95, 216, 0.25);
+  color: inherit;
+}
+
+@layer components {
+  /* Cartão base: branco com borda fina no tema claro, azul-noite translúcido nos painéis escuros */
+  .vidro {
+    @apply rounded-3xl border border-linha/[0.08] bg-sup shadow-vidro;
+  }
+  .escuro .vidro {
+    @apply bg-transparent bg-gradient-to-b from-white/[0.05] to-white/[0.012] backdrop-blur-xl;
+  }
+  .vidro-forte {
+    @apply rounded-3xl border border-linha/[0.1] bg-gradient-to-b from-[#f5f8fd] to-white shadow-vidro;
+  }
+  .escuro .vidro-forte {
+    @apply from-[#101a2c] to-[#060b16];
+  }
+  .rotulo {
+    @apply font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-tx4;
+  }
+  .campo {
+    @apply w-full rounded-xl border border-linha/10 bg-sup/60 px-4 py-3 text-[15px] text-tx outline-none transition-[border-color,box-shadow] duration-200 placeholder:text-tx4/70 focus:border-ouro/70 focus:shadow-[0_0_0_4px_rgb(var(--ouro)/.14)];
+  }
+  /* tipografia larga e itálica do logotipo */
+  .display {
+    @apply font-display font-extrabold uppercase italic;
+    font-stretch: 125%;
+    font-variation-settings: "wdth" 125;
+  }
+  .cromado {
+    background: var(--cromo);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  /* logotipo em tinta azul-noite escovada, para fundos claros */
+  .tinta {
+    background: linear-gradient(180deg, #3b4a63 0%, #0e1624 48%, #2a3850 56%, #0e1624 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .texto-neon,
+  .dourado {
+    background: var(--ouro-grad);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+  .linha-ouro {
+    background: linear-gradient(90deg, transparent, rgba(26, 95, 216, 0.8), transparent);
+    height: 1px;
+  }
+  .grade-fundo {
+    background-image: radial-gradient(ellipse 60% 50% at 70% 0%, rgb(var(--ouro) / 0.1), transparent 70%),
+      repeating-linear-gradient(115deg, rgb(var(--linha) / 0.02) 0 2px, transparent 2px 9px);
+    mask-image: radial-gradient(ellipse at 50% 0%, #000 35%, transparent 80%);
+  }
+  .num {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .sem-barra::-webkit-scrollbar {
+    display: none;
+  }
+  .sem-barra {
+    scrollbar-width: none;
+  }
+  .pb-seguro {
+    padding-bottom: calc(env(safe-area-inset-bottom, 0px) + 6.5rem);
+  }
+}
+
+:focus-visible {
+  outline: 2px solid #1a5fd8;
+  outline-offset: 3px;
+  border-radius: 10px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    scroll-behavior: auto !important;
+  }
+}
