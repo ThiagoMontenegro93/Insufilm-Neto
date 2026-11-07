@@ -2,6 +2,7 @@ import Link from "next/link";
 import { ArrowRight } from "lucide-react";
 import { Hero } from "@/components/landing/hero";
 import { ServicosJR } from "@/components/landing/servicos-jr";
+import { GaleriaArtes } from "@/components/landing/galeria-artes";
 import { BotaoWhatsapp, DestaqueAntivandalismo } from "@/components/landing/antivandalismo";
 import { ProtecaoSolar } from "@/components/landing/sol";
 import { TimelineEtapas } from "@/components/landing/timeline";
@@ -14,6 +15,7 @@ export default function Home() {
     <div className="tema-claro bg-[#0a0a0b]">
       <Hero />
       <ServicosJR />
+      <GaleriaArtes />
       <ProtecaoSolar />
       <DestaqueAntivandalismo />
 
