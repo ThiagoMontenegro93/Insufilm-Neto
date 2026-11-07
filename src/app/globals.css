@@ -3,41 +3,31 @@
 @tailwind utilities;
 
 :root,
-.tema-claro {
-  color-scheme: light;
-  --fundo: #ffffff;
-  /* metal escovado do logotipo antigo, mantido para selos e detalhes */
-  --cromo: linear-gradient(180deg, #ffffff 0%, #e4e5e8 28%, #9a9da3 48%, #5f6268 52%, #d9dadd 70%, #f6f6f7 86%, #a7aab0 100%);
-  /* acento azul royal do logotipo JR */
-  --ouro-grad: linear-gradient(180deg, #5b9bff 0%, #1a5fd8 55%, #0f47b3 100%);
-  /* tokens de tema em "r g b" para aceitar opacidade do Tailwind */
-  --ouro: 26 95 216;
-  --tx: 10 14 22;
-  --tx2: 46 54 68;
-  --tx3: 84 94 110;
-  --tx4: 118 126 140;
-  --linha: 10 18 34;
-  --sup: 255 255 255;
-  --sombra: 15 30 60;
-}
-.tema-claro {
-  background: #ffffff;
-  color: rgb(var(--tx2));
-}
-
-/* Painéis e faixas em azul-noite: Creator Hub, parceiro, rodapé e ilhas sobre fotos. */
+.tema-claro,
 .escuro {
   color-scheme: dark;
-  --ouro: 92 152 255;
-  --ouro-grad: linear-gradient(180deg, #7fb0ff 0%, #3b82f6 55%, #1a5fd8 100%);
+  --fundo: #0a0a0b;
+  /* cromado do "FILMS" no logotipo */
+  --cromo: linear-gradient(180deg, #ffffff 0%, #e4e5e8 28%, #9a9da3 48%, #5f6268 52%, #d9dadd 70%, #f6f6f7 86%, #a7aab0 100%);
+  /* vermelho brilhante do "A" da Aplik */
+  --ouro-grad: linear-gradient(180deg, #ff5a5a 0%, #e10914 55%, #9e0a0f 100%);
+  /* tokens de tema em "r g b" para aceitar opacidade do Tailwind */
+  --ouro: 238 32 40;
   --tx: 255 255 255;
-  --tx2: 212 212 216;
-  --tx3: 161 161 170;
-  --tx4: 113 113 122;
+  --tx2: 220 220 224;
+  --tx3: 168 168 176;
+  --tx4: 120 120 128;
   --linha: 255 255 255;
-  --sup: 10 16 28;
+  --sup: 20 20 23;
   --sombra: 0 0 0;
+}
+/* Vitrine, painéis e rodapé seguem o mesmo preto com vermelho das artes. */
+.tema-claro,
+.escuro {
   color: rgb(var(--tx2));
+}
+.tema-claro {
+  background: var(--fundo);
 }
 
 html,
@@ -51,12 +41,12 @@ body {
 }
 
 ::selection {
-  background: rgba(26, 95, 216, 0.25);
+  background: rgba(225, 9, 20, 0.3);
   color: inherit;
 }
 
 @layer components {
-  /* Cartão base: branco com borda fina no tema claro, azul-noite translúcido nos painéis escuros */
+  /* Cartão base: grafite com borda fina; translúcido nos painéis */
   .vidro {
     @apply rounded-3xl border border-linha/[0.08] bg-sup shadow-vidro;
   }
@@ -64,10 +54,10 @@ body {
     @apply bg-transparent bg-gradient-to-b from-white/[0.05] to-white/[0.012] backdrop-blur-xl;
   }
   .vidro-forte {
-    @apply rounded-3xl border border-linha/[0.1] bg-gradient-to-b from-[#f5f8fd] to-white shadow-vidro;
+    @apply rounded-3xl border border-linha/[0.1] bg-gradient-to-b from-[#18181b] to-[#0c0c0e] shadow-vidro;
   }
   .escuro .vidro-forte {
-    @apply from-[#101a2c] to-[#060b16];
+    @apply from-[#18181b] to-[#0c0c0e];
   }
   .rotulo {
     @apply font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-tx4;
@@ -87,7 +77,7 @@ body {
     background-clip: text;
     color: transparent;
   }
-  /* logotipo em tinta azul-noite escovada, para fundos claros */
+  /* tinta escura escovada (legado do tema claro) */
   .tinta {
     background: linear-gradient(180deg, #3b4a63 0%, #0e1624 48%, #2a3850 56%, #0e1624 100%);
     -webkit-background-clip: text;
@@ -102,7 +92,7 @@ body {
     color: transparent;
   }
   .linha-ouro {
-    background: linear-gradient(90deg, transparent, rgba(26, 95, 216, 0.8), transparent);
+    background: linear-gradient(90deg, transparent, rgba(238, 32, 40, 0.8), transparent);
     height: 1px;
   }
   .grade-fundo {
@@ -131,7 +121,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid #1a5fd8;
+  outline: 2px solid #e10914;
   outline-offset: 3px;
   border-radius: 10px;
 }

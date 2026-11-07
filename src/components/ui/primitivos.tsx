@@ -87,7 +87,7 @@ export function Titulo({ eyebrow, titulo, descricao, className }: { eyebrow?: st
   return (
     <div className={cn("flex max-w-2xl flex-col gap-3", className)}>
       {eyebrow && <span className="rotulo flex items-center gap-3 text-ouro"><span className="h-px w-8 bg-ouro/70" aria-hidden />{eyebrow}</span>}
-      <h2 className="text-balance font-sans text-[1.92rem] font-bold leading-[1.02] tracking-[-0.01em] text-tx sm:text-[2.72rem] [&_em]:not-italic [&_em]:text-ouro">{titulo}</h2>
+      <h2 className="text-balance font-sans text-[1.92rem] font-extrabold uppercase italic leading-[1.02] tracking-[-0.01em] text-tx sm:text-[2.6rem] [&_em]:text-ouro">{titulo}</h2>
       {descricao && <p className="text-pretty text-[15px] leading-relaxed text-tx3 sm:text-base">{descricao}</p>}
     </div>
   );

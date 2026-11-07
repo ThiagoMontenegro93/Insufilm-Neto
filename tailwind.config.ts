@@ -1,10 +1,10 @@
 import type { Config } from "tailwindcss";
 
 /**
- * Identidade JR Filmes: branco, preto e azul royal do logotipo.
- * `ouro` e `neon` continuam como nomes do acento por compatibilidade com os componentes; hoje o acento é o azul.
+ * Identidade Aplik Films: preto com vermelho e cromado do logotipo.
+ * `ouro`, `neon` e `azul` continuam como nomes do acento por compatibilidade com os componentes; hoje o acento é o vermelho.
  */
-const ouro = { DEFAULT: "rgb(var(--ouro) / <alpha-value>)", soft: "#7FB0FF", deep: "#0F47B3" };
+const ouro = { DEFAULT: "rgb(var(--ouro) / <alpha-value>)", soft: "#FF6B6B", deep: "#A3070E" };
 /** Tons que mudam com o tema: escuro por padrão, claro dentro de `.tema-claro`. */
 const tom = (v: string) => `rgb(var(--${v}) / <alpha-value>)`;
 
@@ -24,8 +24,8 @@ const config: Config = {
         linha: tom("linha"),
         sup: tom("sup"),
         mar: "#0E6BA8",
-        azul: { DEFAULT: "#1A5FD8", claro: "#3B82F6", escuro: "#0B3C9C" },
-        noite: { DEFAULT: "#0A1222", fundo: "#060B16" },
+        azul: { DEFAULT: "#E10914", claro: "#FF3B3B", escuro: "#8E060C" },
+        noite: { DEFAULT: "#111113", fundo: "#070708" },
         alerta: "#E8B04A",
         perigo: "#E5484D",
       },
@@ -40,8 +40,8 @@ const config: Config = {
         "3xl": "0.625rem",
       },
       boxShadow: {
-        neon: "0 0 0 1px rgba(26,95,216,.45), 0 12px 32px -18px rgba(26,95,216,.45)",
-        "neon-lg": "0 0 0 1px rgba(26,95,216,.6), 0 16px 40px -18px rgba(26,95,216,.55)",
+        neon: "0 0 0 1px rgba(225,9,20,.45), 0 12px 32px -18px rgba(225,9,20,.45)",
+        "neon-lg": "0 0 0 1px rgba(225,9,20,.6), 0 16px 40px -18px rgba(225,9,20,.55)",
         esmeralda: "0 0 0 1px rgba(52,195,143,.4), 0 10px 30px -14px rgba(52,195,143,.5)",
         vidro: "inset 0 1px 0 0 rgb(var(--linha) / .07), 0 24px 48px -30px rgb(var(--sombra) / .55)",
       },

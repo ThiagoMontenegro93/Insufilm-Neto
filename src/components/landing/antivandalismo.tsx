@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Película antivandalismo: produto principal da JR Filmes.
+ * Película antivandalismo: produto principal da Aplik Films.
  * Ilustração própria em SVG (vidro trincado preso pela película), segmentos de uso,
  * como funciona, o que faz e o que não faz, e contexto do Rio com fonte oficial (ISP-RJ).
  */
@@ -28,6 +28,7 @@ import {
   X,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { IconeWhatsapp } from "@/components/ui/contatos";
 import { usePlataforma } from "@/lib/store";
 import { brl } from "@/lib/pricing";
 import type { LinhaAntivandalismo } from "@/lib/config";
@@ -77,8 +78,8 @@ export function VidroSeguro({ className = "" }: { className?: string }) {
           <stop offset="1" stopColor="#2a7fc4" />
         </linearGradient>
         <linearGradient id="av-pelicula" x1="0" y1="0" x2="1" y2="0">
-          <stop offset="0" stopColor="#1a5fd8" stopOpacity="0.26" />
-          <stop offset="1" stopColor="#1a5fd8" stopOpacity="0.1" />
+          <stop offset="0" stopColor="#e10914" stopOpacity="0.26" />
+          <stop offset="1" stopColor="#e10914" stopOpacity="0.1" />
         </linearGradient>
         <clipPath id="av-vao">
           <rect x="60" y="40" width="380" height="330" rx="4" />
@@ -112,7 +113,7 @@ export function VidroSeguro({ className = "" }: { className?: string }) {
       {/* legendas */}
       <g fontFamily="var(--font-corpo), sans-serif" fontSize="13" fontWeight="600">
         <rect x="52" y="392" width="214" height="34" rx="3" fill="#0e1624" />
-        <circle cx="70" cy="409" r="5" fill="#1a5fd8" />
+        <circle cx="70" cy="409" r="5" fill="#e10914" />
         <text x="84" y="414" fill="#ffffff">Cacos presos na película</text>
         <rect x="274" y="392" width="184" height="34" rx="3" fill="#ffffff" stroke="#0e1624" strokeOpacity="0.15" />
         <circle cx="292" cy="409" r="5" fill="#1f7a55" />
@@ -129,7 +130,7 @@ export function HeroAntivandalismo() {
   const wa = useWhatsapp();
   return (
     <section className="relative overflow-hidden">
-      <div className="pointer-events-none absolute -left-40 top-0 h-[420px] w-[420px] rounded-full bg-[#8fd3ff]/30 blur-3xl" aria-hidden />
+      <div className="pointer-events-none absolute -left-40 top-0 h-[420px] w-[420px] rounded-full bg-[#e10914]/20 blur-3xl" aria-hidden />
       <div className="relative mx-auto grid max-w-7xl items-center gap-12 px-4 pb-16 pt-12 sm:px-6 md:pt-20 lg:grid-cols-[1.05fr_0.95fr]">
         <div className="flex flex-col gap-7">
           <div className="flex items-center gap-4">
@@ -144,7 +145,7 @@ export function HeroAntivandalismo() {
           </p>
           <div className="flex flex-col gap-3 sm:flex-row">
             <Button asChild tamanho="lg">
-              <a href={wa("Olá, JR Filmes! Quero um orçamento de película antivandalismo.")} target="_blank" rel="noreferrer">
+              <a href={wa("Olá, Aplik Films! Quero um orçamento de película antivandalismo.")} target="_blank" rel="noreferrer">
                 <MessageCircle className="h-4 w-4" aria-hidden /> Quero um orçamento
               </a>
             </Button>
@@ -280,7 +281,7 @@ export function FazNaoFaz() {
 
 export function ContextoRio() {
   return (
-    <section className="escuro bg-[#0e1624] text-tx2">
+    <section className="escuro bg-[#0d0d0f] text-tx2">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-[1fr_1fr] md:py-24">
         <div className="flex flex-col gap-5">
           <div className="flex items-center gap-4">
@@ -311,7 +312,7 @@ export function ContextoRio() {
 
 export function DestaqueAntivandalismo() {
   return (
-    <section className="escuro bg-[#0e1624]">
+    <section className="escuro bg-[#0d0d0f]">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 md:py-20 lg:grid-cols-[1fr_0.9fr]">
         <div className="flex flex-col gap-6">
           <div className="flex items-center gap-4">
@@ -335,7 +336,7 @@ export function DestaqueAntivandalismo() {
             </Link>
           </Button>
         </div>
-        <div className="rounded-[3px] bg-[#f4f6f9] p-4 sm:p-6">
+        <div className="rounded-[3px] bg-[#111113] p-4 sm:p-6">
           <VidroSeguro className="w-full" />
         </div>
       </div>
@@ -352,7 +353,7 @@ export function useWhatsapp() {
 }
 
 /** Botão flutuante, acima da barra inferior no celular. */
-export function BotaoWhatsapp({ texto = "Olá, JR Filmes! Quero um orçamento de película antivandalismo." }: { texto?: string }) {
+export function BotaoWhatsapp({ texto = "Olá, Aplik Films! Quero um orçamento de película antivandalismo." }: { texto?: string }) {
   const wa = useWhatsapp();
   return (
     <a
@@ -362,7 +363,7 @@ export function BotaoWhatsapp({ texto = "Olá, JR Filmes! Quero um orçamento de
       aria-label="Falar no WhatsApp"
       className="fixed bottom-[calc(env(safe-area-inset-bottom,0px)+6.5rem)] right-4 z-40 grid h-14 w-14 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_14px_30px_-10px_rgba(37,211,102,.7)] transition-transform duration-150 ease-saida hover:scale-105 active:scale-[0.97] lg:bottom-6 lg:right-6"
     >
-      <MessageCircle className="h-6 w-6" aria-hidden />
+      <IconeWhatsapp className="h-7 w-7" />
     </a>
   );
 }
@@ -508,7 +509,7 @@ export function LinhasAntivandalismo() {
             <div className="mt-auto flex flex-col gap-4 border-t border-linha/10 pt-5">
               <Preco l={l} />
               <Button asChild variante={i === 0 ? "neon" : "contorno"} className="w-full">
-                <a href={wa(`Olá, JR Filmes! Quero orçamento de película antivandalismo para ${l.nome.toLowerCase()} (${l.uso.toLowerCase()}).`)} target="_blank" rel="noreferrer">
+                <a href={wa(`Olá, Aplik Films! Quero orçamento de película antivandalismo para ${l.nome.toLowerCase()} (${l.uso.toLowerCase()}).`)} target="_blank" rel="noreferrer">
                   <MessageCircle className="h-4 w-4 shrink-0" aria-hidden /> Quero esta proteção
                 </a>
               </Button>
@@ -566,7 +567,7 @@ export function SeloGarantia() {
         </p>
       </div>
       <Button asChild tamanho="lg">
-        <a href={wa("Olá, JR Filmes! Quero saber mais sobre a garantia da película antivandalismo.")} target="_blank" rel="noreferrer">
+        <a href={wa("Olá, Aplik Films! Quero saber mais sobre a garantia da película antivandalismo.")} target="_blank" rel="noreferrer">
           Receber orçamento <ArrowRight className="h-4 w-4" aria-hidden />
         </a>
       </Button>

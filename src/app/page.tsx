@@ -11,7 +11,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="tema-claro bg-white">
+    <div className="tema-claro bg-[#0a0a0b]">
       <Hero />
       <ServicosJR />
       <ProtecaoSolar />
@@ -20,20 +20,20 @@ export default function Home() {
       <section className="relative">
         <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-16 sm:px-6 md:py-28">
           <Titulo
-            eyebrow="Onde atendemos"
-            titulo={<>Na sua casa <em>ou no nosso ponto.</em></>}
-            descricao="Você escolhe: a equipe vai até você com todo o equipamento, ou você leva o carro ou a peça até um ponto de instalação. Nos dois casos, com hora marcada."
+            eyebrow="Atendimento a domicílio"
+            titulo={<>Praticidade e qualidade <em>onde você precisar.</em></>}
+            descricao="Na sua casa, no seu veículo ou na sua empresa: a equipe vai até você com todo o equipamento. Se preferir, você leva o carro ou a peça até um ponto de instalação. Sempre com hora marcada."
           />
           <figure className="relative overflow-hidden rounded-[3px]">
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src="/img/jr-casa-piscina.webp"
-              alt="Casa moderna com grandes vidros e piscina, com a baía de Guanabara ao fundo"
+              src="/img/aplik-van.webp"
+              alt="Neto, proprietário da Aplik Films, apontando para a van de atendimento a domicílio"
               loading="lazy"
-              className="aspect-[16/9] w-full object-cover object-[50%_40%] sm:aspect-[2.6/1]"
+              className="aspect-[16/10] w-full object-cover object-[50%_35%] sm:aspect-[2.2/1]"
             />
-            <figcaption className="absolute bottom-4 left-4 rounded-[3px] bg-white/90 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-tx backdrop-blur">
-              Rio de Janeiro e região
+            <figcaption className="absolute bottom-4 left-4 rounded-[3px] bg-black/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-tx backdrop-blur">
+              Na sua casa • No seu veículo • Na sua empresa
             </figcaption>
           </figure>
           <AtendimentoLocal />
@@ -65,7 +65,7 @@ export default function Home() {
         <Titulo eyebrow="Dúvidas frequentes" titulo="Antes de agendar." />
         <Perguntas />
       </section>
-      <BotaoWhatsapp texto="Olá, JR Filmes! Quero um orçamento." />
+      <BotaoWhatsapp texto="Olá, Aplik Films! Quero um orçamento." />
     </div>
   );
 }

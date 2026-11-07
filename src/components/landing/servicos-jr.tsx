@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { ArrowUpRight, Car, Eye, Hammer, Home, Shield, ShieldCheck, Sparkles, Sun, Thermometer, Zap } from "lucide-react";
+import { ArrowUpRight, Car, Eye, Hammer, Home, MapPin, Refrigerator, Shield, ShieldCheck, Sparkles, Sun, Thermometer, Zap } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 import { Titulo } from "@/components/ui/primitivos";
 
@@ -39,92 +39,117 @@ const SERVICOS: Servico[] = [
     icone: Car,
     titulo: "Insulfilm",
     destaque: "automotivo",
-    texto: "Mais segurança, conforto térmico e proteção contra raios UV. Películas de alta performance e resistência.",
+    texto: "Conforto, privacidade e proteção para o seu carro, com películas de alta performance.",
     href: "/pelicula",
-    foto: "/img/jr-insulfilm.webp",
-    alt: "Vidros laterais de um carro preto com insulfilm refletindo prédios",
+    foto: "/img/aplik-insulfilm.webp",
+    alt: "Neto apontando para o vidro de um carro com insulfilm",
     selos: [
-      { icone: Sun, rotulo: "Anti-irradiação UV 99%" },
+      { icone: Sun, rotulo: "Bloqueio de raios UV" },
       { icone: Thermometer, rotulo: "Reduz o calor interno" },
       { icone: Eye, rotulo: "Mais privacidade" },
     ],
   },
   {
-    id: "envelopamento",
-    icone: Car,
-    titulo: "Envelopamento",
-    destaque: "automotivo",
-    texto: "Transforme o visual do seu veículo com estilo e personalidade. Diversas cores, texturas e acabamentos.",
-    href: "/envelopamento",
-    foto: "/img/jr-envelopamento.webp",
-    alt: "Carro esportivo envelopado em grafite fosco em estúdio claro",
-    amostras: ACABAMENTOS_AUTO,
-  },
-  {
-    id: "residencial",
-    icone: Home,
-    titulo: "Películas",
-    destaque: "residenciais e comerciais",
-    texto: "Conforto térmico, privacidade e proteção solar para casas, apartamentos, escritórios, lojas e muito mais.",
-    href: "/arquitetonico",
-    foto: "/img/jr-comercial.webp",
-    alt: "Prédio comercial com fachada de vidro refletindo palmeiras",
-    selos: [
-      { icone: Thermometer, rotulo: "Conforto térmico" },
-      { icone: Eye, rotulo: "Privacidade" },
-      { icone: Sparkles, rotulo: "Decoração e design" },
-    ],
-  },
-  {
-    id: "superficies",
-    icone: Sparkles,
-    titulo: "Envelopamento",
-    destaque: "de superfícies",
-    texto: "Parece mármore, porcelanato, madeira e muito mais. Renove e valorize seus ambientes com sofisticação e praticidade.",
-    href: "/arquitetonico",
-    foto: "/img/jr-superficies.webp",
-    alt: "Cozinha com ilha em mármore branco e armários de madeira",
-    amostras: ACABAMENTOS_SUPERFICIE,
-  },
-  {
     id: "seguranca",
     icone: ShieldCheck,
-    titulo: "Película",
-    destaque: "de segurança",
-    texto: "Mais resistência contra impactos, prevenção de arrombamentos e proteção para vidros de veículos, residências e comércios.",
+    titulo: "Películas de segurança",
+    destaque: "antivandalismo",
+    texto: "Mais resistência contra impactos, tentativas de furto e vandalismo em carros, casas e comércios.",
     href: "/antivandalismo",
-    foto: "/img/jr-seguranca.webp",
-    alt: "Vidro de carro trincado após impacto, preso pela película de segurança",
+    foto: "/img/aplik-seguranca.webp",
+    alt: "Neto ao lado de um vidro trincado que a película de segurança manteve no lugar",
     selos: [
       { icone: Hammer, rotulo: "Resiste a impactos" },
       { icone: Zap, rotulo: "Evita estilhaços" },
       { icone: Shield, rotulo: "Mais segurança" },
     ],
   },
+  {
+    id: "solar",
+    icone: Sun,
+    titulo: "Proteção solar",
+    destaque: "e térmica",
+    texto: "Redução de calor, proteção dos estofados e móveis e bloqueio dos raios UV.",
+    href: "/#protecao-uv",
+    foto: "/img/aplik-solar.webp",
+    alt: "Neto de óculos escuros apontando para uma janela com película de controle solar",
+  },
+  {
+    id: "envelopamento",
+    icone: Car,
+    titulo: "Envelopamento",
+    destaque: "automotivo",
+    texto: "Personalize, proteja a pintura e valorize o seu veículo. Diversas cores, texturas e acabamentos.",
+    href: "/envelopamento",
+    foto: "/img/aplik-envelopamento.webp",
+    alt: "Neto aplicando vinil preto fosco no capô de um carro",
+    amostras: ACABAMENTOS_AUTO,
+  },
+  {
+    id: "superficies",
+    icone: Sparkles,
+    titulo: "Envelopamento",
+    destaque: "de superfícies",
+    texto: "Porcelanato e mármore: renove ambientes com elegância, praticidade e baixo custo.",
+    href: "/arquitetonico",
+    foto: "/img/aplik-superficies.webp",
+    alt: "Neto apontando para uma parede revestida em mármore preto",
+    amostras: ACABAMENTOS_SUPERFICIE,
+  },
+  {
+    id: "residencial",
+    icone: Home,
+    titulo: "Insulfilm",
+    destaque: "residencial e comercial",
+    texto: "Privacidade, controle de luminosidade, conforto térmico e mais segurança para sua casa ou empresa.",
+    href: "/arquitetonico",
+    foto: "/img/aplik-residencial.webp",
+    alt: "Neto apontando para portas de vidro com película em uma casa",
+  },
+  {
+    id: "geladeira",
+    icone: Refrigerator,
+    titulo: "Envelopamento",
+    destaque: "de geladeiras",
+    texto: "Transforme sua geladeira com um visual moderno, elegante e personalizado, por valor fechado.",
+    href: "/arquitetonico",
+    foto: "/img/aplik-geladeira.webp",
+    alt: "Neto aplicando vinil preto em uma geladeira inox",
+  },
+  {
+    id: "domicilio",
+    icone: MapPin,
+    titulo: "Atendimento",
+    destaque: "a domicílio",
+    texto: "Levamos qualidade, segurança e praticidade até a sua casa, seu veículo ou sua empresa.",
+    href: "/#orcamento",
+    foto: "/img/aplik-domicilio.webp",
+    alt: "Neto de braços cruzados ao lado da van Aplik Films de atendimento a domicílio",
+  },
 ];
 
 /**
- * Os cinco serviços da arte JR Filmes: foto com corte diagonal, título em caixa alta,
+ * Os oito serviços das artes Aplik Films: o recorte de cada arte (Neto + serviço), título em caixa alta,
  * texto curto e, embaixo, os selos de benefício ou as amostras de acabamento.
  */
 export function ServicosJR() {
   return (
-    <section id="servicos" className="scroll-mt-20 bg-[#f4f6f9]">
+    <section id="servicos" className="scroll-mt-20 bg-[#0d0d0f]">
       <div className="mx-auto flex max-w-[1440px] flex-col gap-10 px-4 py-16 sm:px-6 md:py-24">
         <Titulo
           className="mx-auto items-center text-center"
           eyebrow="Nossos serviços"
-          titulo={<>Do carro <em>à sua casa.</em></>}
-          descricao="Insulfilm, envelopamento e películas para veículos, residências, comércios e escritórios, com acabamento de alto padrão."
+          titulo={<>Soluções em películas <em>e envelopamento.</em></>}
+          descricao="Do carro à geladeira: insulfilm, películas de segurança, proteção solar e envelopamento, com atendimento a domicílio."
         />
-        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-5 lg:gap-0">
-          {SERVICOS.map((s, i) => (
-            <li key={s.id} className={i === 0 ? "" : "lg:-ml-px"}>
+        <ul className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+          {SERVICOS.map((s) => (
+            <li key={s.id}>
               <Link
                 href={s.href}
-                className="group flex h-full flex-col overflow-hidden rounded-[3px] bg-white shadow-[0_24px_48px_-36px_rgba(15,30,60,.5)] ring-1 ring-linha/[0.06] transition-shadow duration-200 hover:shadow-[0_30px_60px_-30px_rgba(26,95,216,.45)] lg:rounded-none"
+                className="group flex h-full flex-col overflow-hidden rounded-[10px] border border-ouro/30 bg-[#141417] shadow-[0_24px_48px_-36px_rgba(0,0,0,.8)] transition-[box-shadow,border-color] duration-200 hover:border-ouro/80 hover:shadow-[0_0_40px_-12px_rgba(225,9,20,.7)]"
               >
-                <div className="relative aspect-[16/10] overflow-hidden bg-[#0a1222] lg:[clip-path:polygon(14%_0,100%_0,86%_100%,0_100%)]">
+                <div className="relative aspect-[1000/420] overflow-hidden bg-[#050505]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
                   <img src={s.foto} alt={s.alt} loading="lazy" className="h-full w-full object-cover transition-transform duration-500 ease-saida group-hover:scale-[1.04]" />
                 </div>
@@ -133,7 +158,7 @@ export function ServicosJR() {
                     <s.icone className="mt-0.5 h-7 w-7 shrink-0 text-ouro" strokeWidth={1.6} aria-hidden />
                     <span>
                       {s.titulo}
-                      {s.destaque && <span className={i === 2 ? "block text-ouro" : "block"}>{s.destaque}</span>}
+                      {s.destaque && <span className="block text-ouro">{s.destaque}</span>}
                     </span>
                   </h3>
                   <p className="text-[13.5px] leading-relaxed text-tx3">{s.texto}</p>

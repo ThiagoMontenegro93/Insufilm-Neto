@@ -6,17 +6,16 @@ import { NavInferior, NavTopo, Rodape } from "@/components/layout/navegacao";
 
 const display = Saira({ subsets: ["latin"], style: ["normal", "italic"], axes: ["wdth"], variable: "--font-display", display: "swap" });
 const corpo = Montserrat({ subsets: ["latin"], style: ["normal", "italic"], variable: "--font-corpo", display: "swap" });
-// pincelada da assinatura "Seu ambiente do seu jeito!"
 const script = Kaushan_Script({ subsets: ["latin"], weight: "400", variable: "--font-script", display: "swap" });
 const mono = JetBrains_Mono({ subsets: ["latin"], variable: "--font-mono", display: "swap" });
 
 export const metadata: Metadata = {
-  title: { default: "JR Filmes · Insulfilm, envelopamento e películas", template: "%s · JR Filmes" },
-  description: "Proteção, conforto, estilo e valorização. Insulfilm automotivo, envelopamento automotivo e de superfícies, películas residenciais e comerciais.",
+  title: { default: "Aplik Films · Soluções em películas e envelopamento", template: "%s · Aplik Films" },
+  description: "Proteção, segurança, privacidade e estilo. Insulfilm automotivo, residencial e comercial, películas de segurança, proteção solar, envelopamento automotivo, de superfícies e de geladeiras, com atendimento a domicílio no Rio de Janeiro. WhatsApp (21) 99017-9141.",
 };
 
 export const viewport: Viewport = {
-  themeColor: "#ffffff",
+  themeColor: "#070708",
   viewportFit: "cover",
   width: "device-width",
   initialScale: 1,

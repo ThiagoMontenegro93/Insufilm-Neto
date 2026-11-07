@@ -8,7 +8,7 @@ import { recalcularPrecos } from "./custos";
 export type UnidadePreco = "m2" | "fixo";
 
 /**
- * Quanto custa fazer o serviço: o que a JR paga ao fornecedor pelo material e a mão de obra.
+ * Quanto custa fazer o serviço: o que a Aplik paga ao fornecedor pelo material e a mão de obra.
  * Com `automatico` ligado, o preço de venda é calculado a partir daqui (ver `recalcularPrecos`).
  */
 export interface CustoItem {
@@ -150,6 +150,14 @@ export interface PlatformConfig {
     nome: string;
     slogan: string;
     whatsappComercial: string;
+    /** E-mail público para orçamentos. */
+    email: string;
+    /** Usuário do Instagram, sem @. */
+    instagram: string;
+    /** Nome da página do Facebook, como aparece nas artes. */
+    facebookNome: string;
+    /** Link da página do Facebook. Vazio = busca pelo nome. */
+    facebookUrl: string;
     garantiaAnos: number;
     /** Região atendida em domicílio (casa, empresa, garagem). */
     areaDomicilio: string;
@@ -170,7 +178,7 @@ const custo = (fornecedor: string, materialM2: number, perdaPct: number, maoDeOb
 });
 
 const CONFIG_BASE: PlatformConfig = {
-  versao: 5,
+  versao: 6,
   taxas: {
     plataformaPct: 30,
     indicadorPct: 5,
@@ -292,7 +300,7 @@ const CONFIG_BASE: PlatformConfig = {
     { id: "condominio", nome: "Condomínio", ativo: true, mensagemModelo: "Olá, {empresa}! Temos película de segurança para portarias e áreas comuns, com garantia de 5 anos." },
     { id: "autopecas", nome: "Autopeças", ativo: true, mensagemModelo: "Olá, {empresa}! Que tal indicar película e envelopamento e ganhar 5% por serviço fechado?" },
     { id: "consultorio", nome: "Consultório", ativo: false, mensagemModelo: "Olá, {empresa}! Película jateada dá privacidade à recepção sem perder a luz natural." },
-    { id: "envelopamento", nome: "Envelopamento automotivo", ativo: true, mensagemModelo: "Olá, {empresa}! A JR Filmes tem programa de indicação com repasse por PIX. Vamos conversar?" },
+    { id: "envelopamento", nome: "Envelopamento automotivo", ativo: true, mensagemModelo: "Olá, {empresa}! A Aplik Films tem programa de indicação com repasse por PIX. Vamos conversar?" },
     { id: "marcenaria", nome: "Marcenaria", ativo: true, mensagemModelo: "Olá, {empresa}! Envelopamento arquitetônico renova móveis sem obra. Vamos conversar?" },
     { id: "vidracaria", nome: "Vidraçaria", ativo: true, mensagemModelo: "Olá, {empresa}! Indique película de segurança aos seus clientes e receba comissão." },
     { id: "geladeira", nome: "Assistência de geladeira", ativo: false, mensagemModelo: "Olá, {empresa}! Envelopamos geladeiras por valor fechado. Parceria?" },
@@ -304,9 +312,13 @@ const CONFIG_BASE: PlatformConfig = {
     exigirOptOut: true,
   },
   site: {
-    nome: "JR Filmes",
-    slogan: "Proteção • Estilo • Sofisticação",
-    whatsappComercial: "5521000000000",
+    nome: "Aplik Films",
+    slogan: "Soluções em películas e envelopamento",
+    whatsappComercial: "5521990179141",
+    email: "aplikfilms.orcamento@outlook.com",
+    instagram: "aplikfilms.oficial",
+    facebookNome: "APLIK FILMS",
+    facebookUrl: "",
     garantiaAnos: 5,
     areaDomicilio: "Rio de Janeiro e região",
     pontosInstalacao: [],

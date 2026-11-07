@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Seções da identidade JR Filmes: benefícios, serviços em grade editorial com fotos,
+ * Seções da identidade Aplik Films: benefícios, serviços em grade editorial com fotos,
  * atendimento em domicílio ou em ponto de instalação, comparativo de películas e dúvidas.
  */
 import Link from "next/link";
@@ -197,7 +197,7 @@ const PASSOS = [
   { icone: BadgeCheck, titulo: "Garantia e suporte", texto: "Certificado de garantia e acompanhamento depois." },
 ];
 
-const SERVICOS_PEDIDO = ["Película antivandalismo", "Insulfilm automotivo", "Envelopamento automotivo", "Envelopamento de superfícies", "Películas residenciais e comerciais", "Revestimentos decorativos"];
+const SERVICOS_PEDIDO = ["Película de segurança (antivandalismo)", "Insulfilm automotivo", "Proteção solar e térmica", "Envelopamento automotivo", "Envelopamento de superfícies (porcelanato e mármore)", "Insulfilm residencial e comercial", "Envelopamento de geladeiras"];
 
 export function AtendimentoLocal({ servicoInicial = SERVICOS_PEDIDO[0] }: { servicoInicial?: string }) {
   const { config } = usePlataforma();
@@ -208,7 +208,7 @@ export function AtendimentoLocal({ servicoInicial = SERVICOS_PEDIDO[0] }: { serv
   const [nome, setNome] = useState("");
 
   const mensagem = encodeURIComponent(
-    `Olá, JR Filmes! Meu nome é ${nome.trim() || "(seu nome)"}.\nQuero orçamento de ${servico.toLowerCase()}.\nLocal: ${local === "domicilio" ? `em domicílio${bairro.trim() ? `, bairro ${bairro.trim()}` : ""}` : "em um ponto de instalação"}.`,
+    `Olá, ${site.nome}! Meu nome é ${nome.trim() || "(seu nome)"}.\nQuero orçamento de ${servico.toLowerCase()}.\nLocal: ${local === "domicilio" ? `em domicílio${bairro.trim() ? `, bairro ${bairro.trim()}` : ""}` : "em um ponto de instalação"}.`,
   );
 
   const opcoes = [
