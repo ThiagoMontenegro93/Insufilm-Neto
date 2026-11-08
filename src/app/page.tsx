@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 
 export default function Home() {
   return (
-    <div className="tema-claro bg-[#0a0a0b]">
+    <div className="bg-fundo">
       <Hero />
       <ServicosJR />
       <GaleriaArtes />
@@ -34,7 +34,7 @@ export default function Home() {
               loading="lazy"
               className="aspect-[16/10] w-full object-cover object-[50%_35%] sm:aspect-[2.2/1]"
             />
-            <figcaption className="absolute bottom-4 left-4 rounded-[3px] bg-black/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-tx backdrop-blur">
+            <figcaption className="absolute bottom-4 left-4 rounded-[3px] bg-black/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white backdrop-blur">
               Na sua casa • No seu veículo • Na sua empresa
             </figcaption>
           </figure>

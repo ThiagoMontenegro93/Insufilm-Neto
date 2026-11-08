@@ -1,4 +1,5 @@
 import { recalcularPrecos } from "./custos";
+import type { TemaId } from "./temas";
 
 /**
  * Configuração da plataforma editada no Creator Hub.
@@ -159,6 +160,10 @@ export interface PlatformConfig {
     /** Link da página do Facebook. Vazio = busca pelo nome. */
     facebookUrl: string;
     garantiaAnos: number;
+    /** Tema padrão da vitrine (ver src/lib/temas.ts). */
+    tema: TemaId;
+    /** Mostra o botão de temas no menu para o visitante trocar. */
+    seletorTema: boolean;
     /** Região atendida em domicílio (casa, empresa, garagem). */
     areaDomicilio: string;
     /** Endereços dos pontos de instalação fixos. Vazio = "consulte o mais próximo". */
@@ -178,7 +183,7 @@ const custo = (fornecedor: string, materialM2: number, perdaPct: number, maoDeOb
 });
 
 const CONFIG_BASE: PlatformConfig = {
-  versao: 6,
+  versao: 7,
   taxas: {
     plataformaPct: 30,
     indicadorPct: 5,
@@ -320,6 +325,8 @@ const CONFIG_BASE: PlatformConfig = {
     facebookNome: "APLIK FILMS",
     facebookUrl: "",
     garantiaAnos: 5,
+    tema: "noir",
+    seletorTema: true,
     areaDomicilio: "Rio de Janeiro e região",
     pontosInstalacao: [],
   },

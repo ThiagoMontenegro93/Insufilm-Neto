@@ -12,7 +12,7 @@ const ARTES = [
 /** Vitrine com as artes oficiais da marca, rolando na horizontal no celular. */
 export function GaleriaArtes() {
   return (
-    <section className="relative overflow-hidden bg-[#070708]">
+    <section className="relative overflow-hidden bg-fundo2">
       <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-16 sm:px-6 md:py-24">
         <Titulo eyebrow="Aplik Films em ação" titulo={<>Proteção <em>e estilo.</em></>} descricao="As peças oficiais da marca. Toque em uma para ver em tamanho cheio." />
         <ul className="sem-barra -mx-4 flex snap-x snap-mandatory gap-4 overflow-x-auto px-4 pb-2 sm:mx-0 sm:px-0">

@@ -46,7 +46,7 @@ const PARA_QUEM = [
  */
 export function ProtecaoSolar() {
   return (
-    <section id="protecao-uv" className="relative scroll-mt-24 overflow-hidden bg-[#0a0a0b]">
+    <section id="protecao-uv" className="relative scroll-mt-24 overflow-hidden bg-fundo">
       <div className="pointer-events-none absolute -left-40 top-24 h-[420px] w-[420px] rounded-full bg-azul/[0.06] blur-3xl" aria-hidden />
       <div className="relative mx-auto grid max-w-7xl gap-12 px-4 py-16 sm:px-6 md:py-28 lg:grid-cols-[0.95fr_1.05fr] lg:items-center">
         <figure className="relative">
@@ -57,7 +57,7 @@ export function ProtecaoSolar() {
             loading="lazy"
             className="aspect-square w-full rounded-[3px] object-cover shadow-[0_40px_80px_-40px_rgba(15,30,60,.55)]"
           />
-          <figcaption className="absolute -bottom-5 left-4 right-4 flex items-center gap-3 rounded-[3px] bg-[#141417] px-4 py-3 text-[13px] text-tx shadow-[0_20px_40px_-24px_rgba(0,0,0,.8)] sm:left-auto sm:right-6 sm:max-w-xs">
+          <figcaption className="absolute -bottom-5 left-4 right-4 flex items-center gap-3 rounded-[3px] bg-sup px-4 py-3 text-[13px] text-tx shadow-[0_20px_40px_-24px_rgba(0,0,0,.8)] sm:left-auto sm:right-6 sm:max-w-xs">
             <span className="grid h-9 w-9 shrink-0 place-items-center rounded-full bg-gradient-to-br from-[#ffd54a] to-[#f59e0b] text-white">
               <Sun className="h-5 w-5" aria-hidden />
             </span>
@@ -98,7 +98,7 @@ export function ProtecaoSolar() {
 
           <ul className="grid gap-4 sm:grid-cols-3">
             {NUMEROS.map((n) => (
-              <li key={n.valor} className="flex flex-col gap-2 rounded-[3px] border border-linha/[0.08] bg-[#111113] p-5">
+              <li key={n.valor} className="flex flex-col gap-2 rounded-[3px] border border-linha/[0.08] bg-fundo2 p-5">
                 <n.icone className="h-5 w-5 text-ouro" strokeWidth={1.6} aria-hidden />
                 <p className="font-sans tracking-[-0.02em] text-[1.52rem] font-semibold leading-none text-tx">{n.valor}</p>
                 <p className="text-[13px] font-semibold text-tx">{n.titulo}</p>

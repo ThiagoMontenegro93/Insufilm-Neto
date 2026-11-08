@@ -5,6 +5,7 @@ import { usePathname } from "next/navigation";
 import { Car, EyeOff, Gem, Handshake, Home, LayoutDashboard, Shield, ShieldCheck, Sofa, Thermometer, Wallet } from "lucide-react";
 import { usePlataforma } from "@/lib/store";
 import { BlocoContatos } from "@/components/ui/contatos";
+import { SeletorTema } from "@/components/layout/seletor-tema";
 import { cn } from "@/lib/utils";
 
 export const ITENS_NAV = [
@@ -36,16 +37,12 @@ function ehPainel(path: string) {
  */
 export function MarcaAplik({ className, prioridade = false }: { className?: string; prioridade?: boolean }) {
   return (
-    // eslint-disable-next-line @next/next/no-img-element
-    <img
-      src="/img/aplik-logo.webp"
-      alt="Aplik Films"
-      width={582}
-      height={215}
-      className={cn("h-auto select-none", className)}
-      fetchPriority={prioridade ? "high" : undefined}
-      draggable={false}
-    />
+    <span className={cn("inline-block select-none", className)}>
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/img/aplik-logo.webp" alt="Aplik Films" width={582} height={215} className="logo-escuro h-auto w-full" fetchPriority={prioridade ? "high" : undefined} draggable={false} />
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img src="/img/aplik-logo-claro.webp" alt="" aria-hidden width={582} height={215} className="logo-claro h-auto w-full" draggable={false} />
+    </span>
   );
 }
 
@@ -77,7 +74,7 @@ export function NavTopo() {
   const painel = ehPainel(path);
   return (
     <header
-      className={cn("sticky top-0 z-40 border-b", painel ? "escuro border-white/[0.06] bg-noite-fundo/90 backdrop-blur-xl" : "border-ouro/30 bg-[#070708]/95 backdrop-blur-xl")}
+      className={cn("sticky top-0 z-40 border-b", painel ? "escuro border-white/[0.06] bg-noite-fundo/90 backdrop-blur-xl" : "border-ouro/30 bg-fundo/90 backdrop-blur-xl")}
       style={{ top: "env(safe-area-inset-top, 0px)" }}
     >
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between gap-6 px-4 sm:px-6">
@@ -96,9 +93,11 @@ export function NavTopo() {
             </Link>
           ))}
         </nav>
+        <div className="flex items-center gap-2">
+        {!painel && <SeletorTema />}
         <Link
           href="/admin/creator"
-          className="hidden items-center gap-2 rounded-[3px] border border-linha/15 px-3 py-2 text-sm text-tx2 transition-colors hover:border-ouro/50 hover:text-ouro sm:flex"
+          className="hidden items-center gap-2 whitespace-nowrap rounded-[3px] border border-linha/15 px-3 py-2 text-sm text-tx2 transition-colors hover:border-ouro/50 hover:text-ouro sm:flex"
         >
           <LayoutDashboard className="h-4 w-4" aria-hidden />
           Creator Hub
@@ -106,6 +105,7 @@ export function NavTopo() {
         <Link href="/admin/creator" className="grid h-10 w-10 place-items-center rounded-[3px] border border-linha/15 text-tx2 sm:hidden" aria-label="Creator Hub">
           <LayoutDashboard className="h-4 w-4" aria-hidden />
         </Link>
+        </div>
       </div>
     </header>
   );
@@ -123,7 +123,7 @@ export function NavInferior() {
       <ul
         className={cn(
           "mx-auto flex max-w-md items-stretch justify-between rounded-[24px] border p-1.5 backdrop-blur-2xl",
-          painel ? "border-white/10 bg-[#111113]/85 shadow-[0_20px_50px_-12px_rgba(0,0,0,.9)]" : "border-white/10 bg-[#111113]/90 shadow-[0_20px_50px_-12px_rgba(0,0,0,.9)]",
+          painel ? "border-white/10 bg-[#111113]/85 shadow-[0_20px_50px_-12px_rgba(0,0,0,.9)]" : "border-linha/10 bg-sup/90 shadow-[0_20px_50px_-12px_rgb(var(--sombra)/.6)]",
         )}
       >
         {ITENS_NAV.map((i) => {
@@ -163,9 +163,9 @@ export function FaixaBeneficios({ className }: { className?: string }) {
   return (
     <ul className={cn("grid grid-cols-2 gap-px overflow-hidden rounded-[10px] border border-ouro/40 bg-ouro/25 shadow-[0_0_40px_-18px_rgba(225,9,20,.9)] sm:grid-cols-5", className)}>
       {DIFERENCIAIS.map((d, i) => (
-        <li key={d.rotulo} className={cn("flex flex-col items-center justify-center gap-2 bg-[#0c0c0e] px-3 py-5 text-center", i === 4 && "col-span-2 sm:col-span-1")}>
-          <d.icone className="h-8 w-8 text-white" strokeWidth={1.4} aria-hidden />
-          <span className="text-[10.5px] font-bold uppercase leading-tight tracking-[0.06em] text-white">{d.rotulo}</span>
+        <li key={d.rotulo} className={cn("flex flex-col items-center cartao-tema justify-center gap-2 bg-sup px-3 py-5 text-center", i === 4 && "col-span-2 sm:col-span-1")}>
+          <d.icone className="h-8 w-8 text-tx" strokeWidth={1.4} aria-hidden />
+          <span className="text-[10.5px] font-bold uppercase leading-tight tracking-[0.06em] text-tx">{d.rotulo}</span>
         </li>
       ))}
     </ul>
@@ -176,9 +176,9 @@ export function FaixaBeneficios({ className }: { className?: string }) {
 export function Rodape() {
   const { site } = usePlataforma().config;
   return (
-    <footer className="escuro relative overflow-hidden border-t border-ouro/40 bg-[#070708] pb-seguro lg:pb-0">
-      <div aria-hidden className="pointer-events-none absolute -bottom-24 -left-24 h-72 w-[46rem] -rotate-12 bg-gradient-to-r from-[#e10914]/45 via-[#e10914]/10 to-transparent blur-3xl" />
-      <div aria-hidden className="pointer-events-none absolute -right-20 top-0 h-full w-40 -skew-x-[24deg] bg-gradient-to-b from-[#e10914]/40 to-transparent" />
+    <footer className="bg-fundo2 relative overflow-hidden border-t border-ouro/40 pb-seguro lg:pb-0">
+      <div aria-hidden className="brilho-tema pointer-events-none absolute -bottom-24 -left-24 h-72 w-[46rem] -rotate-12 bg-gradient-to-r from-[#e10914]/45 via-[#e10914]/10 to-transparent blur-3xl" />
+      <div aria-hidden className="brilho-tema pointer-events-none absolute -right-20 top-0 h-full w-40 -skew-x-[24deg] bg-gradient-to-b from-[#e10914]/40 to-transparent" />
       <div className="relative mx-auto flex max-w-7xl flex-col gap-10 px-4 py-12 sm:px-6 lg:py-16">
         <FaixaBeneficios />
         <div className="grid items-center gap-10 lg:grid-cols-[auto_1px_1fr_auto]">
@@ -201,7 +201,7 @@ export function Rodape() {
             </p>
           </div>
         </div>
-        <p className="border-t border-white/[0.06] pt-6 text-[11px] text-tx4">
+        <p className="border-t border-linha/[0.08] pt-6 text-[11px] text-tx4">
           © {new Date().getFullYear()} {site.nome} · {site.slogan}
         </p>
       </div>

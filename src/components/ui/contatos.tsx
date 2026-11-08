@@ -31,7 +31,7 @@ export function BlocoContatos({ className, mensagem = "Olá, Aplik Films! Quero 
         href={linkWhatsapp(site, mensagem)}
         target="_blank"
         rel="noreferrer"
-        className="group flex items-center gap-3 text-white transition-colors hover:text-[#25D366]"
+        className="group flex items-center gap-3 text-tx transition-colors hover:text-[#1fae55]"
         aria-label={`Chamar no WhatsApp ${telefoneFormatado(site.whatsappComercial)}`}
       >
         <span className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[#25D366] text-white shadow-[0_10px_24px_-10px_rgba(37,211,102,.8)]">
@@ -45,7 +45,7 @@ export function BlocoContatos({ className, mensagem = "Olá, Aplik Films! Quero 
             <a
               href={l.href}
               {...(l.externo ? { target: "_blank", rel: "noreferrer" } : {})}
-              className="flex items-center gap-3 text-[13px] font-semibold tracking-[0.02em] text-tx2 transition-colors hover:text-white sm:text-[14px]"
+              className="flex items-center gap-3 text-[13px] font-semibold tracking-[0.02em] text-tx2 transition-colors hover:text-tx sm:text-[14px]"
             >
               <span className="grid h-8 w-8 shrink-0 place-items-center rounded-full border border-ouro/40 text-ouro">{l.icone}</span>
               <span className="sr-only">{l.rotulo}: </span>

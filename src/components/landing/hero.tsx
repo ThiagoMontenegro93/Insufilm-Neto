@@ -40,16 +40,16 @@ export function Hero() {
   const { config } = usePlataforma();
   const { site } = config;
   return (
-    <section className="escuro relative overflow-hidden bg-[#070708]">
+    <section className="bg-fundo relative overflow-hidden">
       {/* brilhos e cortes vermelhos das artes */}
-      <div aria-hidden className="pointer-events-none absolute inset-0">
+      <div aria-hidden className="brilho-tema pointer-events-none absolute inset-0">
         <div className="absolute -left-40 -top-24 h-[28rem] w-[60rem] -rotate-[18deg] bg-gradient-to-r from-[#e10914]/35 via-[#e10914]/5 to-transparent blur-3xl" />
         <div className="absolute -right-10 top-0 h-full w-24 -skew-x-[22deg] bg-gradient-to-b from-[#ff2a33] via-[#e10914]/50 to-transparent opacity-80" />
         <div className="absolute -right-2 top-0 h-full w-3 -skew-x-[22deg] bg-[#ff3b3b]/80 blur-[1px]" />
         <div className="absolute bottom-0 left-0 h-40 w-full bg-gradient-to-t from-[#e10914]/25 to-transparent" />
       </div>
 
-      <div className="relative mx-auto grid max-w-7xl items-end gap-0 px-4 pt-8 sm:px-6 lg:min-h-[640px] lg:grid-cols-[0.95fr_1.05fr] lg:pt-0">
+      <div className="relative mx-auto grid max-w-7xl items-end gap-0 px-4 pt-8 sm:px-6 lg:min-h-[640px] lg:grid-cols-[0.95fr_1.05fr] lg:gap-10 lg:pt-0">
         {/* Neto apontando para a marca */}
         <figure className="relative order-2 mx-auto w-full max-w-[460px] lg:order-1 lg:max-w-none">
           {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -58,10 +58,10 @@ export function Hero() {
             alt="Neto, proprietário da Aplik Films, de polo preta com o logotipo, apontando para o lado"
             width={432}
             height={650}
-            className="w-full [mask-image:linear-gradient(to_bottom,transparent,#000_8%,#000_80%,transparent),linear-gradient(to_right,transparent,#000_10%,#000_92%,transparent)] [mask-composite:intersect]"
+            className="foto-hero w-full [mask-image:linear-gradient(to_bottom,transparent,#000_8%,#000_80%,transparent),linear-gradient(to_right,transparent,#000_10%,#000_92%,transparent)] [mask-composite:intersect]"
             fetchPriority="high"
           />
-          <figcaption className="absolute bottom-10 left-4 rounded-full border border-ouro/70 bg-black/70 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-white backdrop-blur">
+          <figcaption className="absolute bottom-10 left-4 rounded-full border border-ouro/70 bg-sup/80 px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.14em] text-tx backdrop-blur">
             Neto <span className="text-ouro">•</span> Proprietário
           </figcaption>
         </figure>
@@ -77,7 +77,7 @@ export function Hero() {
             <span className="h-0.5 w-full max-w-md bg-gradient-to-r from-transparent via-ouro to-transparent lg:from-ouro" aria-hidden />
           </h1>
 
-          <p className="flex flex-wrap justify-center gap-x-2.5 gap-y-1 text-[10.5px] font-semibold uppercase tracking-[0.12em] text-white sm:gap-x-3 sm:text-[12px] sm:tracking-[0.18em] lg:justify-start">
+          <p className="flex flex-wrap justify-center gap-x-2.5 gap-y-1 text-[10.5px] font-semibold uppercase tracking-[0.12em] text-tx sm:gap-x-3 sm:text-[12px] sm:tracking-[0.18em] lg:justify-start">
             {["Proteção", "Segurança", "Privacidade", "Estilo"].map((t, i) => (
               <span key={t} className="flex items-center gap-3">
                 {i > 0 && <span className="h-3 w-px bg-ouro" aria-hidden />}
@@ -88,12 +88,12 @@ export function Hero() {
 
           <Link
             href="#orcamento"
-            className="group relative -skew-x-[8deg] rounded-[8px] border border-ouro/60 bg-black/50 px-6 py-4 shadow-[0_0_50px_-14px_rgba(225,9,20,.9)] transition-[filter] hover:brightness-110"
+            className="group relative -skew-x-[8deg] cartao-tema rounded-[8px] border border-ouro/60 bg-sup/60 px-6 py-4 shadow-[0_0_50px_-14px_rgba(225,9,20,.9)] transition-[filter] hover:brightness-110"
           >
-            <span className="block skew-x-[8deg] font-sans font-extrabold uppercase italic leading-[0.95] text-white">
-              <span className="block w-fit rounded-[4px] bg-gradient-to-b from-[#f0262f] to-[#a3070e] px-3 py-1 text-[1.5rem] sm:text-[2rem]">Peça seu</span>
+            <span className="block skew-x-[8deg] font-sans font-extrabold uppercase italic leading-[0.95] text-tx">
+              <span className="block w-fit rounded-[4px] bg-gradient-to-b from-[#f0262f] to-[#a3070e] px-3 py-1 text-[1.5rem] text-white sm:text-[2rem]">Peça seu</span>
               <span className="block py-1 text-[2.3rem] sm:text-[3.2rem]">orçamento</span>
-              <span className="ml-auto block w-fit rounded-[4px] bg-gradient-to-b from-[#f0262f] to-[#a3070e] px-3 py-1 text-[1.5rem] sm:text-[2rem]">
+              <span className="ml-auto block w-fit rounded-[4px] bg-gradient-to-b from-[#f0262f] to-[#a3070e] px-3 py-1 text-[1.5rem] text-white sm:text-[2rem]">
                 agora <ArrowRight className="inline h-6 w-6 transition-transform group-hover:translate-x-1" aria-hidden />
               </span>
             </span>

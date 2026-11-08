@@ -23,6 +23,8 @@ const config: Config = {
         tx4: tom("tx4"),
         linha: tom("linha"),
         sup: tom("sup"),
+        fundo: tom("fundo"),
+        fundo2: tom("fundo2"),
         mar: "#0E6BA8",
         azul: { DEFAULT: "#E10914", claro: "#FF3B3B", escuro: "#8E060C" },
         noite: { DEFAULT: "#111113", fundo: "#070708" },

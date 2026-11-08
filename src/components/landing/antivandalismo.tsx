@@ -281,7 +281,7 @@ export function FazNaoFaz() {
 
 export function ContextoRio() {
   return (
-    <section className="escuro bg-[#0d0d0f] text-tx2">
+    <section className="bg-fundo2 text-tx2">
       <div className="mx-auto grid max-w-7xl gap-10 px-4 py-16 sm:px-6 md:grid-cols-[1fr_1fr] md:py-24">
         <div className="flex flex-col gap-5">
           <div className="flex items-center gap-4">
@@ -312,7 +312,7 @@ export function ContextoRio() {
 
 export function DestaqueAntivandalismo() {
   return (
-    <section className="escuro bg-[#0d0d0f]">
+    <section className="bg-fundo2">
       <div className="mx-auto grid max-w-7xl items-center gap-10 px-4 py-16 sm:px-6 md:py-20 lg:grid-cols-[1fr_0.9fr]">
         <div className="flex flex-col gap-6">
           <div className="flex items-center gap-4">
@@ -336,7 +336,7 @@ export function DestaqueAntivandalismo() {
             </Link>
           </Button>
         </div>
-        <div className="rounded-[3px] bg-[#111113] p-4 sm:p-6">
+        <div className="rounded-[3px] bg-fundo2 p-4 sm:p-6">
           <VidroSeguro className="w-full" />
         </div>
       </div>

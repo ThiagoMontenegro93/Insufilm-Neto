@@ -134,7 +134,7 @@ const SERVICOS: Servico[] = [
  */
 export function ServicosJR() {
   return (
-    <section id="servicos" className="scroll-mt-20 bg-[#0d0d0f]">
+    <section id="servicos" className="scroll-mt-20 bg-fundo2">
       <div className="mx-auto flex max-w-[1440px] flex-col gap-10 px-4 py-16 sm:px-6 md:py-24">
         <Titulo
           className="mx-auto items-center text-center"
@@ -147,7 +147,7 @@ export function ServicosJR() {
             <li key={s.id}>
               <Link
                 href={s.href}
-                className="group flex h-full flex-col overflow-hidden rounded-[10px] border border-ouro/30 bg-[#141417] shadow-[0_24px_48px_-36px_rgba(0,0,0,.8)] transition-[box-shadow,border-color] duration-200 hover:border-ouro/80 hover:shadow-[0_0_40px_-12px_rgba(225,9,20,.7)]"
+                className="group flex h-full flex-col overflow-hidden cartao-tema rounded-[10px] border bg-sup shadow-[0_24px_48px_-36px_rgba(0,0,0,.8)] transition-[box-shadow,border-color] duration-200 hover:border-ouro/80 hover:shadow-[0_0_40px_-12px_rgba(225,9,20,.7)]"
               >
                 <div className="relative aspect-[1000/420] overflow-hidden bg-[#050505]">
                   {/* eslint-disable-next-line @next/next/no-img-element */}
