@@ -1,0 +1,9 @@
+{
+  "nome": "NOME_DO_CLIENTE",
+  "logo": "assets/logo.png",
+  "cores": { "principal": "#5BB531", "destaque": "#FFB21A", "fundo": "#0B1418" },
+  "whatsapp": "WHATSAPP_AQUI",
+  "instagram": "@INSTAGRAM_AQUI",
+  "cidade": "CIDADE_AQUI",
+  "chamada": "Agende sua aplicação"
+}

@@ -1,0 +1,161 @@
+name: Vídeo automático
+
+# Gera vídeos de demonstração sem precisar escrever @claude.
+#  1. Filmagem nova: envie vídeos para assets/videos/<servico>/ (envelopamento, insulfilm ou box).
+#  2. Agenda: toda segunda-feira um vídeo novo, alternando os três serviços.
+#  3. Manual: aba Actions > Vídeo automático > Run workflow.
+# O MP4 pronto aparece na aba Releases; o código do vídeo vem num pull request.
+on:
+  push:
+    branches: [main]
+    paths:
+      - "assets/videos/envelopamento/**"
+      - "assets/videos/insulfilm/**"
+      - "assets/videos/box/**"
+      - "!assets/videos/**/*.md"
+  schedule:
+    - cron: "17 11 * * 1" # segunda-feira, 08:17 em Brasília
+  workflow_dispatch:
+    inputs:
+      servico:
+        description: "Serviço"
+        type: choice
+        options: [envelopamento, insulfilm, box]
+        default: insulfilm
+      formato:
+        description: "Formato"
+        type: choice
+        options: ["9:16", "16:9", "1:1"]
+        default: "9:16"
+      duracao:
+        description: "Duração em segundos"
+        type: choice
+        options: ["15", "30", "60"]
+        default: "30"
+
+concurrency:
+  group: video-automatico
+  cancel-in-progress: false
+
+jobs:
+  video:
+    runs-on: ubuntu-latest
+    timeout-minutes: 90
+    permissions:
+      contents: write
+      pull-requests: write
+      issues: write
+      id-token: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 1
+
+      - name: Definir serviço, formato e duração
+        id: cfg
+        env:
+          EVENTO: ${{ github.event_name }}
+          IN_SERVICO: ${{ inputs.servico }}
+          IN_FORMATO: ${{ inputs.formato }}
+          IN_DURACAO: ${{ inputs.duracao }}
+        run: |
+          formato="9:16"; duracao="30"; filmagens=""
+          case "$EVENTO" in
+            workflow_dispatch)
+              servico="$IN_SERVICO"; formato="$IN_FORMATO"; duracao="$IN_DURACAO" ;;
+            push)
+              # Arquivos adicionados/alterados neste push dentro de assets/videos/<servico>/
+              filmagens=$(jq -r '[.commits[] | (.added + .modified)[]] | unique | .[] | select(startswith("assets/videos/")) | select(test("\\.(mp4|mov|m4v|webm)$"; "i"))' "$GITHUB_EVENT_PATH")
+              if [ -z "$filmagens" ]; then echo "Nenhum arquivo de vídeo neste push."; fi
+              servico=$(echo "$filmagens" | head -1 | cut -d/ -f3) ;;
+            schedule)
+              servicos=(envelopamento insulfilm box)
+              semana=$((10#$(date -u +%V)))
+              servico=${servicos[$((semana % 3))]} ;;
+          esac
+          case "$servico" in envelopamento|insulfilm|box) ;; *) echo "Serviço inválido: '$servico'"; exit 1 ;; esac
+          tag="video-${servico}-$(date -u +%Y%m%d-%H%M)"
+          {
+            echo "servico=$servico"
+            echo "formato=$formato"
+            echo "duracao=$duracao"
+            echo "tag=$tag"
+            echo "filmagens<<EOF"; echo "$filmagens"; echo "EOF"
+          } >> "$GITHUB_OUTPUT"
+          echo "Serviço: $servico | Formato: $formato | Duração: ${duracao}s"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Instalar FFmpeg e fontes
+        run: sudo apt-get update && sudo apt-get install -y ffmpeg fonts-noto-color-emoji
+
+      - name: Criar o vídeo com o Claude
+        uses: anthropics/claude-code-action@v1
+        with:
+          # Configure UM destes secrets em Settings > Secrets and variables > Actions
+          claude_code_oauth_token: ${{ secrets.CLAUDE_CODE_OAUTH_TOKEN }}
+          anthropic_api_key: ${{ secrets.ANTHROPIC_API_KEY }}
+          prompt: |
+            Você é o produtor de vídeo deste repositório. Trabalhe sozinho, sem fazer perguntas.
+
+            Tarefa: criar um vídeo de demonstração do serviço "${{ steps.cfg.outputs.servico }}",
+            formato ${{ steps.cfg.outputs.formato }}, duração de ${{ steps.cfg.outputs.duracao }} segundos.
+
+            Filmagens novas enviadas agora (use-as como base, se houver):
+            ${{ steps.cfg.outputs.filmagens || 'nenhuma — use as filmagens já existentes em assets/videos/ deste serviço; se não houver, faça só animação' }}
+
+            Siga o agente .claude/agents/produtor-de-video.md e as skills:
+            - padrao-video-demo
+            - roteiro-${{ steps.cfg.outputs.servico == 'box' && 'pelicula-box' || steps.cfg.outputs.servico }}
+            - remotion-create, remotion-best-practices, remotion-multimedia, remotion-captions, remotion-render
+
+            Regras:
+            - Dados do cliente (logo, cores, contatos) ficam em cliente.json na raiz; se não existir, use espaços reservados.
+            - Se já houver vídeos anteriores deste serviço em video/roteiros/, faça uma variação nova (outro gancho e outra ordem de cenas), não uma cópia.
+            - Renderize o resultado final em: video/out/${{ steps.cfg.outputs.tag }}.mp4
+              (H.264, CRF 23, preset veryfast, AAC 128k). Confira frames do início, meio e fim.
+            - Escreva um resumo curto em video/out/${{ steps.cfg.outputs.tag }}.md: roteiro usado, suposições
+              e o que falta o cliente enviar.
+            - Não faça commit nem push: o workflow cuida disso.
+          claude_args: |
+            --max-turns 120
+            --allowedTools "Read,Write,Edit,MultiEdit,Glob,Grep,Skill,Task,TodoWrite,Bash(npm:*),Bash(npx:*),Bash(node:*),Bash(ffmpeg:*),Bash(ffprobe:*),Bash(ls:*),Bash(mkdir:*),Bash(cp:*),Bash(mv:*),Bash(cat:*)"
+
+      - name: Conferir se o vídeo saiu
+        id: out
+        env:
+          TAG: ${{ steps.cfg.outputs.tag }}
+        run: |
+          arquivo="video/out/$TAG.mp4"
+          if [ ! -s "$arquivo" ]; then echo "O vídeo não foi gerado ($arquivo)."; exit 1; fi
+          ffprobe -v error -show_entries format=duration -of csv=p=0 "$arquivo"
+          echo "arquivo=$arquivo" >> "$GITHUB_OUTPUT"
+
+      - name: Publicar o MP4 em Releases
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.cfg.outputs.tag }}
+          SERVICO: ${{ steps.cfg.outputs.servico }}
+          ARQUIVO: ${{ steps.out.outputs.arquivo }}
+        run: |
+          notas="video/out/$TAG.md"; [ -f "$notas" ] || { echo "Vídeo de $SERVICO gerado automaticamente." > "$notas"; }
+          gh release create "$TAG" "$ARQUIVO" --title "Vídeo: $SERVICO ($(date -u +%d/%m/%Y))" --notes-file "$notas" --target "${{ github.sha }}"
+
+      - name: Abrir pull request com o código do vídeo
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ steps.cfg.outputs.tag }}
+          SERVICO: ${{ steps.cfg.outputs.servico }}
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git checkout -b "auto/$TAG"
+          git add -A -- . ':!video/out/*.mp4'
+          if git diff --cached --quiet; then echo "Nada de código novo para revisar."; exit 0; fi
+          git commit -m "Vídeo automático: $SERVICO ($TAG)"
+          git push -u origin "auto/$TAG"
+          gh pr create --base main --head "auto/$TAG" \
+            --title "Vídeo automático: $SERVICO" \
+            --body "Vídeo gerado automaticamente. O MP4 está em Releases, na versão \`$TAG\`. Este PR guarda o roteiro e o código da composição."
