@@ -29,7 +29,7 @@ export function CalculadoraInsulfilm() {
     ...(comAntivandalismo && temAv ? [{ rotulo: `Antivandalismo · ${porte.nome}`, valor: porte.precoAntivandalismo }] : []),
   ];
   const total = linhas.reduce((t, l) => t + l.valor, 0);
-  const wa = `https://wa.me/${config.site.whatsappComercial}?text=${encodeURIComponent(`Olá, JR Filmes! Quero orçamento de insulfilm para ${porte.nome.toLowerCase()}${modelo ? ` (${modelo})` : ""}.`)}`;
+  const wa = `https://wa.me/${config.site.whatsappComercial}?text=${encodeURIComponent(`Olá, Aplik Films! Quero orçamento de insulfilm para ${porte.nome.toLowerCase()}${modelo ? ` (${modelo})` : ""}.`)}`;
 
   return (
     <div className="grid gap-6 lg:grid-cols-[1fr_380px]">

@@ -2,47 +2,170 @@
 @tailwind components;
 @tailwind utilities;
 
+/*
+ * Temas da vitrine Aplik Films. O tema vem de <html data-tema="...">.
+ * Tokens em "r g b" para aceitar opacidade do Tailwind (bg-fundo/80, text-tx/60...).
+ * --textura-* são background-image extras (aço escovado, fibra de carbono, vidro).
+ * `.escuro` força o Noir: painéis (Creator Hub, parceiro) e faixas sobre foto.
+ */
 :root,
-.tema-claro {
-  color-scheme: light;
-  --fundo: #ffffff;
-  /* metal escovado do logotipo antigo, mantido para selos e detalhes */
-  --cromo: linear-gradient(180deg, #ffffff 0%, #e4e5e8 28%, #9a9da3 48%, #5f6268 52%, #d9dadd 70%, #f6f6f7 86%, #a7aab0 100%);
-  /* acento azul royal do logotipo JR */
-  --ouro-grad: linear-gradient(180deg, #5b9bff 0%, #1a5fd8 55%, #0f47b3 100%);
-  /* tokens de tema em "r g b" para aceitar opacidade do Tailwind */
-  --ouro: 26 95 216;
-  --tx: 10 14 22;
-  --tx2: 46 54 68;
-  --tx3: 84 94 110;
-  --tx4: 118 126 140;
-  --linha: 10 18 34;
-  --sup: 255 255 255;
-  --sombra: 15 30 60;
-}
-.tema-claro {
-  background: #ffffff;
-  color: rgb(var(--tx2));
-}
-
-/* Painéis e faixas em azul-noite: Creator Hub, parceiro, rodapé e ilhas sobre fotos. */
+[data-tema="noir"],
 .escuro {
   color-scheme: dark;
-  --ouro: 92 152 255;
-  --ouro-grad: linear-gradient(180deg, #7fb0ff 0%, #3b82f6 55%, #1a5fd8 100%);
+  --modo: escuro;
+  --fundo: 10 10 11;
+  --fundo2: 14 14 16;
+  --sup: 20 20 23;
   --tx: 255 255 255;
-  --tx2: 212 212 216;
-  --tx3: 161 161 170;
-  --tx4: 113 113 122;
+  --tx2: 220 220 224;
+  --tx3: 168 168 176;
+  --tx4: 120 120 128;
   --linha: 255 255 255;
-  --sup: 10 16 28;
   --sombra: 0 0 0;
+  --ouro: 238 32 40;
+  --ouro-grad: linear-gradient(180deg, #ff5a5a 0%, #e10914 55%, #9e0a0f 100%);
+  --brilho: 1;
+  --textura-fundo: none;
+  --textura-fundo2: none;
+  --textura-cartao: none;
+  --blur-cartao: none;
+  --borda-cartao: 238 32 40;
+  --cromo: linear-gradient(180deg, #ffffff 0%, #e4e5e8 28%, #9a9da3 48%, #5f6268 52%, #d9dadd 70%, #f6f6f7 86%, #a7aab0 100%);
+}
+
+/* Claro: branco gelo, tipografia preta e vermelho da marca */
+[data-tema="claro"] {
+  color-scheme: light;
+  --modo: claro;
+  --fundo: 246 247 249;
+  --fundo2: 255 255 255;
+  --sup: 255 255 255;
+  --tx: 11 11 13;
+  --tx2: 52 54 60;
+  --tx3: 92 96 104;
+  --tx4: 130 134 142;
+  --linha: 11 11 13;
+  --sombra: 20 24 32;
+  --ouro: 214 8 18;
+  --ouro-grad: linear-gradient(180deg, #ff4a52 0%, #d60812 60%, #9e0a0f 100%);
+  --brilho: 0.35;
+  --textura-fundo: radial-gradient(ellipse 80% 60% at 100% 0%, rgb(214 8 18 / 0.06), transparent 60%);
+  --textura-cartao: linear-gradient(180deg, #ffffff, #fafbfc);
+  --borda-cartao: 11 11 13;
+}
+
+/* Metalizado: aço escovado prateado, cartões cromados, letras grafite e vermelho */
+[data-tema="metalizado"] {
+  color-scheme: light;
+  --modo: claro;
+  --fundo: 196 199 204;
+  --fundo2: 178 182 188;
+  --sup: 226 228 232;
+  --tx: 14 15 18;
+  --tx2: 38 41 47;
+  --tx3: 66 70 78;
+  --tx4: 96 100 108;
+  --linha: 14 15 18;
+  --sombra: 10 12 16;
+  --ouro: 200 6 16;
+  --ouro-grad: linear-gradient(180deg, #ff4a52 0%, #c80610 60%, #7d050b 100%);
+  --brilho: 0.5;
+  --textura-fundo: repeating-linear-gradient(90deg, rgb(255 255 255 / 0.07) 0 1px, transparent 1px 3px, rgb(0 0 0 / 0.035) 3px 4px, transparent 4px 7px),
+    linear-gradient(180deg, #d9dbdf 0%, #b9bdc3 38%, #cfd2d6 52%, #a9adb4 100%);
+  --textura-fundo2: repeating-linear-gradient(90deg, rgb(255 255 255 / 0.08) 0 1px, transparent 1px 3px, rgb(0 0 0 / 0.04) 3px 4px, transparent 4px 7px),
+    linear-gradient(180deg, #a7abb2 0%, #c7cace 45%, #9da1a8 100%);
+  --textura-cartao: linear-gradient(160deg, #fbfbfc 0%, #e3e5e8 28%, #c4c7cc 50%, #e9eaed 72%, #cfd2d6 100%);
+  --borda-cartao: 255 255 255;
+}
+
+/* Carbono: fibra de carbono com brilho neon vermelho */
+[data-tema="carbono"] {
+  color-scheme: dark;
+  --modo: escuro;
+  --fundo: 12 12 13;
+  --fundo2: 16 16 18;
+  --sup: 22 22 25;
+  --tx: 255 255 255;
+  --tx2: 214 214 218;
+  --tx3: 160 160 168;
+  --tx4: 112 112 120;
+  --linha: 255 255 255;
+  --sombra: 0 0 0;
+  --ouro: 255 36 52;
+  --ouro-grad: linear-gradient(180deg, #ff6a74 0%, #ff2434 50%, #b0000e 100%);
+  --brilho: 1.25;
+  --textura-fundo: linear-gradient(45deg, rgb(255 255 255 / 0.035) 25%, transparent 25%, transparent 75%, rgb(255 255 255 / 0.035) 75%),
+    linear-gradient(45deg, rgb(255 255 255 / 0.035) 25%, transparent 25%, transparent 75%, rgb(255 255 255 / 0.035) 75%),
+    linear-gradient(-45deg, rgb(0 0 0 / 0.5) 25%, transparent 25%, transparent 75%, rgb(0 0 0 / 0.5) 75%);
+  --textura-fundo2: radial-gradient(ellipse 70% 50% at 50% 0%, rgb(255 36 52 / 0.1), transparent 70%),
+    linear-gradient(45deg, rgb(255 255 255 / 0.03) 25%, transparent 25%, transparent 75%, rgb(255 255 255 / 0.03) 75%);
+  --textura-cartao: linear-gradient(180deg, rgb(255 255 255 / 0.05), rgb(255 255 255 / 0.01));
+  --borda-cartao: 255 36 52;
+}
+[data-tema="carbono"] .bg-fundo,
+[data-tema="carbono"] .bg-fundo2 {
+  background-size: 8px 8px, 8px 8px, 8px 8px;
+  background-position: 0 0, 4px 4px, 0 0;
+}
+
+/* Vidro: gradiente vinho profundo com cartões de vidro fosco */
+[data-tema="vidro"] {
+  color-scheme: dark;
+  --modo: escuro;
+  --fundo: 9 6 10;
+  --fundo2: 12 8 14;
+  --sup: 34 18 28;
+  --tx: 255 255 255;
+  --tx2: 226 222 230;
+  --tx3: 176 170 184;
+  --tx4: 128 122 136;
+  --linha: 255 255 255;
+  --sombra: 0 0 0;
+  --ouro: 255 64 80;
+  --ouro-grad: linear-gradient(180deg, #ff8a95 0%, #ff4050 50%, #c0102a 100%);
+  --brilho: 1.1;
+  --textura-fundo: radial-gradient(circle at 15% 10%, rgb(225 9 20 / 0.35), transparent 40%),
+    radial-gradient(circle at 85% 30%, rgb(120 40 160 / 0.25), transparent 45%),
+    radial-gradient(circle at 40% 90%, rgb(225 9 20 / 0.2), transparent 45%);
+  --textura-fundo2: radial-gradient(circle at 80% 20%, rgb(225 9 20 / 0.25), transparent 45%),
+    radial-gradient(circle at 10% 80%, rgb(90 30 140 / 0.25), transparent 45%);
+  --textura-cartao: linear-gradient(160deg, rgb(255 255 255 / 0.12), rgb(255 255 255 / 0.03));
+  --blur-cartao: blur(18px) saturate(140%);
+  --borda-cartao: 255 255 255;
+}
+[data-tema="vidro"] .bg-fundo {
+  background-attachment: fixed;
+}
+
+/* Pérola: off-white quente, editorial, preto e filetes vermelhos */
+[data-tema="perola"] {
+  color-scheme: light;
+  --modo: claro;
+  --fundo: 245 241 234;
+  --fundo2: 238 232 222;
+  --sup: 251 249 245;
+  --tx: 17 16 15;
+  --tx2: 54 50 46;
+  --tx3: 96 90 84;
+  --tx4: 136 128 120;
+  --linha: 17 16 15;
+  --sombra: 60 40 20;
+  --ouro: 190 14 26;
+  --ouro-grad: linear-gradient(180deg, #e2414b 0%, #be0e1a 60%, #8a0812 100%);
+  --brilho: 0.2;
+  --textura-fundo: radial-gradient(ellipse 70% 50% at 0% 0%, rgb(255 255 255 / 0.7), transparent 60%);
+  --textura-cartao: linear-gradient(180deg, #fdfcfa, #f7f3ec);
+  --borda-cartao: 17 16 15;
+}
+
+/* Painéis e faixas sobre foto ficam sempre no Noir, sem textura. */
+.escuro {
   color: rgb(var(--tx2));
 }
 
 html,
 body {
-  background: var(--fundo);
+  background-color: rgb(var(--fundo));
   color: rgb(var(--tx2));
 }
 
@@ -51,23 +174,76 @@ body {
 }
 
 ::selection {
-  background: rgba(26, 95, 216, 0.25);
+  background: rgba(225, 9, 20, 0.3);
   color: inherit;
 }
 
 @layer components {
-  /* Cartão base: branco com borda fina no tema claro, azul-noite translúcido nos painéis escuros */
+  /* superfícies que seguem o tema */
+  .bg-fundo {
+    background-image: var(--textura-fundo);
+  }
+  .bg-fundo2 {
+    background-image: var(--textura-fundo2);
+  }
+  .cartao-tema {
+    background-image: var(--textura-cartao);
+    backdrop-filter: var(--blur-cartao);
+    -webkit-backdrop-filter: var(--blur-cartao);
+    border-color: rgb(var(--borda-cartao) / 0.16);
+  }
+  [data-tema="metalizado"] .cartao-tema {
+    box-shadow: inset 0 1px 0 rgb(255 255 255 / 0.9), inset 0 -1px 0 rgb(0 0 0 / 0.12), 0 18px 36px -24px rgb(0 0 0 / 0.55);
+  }
+  /* nos temas claros a foto do Neto vira um cartão com cantos e sombra, sem esfumado escuro */
+  [data-tema="claro"] .foto-hero,
+  [data-tema="metalizado"] .foto-hero,
+  [data-tema="perola"] .foto-hero {
+    mask-image: none;
+    -webkit-mask-image: none;
+    margin: 2rem 0;
+    border-radius: 18px;
+    box-shadow: 0 30px 60px -30px rgb(var(--sombra) / 0.55), 0 0 0 1px rgb(var(--linha) / 0.06);
+  }
+  .brilho-tema {
+    opacity: var(--brilho);
+  }
+  /* logo: versão cromada para fundo escuro e grafite para fundo claro */
+  .logo-claro {
+    display: none;
+  }
+  [data-tema="claro"] .logo-escuro,
+  [data-tema="metalizado"] .logo-escuro,
+  [data-tema="perola"] .logo-escuro {
+    display: none;
+  }
+  [data-tema="claro"] .logo-claro,
+  [data-tema="metalizado"] .logo-claro,
+  [data-tema="perola"] .logo-claro {
+    display: block;
+  }
+  [data-tema] .escuro .logo-claro {
+    display: none;
+  }
+  [data-tema] .escuro .logo-escuro {
+    display: block;
+  }
+  /* Cartão base: grafite com borda fina; translúcido nos painéis */
   .vidro {
     @apply rounded-3xl border border-linha/[0.08] bg-sup shadow-vidro;
+  }
+  .escuro .bg-fundo,
+  .escuro .bg-fundo2,
+  .escuro .cartao-tema,
+  .escuro .vidro-forte {
+    background-image: none;
   }
   .escuro .vidro {
     @apply bg-transparent bg-gradient-to-b from-white/[0.05] to-white/[0.012] backdrop-blur-xl;
   }
   .vidro-forte {
-    @apply rounded-3xl border border-linha/[0.1] bg-gradient-to-b from-[#f5f8fd] to-white shadow-vidro;
-  }
-  .escuro .vidro-forte {
-    @apply from-[#101a2c] to-[#060b16];
+    @apply rounded-3xl border border-linha/[0.1] bg-sup shadow-vidro;
+    background-image: var(--textura-cartao);
   }
   .rotulo {
     @apply font-sans text-[11px] font-semibold uppercase tracking-[0.22em] text-tx4;
@@ -87,7 +263,7 @@ body {
     background-clip: text;
     color: transparent;
   }
-  /* logotipo em tinta azul-noite escovada, para fundos claros */
+  /* tinta escura escovada (legado do tema claro) */
   .tinta {
     background: linear-gradient(180deg, #3b4a63 0%, #0e1624 48%, #2a3850 56%, #0e1624 100%);
     -webkit-background-clip: text;
@@ -102,7 +278,7 @@ body {
     color: transparent;
   }
   .linha-ouro {
-    background: linear-gradient(90deg, transparent, rgba(26, 95, 216, 0.8), transparent);
+    background: linear-gradient(90deg, transparent, rgba(238, 32, 40, 0.8), transparent);
     height: 1px;
   }
   .grade-fundo {
@@ -131,7 +307,7 @@ body {
 }
 
 :focus-visible {
-  outline: 2px solid #1a5fd8;
+  outline: 2px solid #e10914;
   outline-offset: 3px;
   border-radius: 10px;
 }

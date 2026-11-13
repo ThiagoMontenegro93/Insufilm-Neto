@@ -14,6 +14,7 @@ import { usePlataforma } from "@/lib/store";
 import type { PlatformConfig, PorteVeiculo } from "@/lib/config";
 import { brl, calcularSplit, precoEnvelopamento, precoLinhas } from "@/lib/pricing";
 import { cn } from "@/lib/utils";
+import { TEMAS, type TemaId } from "@/lib/temas";
 import { PainelProspeccao } from "./prospeccao";
 import { PainelEstoque } from "./estoque";
 import { AbaCustos } from "./custos";
@@ -473,6 +474,31 @@ function AbaSite() {
         <Campo rotulo="WhatsApp comercial (DDI+DDD+número)" htmlFor="site-wpp" dica="Recebe os orçamentos gerados nas calculadoras">
           <input id="site-wpp" className="campo font-mono" inputMode="numeric" value={s.whatsappComercial} onChange={(e) => setRascunho({ ...s, whatsappComercial: e.target.value.replace(/\D/g, "") })} />
         </Campo>
+        <Campo rotulo="E-mail de orçamento" htmlFor="site-email">
+          <input id="site-email" type="email" className="campo" value={s.email} onChange={(e) => setRascunho({ ...s, email: e.target.value.trim() })} />
+        </Campo>
+        <Campo rotulo="Instagram (sem @)" htmlFor="site-insta">
+          <input id="site-insta" className="campo" value={s.instagram} onChange={(e) => setRascunho({ ...s, instagram: e.target.value.replace(/^@/, "").trim() })} />
+        </Campo>
+        <Campo rotulo="Facebook (nome da página)" htmlFor="site-fb-nome">
+          <input id="site-fb-nome" className="campo" value={s.facebookNome} onChange={(e) => setRascunho({ ...s, facebookNome: e.target.value })} />
+        </Campo>
+        <Campo rotulo="Facebook (link da página)" htmlFor="site-fb-url" dica="Vazio: o site abre a busca do Facebook pelo nome">
+          <input id="site-fb-url" type="url" className="campo" placeholder="https://www.facebook.com/..." value={s.facebookUrl} onChange={(e) => setRascunho({ ...s, facebookUrl: e.target.value.trim() })} />
+        </Campo>
+        <Campo rotulo="Tema padrão do site" htmlFor="site-tema" dica="Visitantes veem este tema; quem escolher outro no botão Temas fica com o escolhido">
+          <select id="site-tema" className="campo" value={s.tema} onChange={(e) => setRascunho({ ...s, tema: e.target.value as TemaId })}>
+            {TEMAS.map((t) => (
+              <option key={t.id} value={t.id}>
+                {t.nome}: {t.descricao}
+              </option>
+            ))}
+          </select>
+        </Campo>
+        <div className="flex items-center justify-between gap-4 rounded-xl border border-linha/10 px-4 py-3">
+          <span className="text-sm text-tx2">Mostrar o botão Temas no menu</span>
+          <Interruptor id="site-seletor-tema" rotulo="Mostrar o botão Temas no menu" ligado={s.seletorTema} onChange={(v) => setRascunho({ ...s, seletorTema: v })} />
+        </div>
         <NumeroCampo id="site-garantia" rotulo="Garantia exibida" sufixo="anos" valor={s.garantiaAnos} onChange={(n) => setRascunho({ ...s, garantiaAnos: n })} />
         <Campo rotulo="Região atendida em domicílio" htmlFor="site-area">
           <input id="site-area" className="campo" value={s.areaDomicilio} onChange={(e) => setRascunho({ ...s, areaDomicilio: e.target.value })} />

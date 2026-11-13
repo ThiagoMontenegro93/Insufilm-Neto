@@ -24,7 +24,7 @@ export const metadata: Metadata = {
 /** Página de vendas do produto principal: problema, benefícios, linhas com preço, processo, garantia e orçamento. */
 export default function PaginaAntivandalismo() {
   return (
-    <div className="tema-claro">
+    <div className="bg-fundo">
       <HeroAntivandalismo />
       <Divisor />
 

@@ -1,7 +1,7 @@
 "use client";
 
 /**
- * Aba "Custos" do Creator Hub: o valor que a JR paga ao fornecedor vira o preço das calculadoras.
+ * Aba "Custos" do Creator Hub: o valor que a Aplik paga ao fornecedor vira o preço das calculadoras.
  * Para cada item: fornecedor, R$/m² do material (direto ou pela nota da bobina), perda e mão de obra.
  * As premissas (impostos, comissão, margem, cartão) valem para todos os itens.
  */

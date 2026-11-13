@@ -71,7 +71,7 @@ export function CalculadoraAuto() {
               <span className="rotulo">Área total</span>
               <span className="num font-mono text-2xl font-semibold text-tx">{num(area, 1)} m²</span>
             </span>
-            <input id="area" type="range" min={2} max={30} step={0.5} value={area} onChange={(e) => setArea(Number(e.target.value))} className="w-full accent-[#1A5FD8]" />
+            <input id="area" type="range" min={2} max={30} step={0.5} value={area} onChange={(e) => setArea(Number(e.target.value))} className="w-full accent-[#E10914]" />
             <span className="text-xs text-tx4">Área média do porte escolhido. Para teto, capô ou retrovisores, reduza a área.</span>
           </label>
         </section>
