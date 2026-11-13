@@ -97,12 +97,12 @@ export function NavTopo() {
         {!painel && <SeletorTema />}
         <Link
           href="/admin/creator"
-          className="hidden items-center gap-2 whitespace-nowrap rounded-[3px] border border-linha/15 px-3 py-2 text-sm text-tx2 transition-colors hover:border-ouro/50 hover:text-ouro sm:flex"
+          className="hidden items-center gap-2 whitespace-nowrap rounded-full border border-linha/15 px-3 py-2 text-sm text-tx2 transition-colors hover:border-ouro/50 hover:text-ouro sm:flex"
         >
           <LayoutDashboard className="h-4 w-4" aria-hidden />
           Creator Hub
         </Link>
-        <Link href="/admin/creator" className="grid h-10 w-10 place-items-center rounded-[3px] border border-linha/15 text-tx2 sm:hidden" aria-label="Creator Hub">
+        <Link href="/admin/creator" className="grid h-10 w-10 place-items-center rounded-full border border-linha/15 text-tx2 sm:hidden" aria-label="Creator Hub">
           <LayoutDashboard className="h-4 w-4" aria-hidden />
         </Link>
         </div>

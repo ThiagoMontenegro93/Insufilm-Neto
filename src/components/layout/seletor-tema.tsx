@@ -73,7 +73,7 @@ export function SeletorTema({ className }: { className?: string }) {
         onClick={() => setAberto((v) => !v)}
         aria-expanded={aberto}
         aria-haspopup="listbox"
-        className="flex h-10 items-center gap-2 rounded-[3px] border border-linha/15 px-3 text-sm text-tx2 transition-colors hover:border-ouro/50 hover:text-ouro"
+        className="flex h-10 items-center gap-2 rounded-full border border-linha/15 px-3 text-sm text-tx2 transition-colors hover:border-ouro/50 hover:text-ouro"
       >
         <Palette className="h-4 w-4" aria-hidden />
         <span className="hidden sm:inline">Temas</span>

@@ -116,7 +116,7 @@ export function ServicosDiagonais() {
           key={s.id}
           href={s.href}
           className={cn(
-            "group relative flex min-h-[340px] flex-col justify-end overflow-hidden rounded-[3px] bg-zinc-950 lg:min-h-0",
+            "group relative flex min-h-[340px] flex-col justify-end overflow-hidden rounded-[20px] bg-zinc-950 lg:min-h-0",
             i === 0 && "sm:col-span-2 sm:min-h-[460px] lg:min-h-0",
             s.grade,
           )}
@@ -238,7 +238,7 @@ export function AtendimentoLocal({ servicoInicial = SERVICOS_PEDIDO[0] }: { serv
             onClick={() => setLocal(o.id)}
             aria-pressed={local === o.id}
             className={cn(
-              "flex flex-col gap-4 rounded-[3px] border bg-sup/60 p-6 text-left transition-[border-color,background-color] duration-200 sm:p-8",
+              "flex flex-col gap-4 rounded-[20px] border bg-sup/60 p-6 text-left transition-[border-color,background-color] duration-200 sm:p-8",
               local === o.id ? "border-ouro/60 bg-ouro/[0.04]" : "border-linha/10 hover:border-linha/25",
             )}
           >
@@ -255,7 +255,7 @@ export function AtendimentoLocal({ servicoInicial = SERVICOS_PEDIDO[0] }: { serv
         ))}
       </div>
 
-      <ol className="grid gap-px overflow-hidden rounded-[3px] border border-linha/[0.07] bg-linha/[0.07] sm:grid-cols-2 lg:grid-cols-5">
+      <ol className="grid gap-px overflow-hidden rounded-[20px] border border-linha/[0.07] bg-linha/[0.07] sm:grid-cols-2 lg:grid-cols-5">
         {PASSOS.map((p, i) => (
           <li key={p.titulo} className="flex flex-col gap-2 bg-sup p-6">
             <div className="flex items-center gap-3">
@@ -271,7 +271,7 @@ export function AtendimentoLocal({ servicoInicial = SERVICOS_PEDIDO[0] }: { serv
       <form
         id="orcamento"
         onSubmit={(e) => e.preventDefault()}
-        className="grid scroll-mt-28 grid-cols-1 gap-4 rounded-[3px] border border-linha/10 bg-sup p-6 sm:p-8 md:grid-cols-[1fr_1fr_auto] md:items-end"
+        className="grid scroll-mt-28 grid-cols-1 gap-4 rounded-[20px] border border-linha/10 bg-sup p-6 sm:p-8 md:grid-cols-[1fr_1fr_auto] md:items-end"
       >
         <div className="flex flex-col gap-1 md:col-span-3">
           <span className="rotulo text-ouro/90">Solicite seu orçamento</span>
@@ -336,7 +336,7 @@ export function ComparativoPeliculas() {
   ];
   return (
     <div className="flex flex-col gap-3">
-      <div className="overflow-x-auto rounded-[3px] border border-linha/[0.07]">
+      <div className="overflow-x-auto rounded-[20px] border border-linha/[0.07]">
         <table className="w-full min-w-[640px] text-left text-sm">
           <thead>
             <tr className="border-b border-linha/[0.07] bg-linha/[0.02]">
@@ -386,7 +386,7 @@ export function Perguntas() {
 
 export function ListaPerguntas({ itens }: { itens: { p: string; r: string }[] }) {
   return (
-    <div className="flex flex-col divide-y divide-linha/[0.07] rounded-[3px] border border-linha/[0.07]">
+    <div className="flex flex-col divide-y divide-linha/[0.07] rounded-[20px] border border-linha/[0.07]">
       {itens.map((i) => (
         <details key={i.p} className="group px-5 py-1 sm:px-6">
           <summary className="flex cursor-pointer list-none items-center justify-between gap-4 py-4 text-[15px] font-semibold text-tx [&::-webkit-details-marker]:hidden">

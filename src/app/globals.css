@@ -321,3 +321,42 @@ body {
     scroll-behavior: auto !important;
   }
 }
+
+/* ---- Visual moderno da home ---- */
+.faixa-rolando {
+  animation: faixa-rolar 38s linear infinite;
+}
+.faixa-rolando:hover {
+  animation-play-state: paused;
+}
+@keyframes faixa-rolar {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.grade-fundo {
+  background-image: linear-gradient(rgb(var(--linha) / 0.05) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--linha) / 0.05) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(ellipse at 30% 40%, #000 20%, transparent 70%);
+}
+/* Seções aparecem suavemente ao rolar, onde o navegador suporta. */
+@supports (animation-timeline: view()) {
+  .revelar {
+    animation: revelar linear both;
+    animation-timeline: view();
+    animation-range: entry 0% cover 22%;
+  }
+  @keyframes revelar {
+    from {
+      opacity: 0;
+      transform: translateY(36px);
+    }
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .faixa-rolando,
+  .revelar {
+    animation: none !important;
+  }
+}

@@ -7,7 +7,8 @@ import { TrabalhosRealizados } from "@/components/landing/trabalhos";
 import { BotaoWhatsapp, DestaqueAntivandalismo } from "@/components/landing/antivandalismo";
 import { ProtecaoSolar } from "@/components/landing/sol";
 import { TimelineEtapas } from "@/components/landing/timeline";
-import { AtendimentoLocal, ComparativoPeliculas, Perguntas } from "@/components/landing/marca";
+import { ComparativoPeliculas, Perguntas } from "@/components/landing/marca";
+import { ChamadaFinal, Diferenciais, Domicilio } from "@/components/landing/moderno";
 import { Titulo } from "@/components/ui/primitivos";
 import { Button } from "@/components/ui/button";
 
@@ -16,33 +17,13 @@ export default function Home() {
     <div className="bg-fundo">
       <Hero />
       <ServicosJR />
+      <Diferenciais />
       <TrabalhosRealizados />
+      <DestaqueAntivandalismo />
       <GaleriaArtes />
       <ProtecaoSolar />
-      <DestaqueAntivandalismo />
 
-      <section className="relative">
-        <div className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-16 sm:px-6 md:py-28">
-          <Titulo
-            eyebrow="Atendimento a domicílio"
-            titulo={<>Praticidade e qualidade <em>onde você precisar.</em></>}
-            descricao="Na sua casa, no seu veículo ou na sua empresa: a equipe vai até você com todo o equipamento. Se preferir, você leva o carro ou a peça até um ponto de instalação. Sempre com hora marcada."
-          />
-          <figure className="relative overflow-hidden rounded-[3px]">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img
-              src="/img/aplik-van.webp"
-              alt="Neto, proprietário da Aplik Films, apontando para a van de atendimento a domicílio"
-              loading="lazy"
-              className="aspect-[16/10] w-full object-cover object-[50%_35%] sm:aspect-[2.2/1]"
-            />
-            <figcaption className="absolute bottom-4 left-4 rounded-[3px] bg-black/80 px-4 py-2 text-[11px] font-semibold uppercase tracking-[0.2em] text-white backdrop-blur">
-              Na sua casa • No seu veículo • Na sua empresa
-            </figcaption>
-          </figure>
-          <AtendimentoLocal />
-        </div>
-      </section>
+      <Domicilio />
 
       <section className="mx-auto flex max-w-7xl flex-col gap-8 px-4 py-16 sm:px-6 md:py-28">
         <Titulo eyebrow="Linhas de película" titulo="Qual película é para você?" descricao="Um guia rápido para comparar. No orçamento indicamos a linha certa para cada vidro." />
@@ -69,6 +50,7 @@ export default function Home() {
         <Titulo eyebrow="Dúvidas frequentes" titulo="Antes de agendar." />
         <Perguntas />
       </section>
+      <ChamadaFinal />
       <BotaoWhatsapp texto="Olá, Aplik Films! Quero um orçamento." />
     </div>
   );

@@ -194,7 +194,7 @@ export function SegmentosAntivandalismo() {
   return (
     <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
       {SEGMENTOS.map((s) => (
-        <article key={s.titulo} className="flex flex-col gap-4 rounded-[3px] border border-linha/10 bg-sup p-6">
+        <article key={s.titulo} className="flex flex-col gap-4 rounded-[20px] border border-linha/10 bg-sup p-6">
           <span className="grid h-11 w-11 place-items-center rounded-full border border-ouro/40">
             <s.icone className="h-5 w-5 text-ouro" strokeWidth={1.4} aria-hidden />
           </span>
@@ -220,7 +220,7 @@ const ETAPAS = [
 
 export function ComoFuncionaAntivandalismo() {
   return (
-    <ol className="grid gap-px overflow-hidden rounded-[3px] border border-linha/10 bg-linha/10 md:grid-cols-3">
+    <ol className="grid gap-px overflow-hidden rounded-[20px] border border-linha/10 bg-linha/10 md:grid-cols-3">
       {ETAPAS.map((e, i) => (
         <li key={e.titulo} className="flex flex-col gap-3 bg-sup p-7">
           <span className="num font-sans tracking-[-0.02em] text-2xl italic text-ouro">{i + 1}</span>
@@ -250,7 +250,7 @@ const NAO_FAZ = [
 export function FazNaoFaz() {
   return (
     <div className="grid gap-4 md:grid-cols-[1.4fr_1fr]">
-      <div className="flex flex-col gap-4 rounded-[3px] border border-linha/10 bg-sup p-7">
+      <div className="flex flex-col gap-4 rounded-[20px] border border-linha/10 bg-sup p-7">
         <h3 className="font-sans tracking-[-0.02em] text-[1.44rem] font-bold text-tx">O que a película faz</h3>
         <ul className="grid gap-3 sm:grid-cols-2">
           {FAZ.map((f) => (
@@ -261,7 +261,7 @@ export function FazNaoFaz() {
           ))}
         </ul>
       </div>
-      <div className="flex flex-col gap-4 rounded-[3px] border border-linha/10 p-7">
+      <div className="flex flex-col gap-4 rounded-[20px] border border-linha/10 p-7">
         <h3 className="font-sans tracking-[-0.02em] text-[1.44rem] font-bold text-tx">O que ela não faz</h3>
         <ul className="grid gap-3">
           {NAO_FAZ.map((f) => (
@@ -336,7 +336,7 @@ export function DestaqueAntivandalismo() {
             </Link>
           </Button>
         </div>
-        <div className="rounded-[3px] bg-fundo2 p-4 sm:p-6">
+        <div className="rounded-[20px] bg-fundo2 p-4 sm:p-6">
           <VidroSeguro className="w-full" />
         </div>
       </div>
@@ -403,7 +403,7 @@ const BENEFICIOS_AV = [
 
 export function BeneficiosAntivandalismo() {
   return (
-    <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-[3px] border border-linha/10 bg-linha/10 md:grid-cols-3">
+    <ul className="grid grid-cols-2 gap-px overflow-hidden rounded-[20px] border border-linha/10 bg-linha/10 md:grid-cols-3">
       {BENEFICIOS_AV.map((b) => (
         <li key={b.titulo} className="flex flex-col gap-3 bg-sup p-6">
           <b.icone className="h-6 w-6 text-ouro" strokeWidth={1.3} aria-hidden />
@@ -478,7 +478,7 @@ export function LinhasAntivandalismo() {
           <article
             key={l.id}
             className={cn(
-              "relative flex flex-col gap-5 rounded-[3px] border bg-sup p-6",
+              "relative flex flex-col gap-5 rounded-[20px] border bg-sup p-6",
               i === 0 ? "border-ouro/60 shadow-[0_24px_50px_-30px_rgba(150,110,38,.55)]" : "border-linha/10",
             )}
           >
@@ -553,7 +553,7 @@ export function SeloGarantia() {
   const { config } = usePlataforma();
   const wa = useWhatsapp();
   return (
-    <div className="grid items-center gap-8 rounded-[3px] border border-ouro/40 bg-sup p-8 md:grid-cols-[auto_1fr_auto] md:p-10">
+    <div className="grid items-center gap-8 rounded-[20px] border border-ouro/40 bg-sup p-8 md:grid-cols-[auto_1fr_auto] md:p-10">
       <div className="grid h-28 w-28 place-items-center rounded-full border-2 border-ouro text-center">
         <div className="flex flex-col leading-none">
           <span className="num font-sans tracking-[-0.02em] text-4xl font-bold text-ouro">{config.site.garantiaAnos}</span>
