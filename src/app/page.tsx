@@ -3,6 +3,7 @@ import { ArrowRight } from "lucide-react";
 import { Hero } from "@/components/landing/hero";
 import { ServicosJR } from "@/components/landing/servicos-jr";
 import { GaleriaArtes } from "@/components/landing/galeria-artes";
+import { TrabalhosRealizados } from "@/components/landing/trabalhos";
 import { BotaoWhatsapp, DestaqueAntivandalismo } from "@/components/landing/antivandalismo";
 import { ProtecaoSolar } from "@/components/landing/sol";
 import { TimelineEtapas } from "@/components/landing/timeline";
@@ -15,6 +16,7 @@ export default function Home() {
     <div className="bg-fundo">
       <Hero />
       <ServicosJR />
+      <TrabalhosRealizados />
       <GaleriaArtes />
       <ProtecaoSolar />
       <DestaqueAntivandalismo />
